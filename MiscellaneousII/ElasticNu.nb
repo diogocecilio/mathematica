@@ -1,0 +1,178 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5249,        169]
+NotebookOptionsPosition[      4714,        146]
+NotebookOutlinePosition[      5051,        161]
+CellTagsIndexPosition[      5008,        158]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"eq1", "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", "DSigR", ")"}], 
+       RowBox[{"(", 
+        RowBox[{"1", "-", "nu"}], ")"}]}], "-", 
+      RowBox[{"nu", 
+       RowBox[{"(", "DSigAx", ")"}]}], "-", 
+      RowBox[{"Elastic", " ", 
+       RowBox[{"(", "DEpsR", ")"}]}]}], "\[Equal]", "0"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"eq2", "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", "DSigAx", ")"}], "-", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"2", " ", "nu"}], ")"}], " ", 
+       RowBox[{"(", "DSigR", ")"}]}], "-", 
+      RowBox[{"Elastic", 
+       RowBox[{"(", "DEpsAx", ")"}]}]}], "\[Equal]", "0"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"eqsol", " ", "=", " ", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Solve", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"eq1", ",", "eq2"}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"Elastic", ",", "nu"}], "}"}]}], "]"}], "[", 
+      RowBox[{"[", "1", "]"}], "]"}], "//", "FullSimplify"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"CForm", "[", 
+    RowBox[{"Elastic", "/.", "eqsol"}], "]"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.599301518084046*^9, 3.5993015209779873`*^9}, {
+  3.5993016016630697`*^9, 3.5993016022144814`*^9}, {3.5993020051736803`*^9, 
+  3.599302036507908*^9}, {3.599302072801539*^9, 3.59930214160751*^9}, {
+  3.5993024840803967`*^9, 3.599302509308032*^9}, {3.599302599788549*^9, 
+  3.5993026640695457`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "DEpsR"}], " ", "Elastic"}], "+", 
+   RowBox[{"DSigR", " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", "nu"}], ")"}]}], "-", 
+   RowBox[{"DSigAx", " ", "nu"}]}], "\[Equal]", "0"}]], "Output",
+ CellChangeTimes->{{3.59930151471611*^9, 3.5993015215527267`*^9}, 
+   3.59930160263385*^9, 3.5993021428394747`*^9, 3.599302511285308*^9, 
+   3.599302610584526*^9, {3.599302656252778*^9, 3.599302668711973*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DSigAx", "-", 
+   RowBox[{"DEpsAx", " ", "Elastic"}], "-", 
+   RowBox[{"2", " ", "DSigR", " ", "nu"}]}], "\[Equal]", "0"}]], "Output",
+ CellChangeTimes->{{3.59930151471611*^9, 3.5993015215527267`*^9}, 
+   3.59930160263385*^9, 3.5993021428394747`*^9, 3.599302511285308*^9, 
+   3.599302610584526*^9, {3.599302656252778*^9, 3.5993026687133827`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"Elastic", "\[Rule]", 
+    FractionBox[
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"DSigAx", "-", "DSigR"}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{"DSigAx", "+", 
+        RowBox[{"2", " ", "DSigR"}]}], ")"}]}], 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "DEpsR", " ", "DSigR"}], "+", 
+      RowBox[{"DEpsAx", " ", 
+       RowBox[{"(", 
+        RowBox[{"DSigAx", "+", "DSigR"}], ")"}]}]}]]}], ",", 
+   RowBox[{"nu", "\[Rule]", 
+    FractionBox[
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "DEpsR"}], " ", "DSigAx"}], "+", 
+      RowBox[{"DEpsAx", " ", "DSigR"}]}], 
+     RowBox[{
+      RowBox[{
+       RowBox[{"-", "2"}], " ", "DEpsR", " ", "DSigR"}], "+", 
+      RowBox[{"DEpsAx", " ", 
+       RowBox[{"(", 
+        RowBox[{"DSigAx", "+", "DSigR"}], ")"}]}]}]]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.59930151471611*^9, 3.5993015215527267`*^9}, 
+   3.59930160263385*^9, 3.5993021428394747`*^9, 3.599302511285308*^9, 
+   3.599302610584526*^9, {3.599302656252778*^9, 3.599302668714538*^9}}],
+
+Cell["\<\
+((DSigAx - DSigR)*(DSigAx + 2*DSigR))/(-2*DEpsR*DSigR + DEpsAx*(DSigAx + \
+DSigR))\
+\>", "Output",
+ CellChangeTimes->{{3.59930151471611*^9, 3.5993015215527267`*^9}, 
+   3.59930160263385*^9, 3.5993021428394747`*^9, 3.599302511285308*^9, 
+   3.599302610584526*^9, {3.599302656252778*^9, 3.599302668716014*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CForm", "[", 
+   RowBox[{"nu", " ", "/.", "eqsol"}], "]"}], 
+  "\[IndentingNewLine]"}]], "Input"],
+
+Cell["\<\
+(-(DEpsR*DSigAx) + DEpsAx*DSigR)/(-2*DEpsR*DSigR + DEpsAx*(DSigAx + DSigR))\
+\>", "Output",
+ CellChangeTimes->{3.5993026738753853`*^9}]
+}, Open  ]]
+},
+WindowSize->{1349, 599},
+WindowMargins->{{20, Automatic}, {Automatic, 25}},
+FrontEndVersion->"8.0 for Linux x86 (64-bit) (October 10, 2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 1543, 44, 126, "Input"],
+Cell[2125, 68, 464, 11, 30, "Output"],
+Cell[2592, 81, 381, 7, 30, "Output"],
+Cell[2976, 90, 1084, 31, 51, "Output"],
+Cell[4063, 123, 318, 6, 43, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4418, 134, 132, 4, 50, "Input"],
+Cell[4553, 140, 145, 3, 43, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

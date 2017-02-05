@@ -1,0 +1,288 @@
+(************** Content-type: application/mathematica **************
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     10825,        236]*)
+(*NotebookOutlinePosition[     11476,        259]*)
+(*  CellTagsIndexPosition[     11432,        255]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+    \(\(Stiff\  = \ {\[IndentingNewLine]{Elast\ Area/l, 0, 
+            0, \(-Elast\)\ Area/l, 0, 
+            0}, \[IndentingNewLine]{0, \((BAB \((1 + ALFAB)\) + 
+                  BBA \((1 + ALFBA)\))\) \(ECIC/l\)/l, 
+            BAB \((1 + ALFAB)\) ECIC/l, 
+            0, \(-\((BAB \((1 + ALFAB)\) + BBA \((1 + ALFBA)\))\)\) \(ECIC/
+                  l\)/l, BBA \((1 + ALFBA)\) ECIC/l}, \[IndentingNewLine]{0, 
+            BAB \((1 + ALFAB)\) ECIC/l, BAB\ ECIC, 
+            0, \(-BAB\) \((1 + ALFAB)\) ECIC/l, 
+            BBA\ ALFBA\ ECIC}, \[IndentingNewLine]{\(-Elast\)\ Area/l, 0, 0, 
+            Elast\ Area/l, 0, 
+            0}, \[IndentingNewLine]{0, \(-\((BAB \((1 + ALFAB)\) + 
+                    BBA \((1 + ALFBA)\))\)\) \(ECIC/l\)/
+                l, \(-BAB\) \((1 + ALFAB)\) ECIC/l, 
+            0, \((BAB \((1 + ALFAB)\) + BBA \((1 + ALFBA)\))\) \(ECIC/l\)/
+                l, \(-BBA\) \((1 + ALFBA)\) ECIC/l}, \[IndentingNewLine]{0, 
+            BBA \((1 + ALFBA)\) ECIC/l, BAB\ ALFAB\ ECIC, 
+            0, \(-BBA\) \((1 + ALFBA)\) ECIC/l, 
+            0}\[IndentingNewLine]};\)\), "\[IndentingNewLine]", 
+    \(\(Prismatic\  = \ {ALFAB \[Rule] 1/2, ALFBA \[Rule] 1/2, 
+          BAB \[Rule] 4\ Elast\ \(Inerc/l\)/ECIC, 
+          BBA \[Rule] 
+            4\ Elast\ \(Inerc/l\)/ECIC};\)\), "\[IndentingNewLine]", 
+    \(MatrixForm[Stiff]\), "\[IndentingNewLine]", 
+    \(MatrixForm[Stiff - Transpose[Stiff]]\), "\[IndentingNewLine]", 
+    \(MatrixForm[Stiff\  /. \ Prismatic]\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(\(Area\ Elast\)\/l\), "0", "0", \(-\(\(Area\ Elast\)\/l\)\), 
+              "0", "0"},
+            {
+              "0", \(\(\((\((1 + ALFAB)\)\ BAB + \((1 + 
+                              ALFBA)\)\ BBA)\)\ ECIC\)\/l\^2\), \(\(\((1 + 
+                        ALFAB)\)\ BAB\ ECIC\)\/l\), 
+              "0", \(\(\((\(-\((1 + ALFAB)\)\)\ BAB - \((1 + 
+                              ALFBA)\)\ BBA)\)\ ECIC\)\/l\^2\), \(\(\((1 + 
+                        ALFBA)\)\ BBA\ ECIC\)\/l\)},
+            {"0", \(\(\((1 + ALFAB)\)\ BAB\ ECIC\)\/l\), \(BAB\ ECIC\), 
+              "0", \(-\(\(\((1 + 
+                          ALFAB)\)\ BAB\ ECIC\)\/l\)\), \(ALFBA\ BBA\ \
+ECIC\)},
+            {\(-\(\(Area\ Elast\)\/l\)\), "0", "0", \(\(Area\ Elast\)\/l\), 
+              "0", "0"},
+            {
+              "0", \(\(\((\(-\((1 + ALFAB)\)\)\ BAB - \((1 + 
+                              ALFBA)\)\ BBA)\)\ ECIC\)\/l\^2\), \(-\(\(\((1 + 
+                          ALFAB)\)\ BAB\ ECIC\)\/l\)\), 
+              "0", \(\(\((\((1 + ALFAB)\)\ BAB + \((1 + 
+                              ALFBA)\)\ BBA)\)\ ECIC\)\/l\^2\), \(-\(\(\((1 + 
+                          ALFBA)\)\ BBA\ ECIC\)\/l\)\)},
+            {"0", \(\(\((1 + ALFBA)\)\ BBA\ ECIC\)\/l\), \(ALFAB\ BAB\ ECIC\),
+               "0", \(-\(\(\((1 + ALFBA)\)\ BBA\ ECIC\)\/l\)\), "0"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"0", "0", "0", "0", "0", "0"},
+            {"0", "0", "0", "0", "0", "0"},
+            {"0", "0", "0", "0", 
+              "0", \(\(-ALFAB\)\ BAB\ ECIC + ALFBA\ BBA\ ECIC\)},
+            {"0", "0", "0", "0", "0", "0"},
+            {"0", "0", "0", "0", "0", "0"},
+            {"0", "0", \(ALFAB\ BAB\ ECIC - ALFBA\ BBA\ ECIC\), "0", "0", 
+              "0"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(\(Area\ Elast\)\/l\), "0", "0", \(-\(\(Area\ Elast\)\/l\)\), 
+              "0", "0"},
+            {
+              "0", \(\(12\ Elast\ Inerc\)\/l\^3\), \(\(6\ Elast\ \
+Inerc\)\/l\^2\), 
+              "0", \(-\(\(12\ Elast\ Inerc\)\/l\^3\)\), \(\(6\ Elast\ Inerc\)\
+\/l\^2\)},
+            {"0", \(\(6\ Elast\ Inerc\)\/l\^2\), \(\(4\ Elast\ Inerc\)\/l\), 
+              "0", \(-\(\(6\ Elast\ Inerc\)\/l\^2\)\), \(\(2\ Elast\ \
+Inerc\)\/l\)},
+            {\(-\(\(Area\ Elast\)\/l\)\), "0", "0", \(\(Area\ Elast\)\/l\), 
+              "0", "0"},
+            {
+              "0", \(-\(\(12\ Elast\ Inerc\)\/l\^3\)\), \(-\(\(6\ Elast\ \
+Inerc\)\/l\^2\)\), 
+              "0", \(\(12\ Elast\ Inerc\)\/l\^3\), \(-\(\(6\ Elast\ \
+Inerc\)\/l\^2\)\)},
+            {"0", \(\(6\ Elast\ Inerc\)\/l\^2\), \(\(2\ Elast\ Inerc\)\/l\), 
+              "0", \(-\(\(6\ Elast\ Inerc\)\/l\^2\)\), "0"}
+            }], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(Rotation = {\[IndentingNewLine]{Cos[phi], Sin[phi], 0, 0, 0, 
+            0}, \[IndentingNewLine]{\(-Sin[phi]\), Cos[phi], 0, 0, 0, 
+            0}, \[IndentingNewLine]{0, 0, 1, 0, 0, 0}, \[IndentingNewLine]{0, 
+            0, 0, Cos[phi], \(-Sin[phi]\), 0}, \[IndentingNewLine]{0, 0, 0, 
+            Sin[phi], Cos[phi], 0}, \[IndentingNewLine]{0, 0, 0, 0, 0, 
+            1}\[IndentingNewLine]};\)\), "\[IndentingNewLine]", 
+    \(\(RotStiff\  = \ 
+        Rotation\  . \ Stiff . \ 
+          Transpose[Rotation];\)\), "\[IndentingNewLine]", 
+    \(RotStiff\  /. \ Prismatic\)}], "Input"],
+
+Cell[BoxData[
+    \({{\(Area\ Elast\ Cos[phi]\^2\)\/l + \(12\ Elast\ Inerc\ \
+Sin[phi]\^2\)\/l\^3, \(12\ Elast\ Inerc\ Cos[phi]\ Sin[phi]\)\/l\^3 - \(Area\ \
+Elast\ Cos[phi]\ Sin[phi]\)\/l, \(6\ Elast\ Inerc\ Sin[phi]\)\/l\^2, \
+\(-\(\(Area\ Elast\ Cos[phi]\^2\)\/l\)\) + \(12\ Elast\ Inerc\ \
+Sin[phi]\^2\)\/l\^3, \(-\(\(12\ Elast\ Inerc\ Cos[phi]\ Sin[
+                    phi]\)\/l\^3\)\) - \(Area\ Elast\ Cos[phi]\ \
+Sin[phi]\)\/l, \(6\ Elast\ Inerc\ Sin[phi]\)\/l\^2}, {\(12\ Elast\ Inerc\ \
+Cos[phi]\ Sin[phi]\)\/l\^3 - \(Area\ Elast\ Cos[phi]\ Sin[phi]\)\/l, \(12\ \
+Elast\ Inerc\ Cos[phi]\^2\)\/l\^3 + \(Area\ Elast\ Sin[phi]\^2\)\/l, \(6\ \
+Elast\ Inerc\ Cos[phi]\)\/l\^2, \(12\ Elast\ Inerc\ Cos[phi]\ \
+Sin[phi]\)\/l\^3 + \(Area\ Elast\ Cos[phi]\ Sin[phi]\)\/l, \(-\(\(12\ Elast\ \
+Inerc\ Cos[phi]\^2\)\/l\^3\)\) + \(Area\ Elast\ Sin[phi]\^2\)\/l, \(6\ Elast\ \
+Inerc\ Cos[phi]\)\/l\^2}, {\(6\ Elast\ Inerc\ Sin[phi]\)\/l\^2, \(6\ Elast\ \
+Inerc\ Cos[phi]\)\/l\^2, \(4\ Elast\ Inerc\)\/l, \(6\ Elast\ Inerc\ \
+Sin[phi]\)\/l\^2, \(-\(\(6\ Elast\ Inerc\ Cos[
+                  phi]\)\/l\^2\)\), \(2\ Elast\ Inerc\)\/l}, {\(-\(\(Area\ \
+Elast\ Cos[phi]\^2\)\/l\)\) + \(12\ Elast\ Inerc\ Sin[phi]\^2\)\/l\^3, \(12\ \
+Elast\ Inerc\ Cos[phi]\ Sin[phi]\)\/l\^3 + \(Area\ Elast\ Cos[phi]\ \
+Sin[phi]\)\/l, \(6\ Elast\ Inerc\ Sin[phi]\)\/l\^2, \(Area\ Elast\ \
+Cos[phi]\^2\)\/l + \(12\ Elast\ Inerc\ Sin[phi]\^2\)\/l\^3, \(-\(\(12\ Elast\ \
+Inerc\ Cos[phi]\ Sin[
+                    phi]\)\/l\^3\)\) + \(Area\ Elast\ Cos[phi]\ \
+Sin[phi]\)\/l, \(6\ Elast\ Inerc\ Sin[phi]\)\/l\^2}, {\(-\(\(12\ Elast\ Inerc\
+\ Cos[phi]\ Sin[
+                    phi]\)\/l\^3\)\) - \(Area\ Elast\ Cos[phi]\ \
+Sin[phi]\)\/l, \(-\(\(12\ Elast\ Inerc\ Cos[phi]\^2\)\/l\^3\)\) + \(Area\ \
+Elast\ Sin[phi]\^2\)\/l, \(-\(\(6\ Elast\ Inerc\ Cos[
+                  phi]\)\/l\^2\)\), \(-\(\(12\ Elast\ Inerc\ Cos[phi]\ Sin[
+                    phi]\)\/l\^3\)\) + \(Area\ Elast\ Cos[phi]\ \
+Sin[phi]\)\/l, \(12\ Elast\ Inerc\ Cos[phi]\^2\)\/l\^3 + \(Area\ Elast\ \
+Sin[phi]\^2\)\/l, \(-\(\(6\ Elast\ Inerc\ Cos[
+                  phi]\)\/l\^2\)\)}, {\(6\ Elast\ Inerc\ Sin[phi]\)\/l\^2, \
+\(6\ Elast\ Inerc\ Cos[phi]\)\/l\^2, \(2\ Elast\ Inerc\)\/l, \(6\ Elast\ \
+Inerc\ Sin[phi]\)\/l\^2, \(-\(\(6\ Elast\ Inerc\ Cos[phi]\)\/l\^2\)\), 
+        0}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Config0\  = \ {l \[Rule] 5, Elast \[Rule] 25000\ 10^6, 
+        Inerc -> 1.0667\ 10^\((\(-4\))\), Area \[Rule] 8\ 10^\(-3\), 
+        phi \[Rule] Pi/10}\), "\[IndentingNewLine]", 
+    \(\(RotStiff\  /. Prismatic\)\  /. \ Config0\)}], "Input"],
+
+Cell[BoxData[
+    \({l \[Rule] 5, Elast \[Rule] 25000000000, Inerc \[Rule] 0.00010667`, 
+      Area \[Rule] 1\/125, phi \[Rule] \[Pi]\/10}\)], "Output"],
+
+Cell[BoxData[
+    \({{3.620478647615098`*^7, \(-1.1680466182415018`*^7\), 
+        197777.05673985387`, \(-3.615589329884692`*^7\), \
+\(-1.1830943909283908`*^7\), 
+        197777.05673985387`}, {\(-1.1680466182415018`*^7\), 
+        4.051221523849023`*^6, 608695.1915592242`, 1.1830943909283908`*^7, 
+        3.5880987011530814`*^6, 608695.1915592242`}, {197777.05673985387`, 
+        608695.1915592242`, 2.1334`*^6, 
+        197777.05673985387`, \(-608695.1915592242`\), 
+        1.0667`*^6}, {\(-3.615589329884692`*^7\), 1.1830943909283908`*^7, 
+        197777.05673985387`, 3.620478647615098`*^7, 1.1680466182415018`*^7, 
+        197777.05673985387`}, {\(-1.1830943909283908`*^7\), 
+        3.5880987011530814`*^6, \(-608695.1915592242`\), 
+        1.1680466182415018`*^7, 
+        4.051221523849023`*^6, \(-608695.1915592242`\)}, \
+{197777.05673985387`, 608695.1915592242`, 1.0667`*^6, 
+        197777.05673985387`, \(-608695.1915592242`\), 0}}\)], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"4.1 for X",
+ScreenRectangle->{{0, 1280}, {0, 1024}},
+WindowSize->{1270, 928},
+WindowMargins->{{0, Automatic}, {Automatic, 28}},
+Magnification->1.25
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1727, 52, 1526, 26, 349, "Input"],
+Cell[3256, 80, 1516, 29, 202, "Output"],
+Cell[4775, 111, 550, 13, 148, "Output"],
+Cell[5328, 126, 1074, 24, 206, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6439, 155, 612, 10, 253, "Input"],
+Cell[7054, 167, 2335, 35, 607, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9426, 207, 263, 4, 61, "Input"],
+Cell[9692, 213, 152, 2, 51, "Output"],
+Cell[9847, 217, 962, 16, 161, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

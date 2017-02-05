@@ -1,0 +1,219 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      6631,        210]
+NotebookOptionsPosition[      5989,        183]
+NotebookOutlinePosition[      6350,        199]
+CellTagsIndexPosition[      6307,        196]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"dep", "=", 
+    RowBox[{"(", GridBox[{
+       {"Dep00", "Dep01", "Dep02"},
+       {"Dep10", "Dep11", "Dep12"},
+       {"Dep20", "Dep21", "Dep22"}
+      }], ")"}]}], ";"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"gradphi", "=", 
+     RowBox[{"(", GridBox[{
+        {"dphiJxdx", "dphiJxdy"},
+        {"dphiJydx", "dphiJydy"}
+       }], ")"}]}], ";"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gradphi", "=", 
+   RowBox[{"(", GridBox[{
+      {"duxdx", "duxdy"},
+      {"duydx", "duydy"}
+     }], ")"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eps", "=", 
+   FractionBox[
+    RowBox[{"gradphi", "+", 
+     RowBox[{"Transpose", "[", "gradphi", "]"}]}], "2"]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsvec", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"eps", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", 
+     RowBox[{"eps", "[", 
+      RowBox[{"[", 
+       RowBox[{"2", ",", "2"}], "]"}], "]"}], ",", 
+     RowBox[{"eps", "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "2"}], "]"}], "]"}]}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"mult", "=", 
+   RowBox[{"dep", ".", "epsvec"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"multMat", "=", 
+   RowBox[{"(", GridBox[{
+      {
+       RowBox[{"mult", "[", 
+        RowBox[{"[", "1", "]"}], "]"}], 
+       RowBox[{"mult", "[", 
+        RowBox[{"[", "3", "]"}], "]"}]},
+      {
+       RowBox[{"mult", "[", 
+        RowBox[{"[", "3", "]"}], "]"}], 
+       RowBox[{"mult", "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}
+     }], ")"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gradphiI", "=", 
+   RowBox[{"(", GridBox[{
+      {"dvxdx", "dvxdy"},
+      {"dvydx", "dvydy"}
+     }], ")"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Tr", "[", 
+   RowBox[{"multMat", ".", "gradphiI"}], "]"}], "//", "Expand", 
+  "\[IndentingNewLine]"}]}], "Input",
+ CellChangeTimes->{{3.612200579674502*^9, 3.612200584040963*^9}, {
+   3.6122007592086487`*^9, 3.6122008518401747`*^9}, {3.612201028859407*^9, 
+   3.612201331955783*^9}, {3.612270752298143*^9, 3.612270763717081*^9}, {
+   3.61227087319769*^9, 3.61227091636899*^9}, 3.61227101451999*^9, {
+   3.612272416884781*^9, 3.6122724351741467`*^9}, {3.612277188798992*^9, 
+   3.612277198730823*^9}, {3.61227757367352*^9, 3.61227758322044*^9}, {
+   3.612541828719558*^9, 3.612541836665579*^9}, {3.619278222959383*^9, 
+   3.619278324483602*^9}, {3.619278397102344*^9, 3.61927848304981*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Dep00", " ", "duxdx", " ", "dvxdx"}], "+", 
+  FractionBox[
+   RowBox[{"Dep02", " ", "duxdy", " ", "dvxdx"}], "2"], "+", 
+  FractionBox[
+   RowBox[{"Dep02", " ", "duydx", " ", "dvxdx"}], "2"], "+", 
+  RowBox[{"Dep01", " ", "duydy", " ", "dvxdx"}], "+", 
+  RowBox[{"Dep20", " ", "duxdx", " ", "dvxdy"}], "+", 
+  FractionBox[
+   RowBox[{"Dep22", " ", "duxdy", " ", "dvxdy"}], "2"], "+", 
+  FractionBox[
+   RowBox[{"Dep22", " ", "duydx", " ", "dvxdy"}], "2"], "+", 
+  RowBox[{"Dep21", " ", "duydy", " ", "dvxdy"}], "+", 
+  RowBox[{"Dep20", " ", "duxdx", " ", "dvydx"}], "+", 
+  FractionBox[
+   RowBox[{"Dep22", " ", "duxdy", " ", "dvydx"}], "2"], "+", 
+  FractionBox[
+   RowBox[{"Dep22", " ", "duydx", " ", "dvydx"}], "2"], "+", 
+  RowBox[{"Dep21", " ", "duydy", " ", "dvydx"}], "+", 
+  RowBox[{"Dep10", " ", "duxdx", " ", "dvydy"}], "+", 
+  FractionBox[
+   RowBox[{"Dep12", " ", "duxdy", " ", "dvydy"}], "2"], "+", 
+  FractionBox[
+   RowBox[{"Dep12", " ", "duydx", " ", "dvydy"}], "2"], "+", 
+  RowBox[{"Dep11", " ", "duydy", " ", "dvydy"}]}]], "Output",
+ CellChangeTimes->{{3.612201211954829*^9, 3.612201248969817*^9}, {
+   3.612270901098434*^9, 3.612270917356413*^9}, 3.612271015009104*^9, 
+   3.612272435751236*^9, 3.612277204103517*^9, 3.612277586410359*^9, 
+   3.612541839306758*^9, {3.6192782957365437`*^9, 3.619278325555691*^9}, 
+   3.619278484248837*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"ela", "=", 
+     RowBox[{"25", " ", 
+      SuperscriptBox["10", "3"]}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[Nu]", "=", "0.2"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"\[Lambda]", "=", 
+    FractionBox[
+     RowBox[{"ela", " ", "\[Nu]"}], 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"1", "+", "\[Nu]"}], ")"}], 
+      RowBox[{"(", 
+       RowBox[{"1", "-", 
+        RowBox[{"2", "\[Nu]"}]}], ")"}]}]]}], "\[IndentingNewLine]", 
+   RowBox[{"G", "=", 
+    FractionBox["ela", 
+     RowBox[{"2", 
+      RowBox[{"(", 
+       RowBox[{"1", "+", "\[Nu]"}], ")"}]}]]}]}]}]], "Input",
+ CellChangeTimes->{{3.612560694421722*^9, 3.612560727291646*^9}, {
+  3.612560766244667*^9, 3.6125608112335567`*^9}}],
+
+Cell[BoxData["6944.444444444444`"], "Output",
+ CellChangeTimes->{3.6125608118041983`*^9}],
+
+Cell[BoxData["10416.666666666668`"], "Output",
+ CellChangeTimes->{3.6125608118049107`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"\[Lambda]", "+", 
+  RowBox[{"2", "G"}]}], "\[IndentingNewLine]", 
+ RowBox[{"2", "G"}]}], "Input",
+ CellChangeTimes->{{3.612560832690412*^9, 3.612560839847741*^9}}],
+
+Cell[BoxData["27777.77777777778`"], "Output",
+ CellChangeTimes->{3.612560840397038*^9}],
+
+Cell[BoxData["20833.333333333336`"], "Output",
+ CellChangeTimes->{3.612560840397668*^9}]
+}, Open  ]]
+},
+WindowSize->{1765, 1004},
+WindowMargins->{{Automatic, 1582}, {Automatic, 180}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (November 6, \
+2010)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 2574, 76, 298, "Input"],
+Cell[3144, 100, 1394, 30, 81, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4575, 135, 807, 24, 137, "Input"],
+Cell[5385, 161, 89, 1, 27, "Output"],
+Cell[5477, 164, 90, 1, 27, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5604, 170, 188, 4, 43, "Input"],
+Cell[5795, 176, 87, 1, 27, "Output"],
+Cell[5885, 179, 88, 1, 27, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

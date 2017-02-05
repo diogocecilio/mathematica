@@ -1,0 +1,1990 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     59973,       1672]*)
+(*NotebookOutlinePosition[     60623,       1695]*)
+(*  CellTagsIndexPosition[     60579,       1691]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Aula1 - Mec\[AHat]nica 1", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Defini\[CCedilla]\[ATilde]o das fun\[CCedilla]\[OTilde]es de \
+mapeamento", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[
+"Rota\[CCedilla]\[ATilde]o de 180 graus em torno do eixo z"], "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f1[{x_, y_, z_}] = {\(-x\), \(-y\), z}\)], "Input"],
+
+Cell[BoxData[
+    \({\(-x\), \(-y\), z}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Corpo estica e encolha pelos eixos", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f2[{x_, y_, z_}] = {1.01\ x, 0.997\ y, 0.997\ z}\)], "Input"],
+
+Cell[BoxData[
+    \({1.01`\ x, 0.997`\ y, 0.997`\ z}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Corpo \[EAcute] mapeado sobre o c\[IAcute]rculo", "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(f3[{x_, y_, z_}] = {\((R - z)\) Sin[x/R], y, 
+        R - \((R - z)\) Cos[x/R]}\)], "Input"],
+
+Cell[BoxData[
+    \({\((R - z)\)\ Sin[x\/R], y, R - \((R - z)\)\ Cos[x\/R]}\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Calculo do valor da fun\[CCedilla]\[ATilde]o de mapeamento em 27 pontos do \
+cubo\
+\>", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\n\)\(For[i = \(-1\), i <= 1, \(i++\), 
+      For[j = \(-1\), j <= 1, \(j++\), 
+        For[k = \(-1\), k <= 1, \(k++\), 
+          Print["\<Ponto = \>", {i, j, k}, "\< f1 = \>", 
+            f1[{i, j, k}]]]]]\)\)\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), \(-1\), \(-1\)}\
+\[InvisibleSpace]" f1 = "\[InvisibleSpace]{1, 1, \(-1\)}\),
+      SequenceForm[ "Ponto = ", {-1, -1, -1}, " f1 = ", {1, 1, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), \(-1\), 
+          0}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{1, 1, 0}\),
+      SequenceForm[ "Ponto = ", {-1, -1, 0}, " f1 = ", {1, 1, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), \(-1\), 
+          1}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{1, 1, 1}\),
+      SequenceForm[ "Ponto = ", {-1, -1, 1}, " f1 = ", {1, 1, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 
+          0, \(-1\)}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{1, 
+          0, \(-1\)}\),
+      SequenceForm[ "Ponto = ", {-1, 0, -1}, " f1 = ", {1, 0, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 0, 
+          0}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{1, 0, 0}\),
+      SequenceForm[ "Ponto = ", {-1, 0, 0}, " f1 = ", {1, 0, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 0, 
+          1}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{1, 0, 1}\),
+      SequenceForm[ "Ponto = ", {-1, 0, 1}, " f1 = ", {1, 0, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 
+          1, \(-1\)}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{1, \(-1\), \
+\(-1\)}\),
+      SequenceForm[ "Ponto = ", {-1, 1, -1}, " f1 = ", {1, -1, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 1, 
+          0}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{1, \(-1\), 0}\),
+      SequenceForm[ "Ponto = ", {-1, 1, 0}, " f1 = ", {1, -1, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 1, 
+          1}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{1, \(-1\), 1}\),
+      SequenceForm[ "Ponto = ", {-1, 1, 1}, " f1 = ", {1, -1, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, \(-1\), \(-1\)}\
+\[InvisibleSpace]" f1 = "\[InvisibleSpace]{0, 1, \(-1\)}\),
+      SequenceForm[ "Ponto = ", {0, -1, -1}, " f1 = ", {0, 1, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, \(-1\), 
+          0}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{0, 1, 0}\),
+      SequenceForm[ "Ponto = ", {0, -1, 0}, " f1 = ", {0, 1, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, \(-1\), 
+          1}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{0, 1, 1}\),
+      SequenceForm[ "Ponto = ", {0, -1, 1}, " f1 = ", {0, 1, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 
+          0, \(-1\)}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{0, 
+          0, \(-1\)}\),
+      SequenceForm[ "Ponto = ", {0, 0, -1}, " f1 = ", {0, 0, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 0, 
+          0}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{0, 0, 0}\),
+      SequenceForm[ "Ponto = ", {0, 0, 0}, " f1 = ", {0, 0, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 0, 
+          1}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{0, 0, 1}\),
+      SequenceForm[ "Ponto = ", {0, 0, 1}, " f1 = ", {0, 0, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 
+          1, \(-1\)}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{0, \(-1\), \
+\(-1\)}\),
+      SequenceForm[ "Ponto = ", {0, 1, -1}, " f1 = ", {0, -1, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 1, 
+          0}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{0, \(-1\), 0}\),
+      SequenceForm[ "Ponto = ", {0, 1, 0}, " f1 = ", {0, -1, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 1, 
+          1}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{0, \(-1\), 1}\),
+      SequenceForm[ "Ponto = ", {0, 1, 1}, " f1 = ", {0, -1, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, \(-1\), \(-1\)}\
+\[InvisibleSpace]" f1 = "\[InvisibleSpace]{\(-1\), 1, \(-1\)}\),
+      SequenceForm[ "Ponto = ", {1, -1, -1}, " f1 = ", {-1, 1, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, \(-1\), 
+          0}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{\(-1\), 1, 0}\),
+      SequenceForm[ "Ponto = ", {1, -1, 0}, " f1 = ", {-1, 1, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, \(-1\), 
+          1}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{\(-1\), 1, 1}\),
+      SequenceForm[ "Ponto = ", {1, -1, 1}, " f1 = ", {-1, 1, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 
+          0, \(-1\)}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{\(-1\), 
+          0, \(-1\)}\),
+      SequenceForm[ "Ponto = ", {1, 0, -1}, " f1 = ", {-1, 0, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 0, 
+          0}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{\(-1\), 0, 0}\),
+      SequenceForm[ "Ponto = ", {1, 0, 0}, " f1 = ", {-1, 0, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 0, 
+          1}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{\(-1\), 0, 1}\),
+      SequenceForm[ "Ponto = ", {1, 0, 1}, " f1 = ", {-1, 0, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 
+          1, \(-1\)}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{\(-1\), \
+\(-1\), \(-1\)}\),
+      SequenceForm[ "Ponto = ", {1, 1, -1}, " f1 = ", {-1, -1, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 1, 
+          0}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{\(-1\), \(-1\), 0}\),
+      SequenceForm[ "Ponto = ", {1, 1, 0}, " f1 = ", {-1, -1, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 1, 
+          1}\[InvisibleSpace]" f1 = "\[InvisibleSpace]{\(-1\), \(-1\), 1}\),
+      SequenceForm[ "Ponto = ", {1, 1, 1}, " f1 = ", {-1, -1, 1}],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\n\)\(For[i = \(-1\), i <= 1, \(i++\), 
+      For[j = \(-1\), j <= 1, \(j++\), 
+        For[k = \(-1\), k <= 1, \(k++\), 
+          Print["\<Ponto = \>", {i, j, k}, "\< f2 = \>", 
+            f2[{i, j, k}]]]]]\)\)\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), \(-1\), \(-1\)}\
+\[InvisibleSpace]" f2 = "\[InvisibleSpace]{\(-1.01`\), \(-0.997`\), \(-0.997`\
+\)}\),
+      SequenceForm[ 
+      "Ponto = ", {-1, -1, -1}, " f2 = ", {-1.01, -0.997, -0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), \(-1\), 
+          0}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{\(-1.01`\), \
+\(-0.997`\), 0}\),
+      SequenceForm[ "Ponto = ", {-1, -1, 0}, " f2 = ", {-1.01, -0.997, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), \(-1\), 
+          1}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{\(-1.01`\), \
+\(-0.997`\), 0.997`}\),
+      SequenceForm[ 
+      "Ponto = ", {-1, -1, 1}, " f2 = ", {-1.01, -0.997, 0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 
+          0, \(-1\)}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{\(-1.01`\), 
+          0, \(-0.997`\)}\),
+      SequenceForm[ "Ponto = ", {-1, 0, -1}, " f2 = ", {-1.01, 0, -0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 0, 
+          0}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{\(-1.01`\), 0, 0}\),
+      SequenceForm[ "Ponto = ", {-1, 0, 0}, " f2 = ", {-1.01, 0, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 0, 
+          1}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{\(-1.01`\), 0, 
+          0.997`}\),
+      SequenceForm[ "Ponto = ", {-1, 0, 1}, " f2 = ", {-1.01, 0, 0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 
+          1, \(-1\)}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{\(-1.01`\), 
+          0.997`, \(-0.997`\)}\),
+      SequenceForm[ 
+      "Ponto = ", {-1, 1, -1}, " f2 = ", {-1.01, 0.997, -0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 1, 
+          0}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{\(-1.01`\), 0.997`, 
+          0}\),
+      SequenceForm[ "Ponto = ", {-1, 1, 0}, " f2 = ", {-1.01, 0.997, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 1, 
+          1}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{\(-1.01`\), 0.997`, 
+          0.997`}\),
+      SequenceForm[ "Ponto = ", {-1, 1, 1}, " f2 = ", {-1.01, 0.997, 0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, \(-1\), \(-1\)}\
+\[InvisibleSpace]" f2 = "\[InvisibleSpace]{0, \(-0.997`\), \(-0.997`\)}\),
+      SequenceForm[ "Ponto = ", {0, -1, -1}, " f2 = ", {0, -0.997, -0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, \(-1\), 
+          0}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{0, \(-0.997`\), 0}\),
+      SequenceForm[ "Ponto = ", {0, -1, 0}, " f2 = ", {0, -0.997, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, \(-1\), 
+          1}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{0, \(-0.997`\), 
+          0.997`}\),
+      SequenceForm[ "Ponto = ", {0, -1, 1}, " f2 = ", {0, -0.997, 0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 
+          0, \(-1\)}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{0, 
+          0, \(-0.997`\)}\),
+      SequenceForm[ "Ponto = ", {0, 0, -1}, " f2 = ", {0, 0, -0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 0, 
+          0}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{0, 0, 0}\),
+      SequenceForm[ "Ponto = ", {0, 0, 0}, " f2 = ", {0, 0, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 0, 
+          1}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{0, 0, 0.997`}\),
+      SequenceForm[ "Ponto = ", {0, 0, 1}, " f2 = ", {0, 0, 0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 
+          1, \(-1\)}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{0, 
+          0.997`, \(-0.997`\)}\),
+      SequenceForm[ "Ponto = ", {0, 1, -1}, " f2 = ", {0, 0.997, -0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 1, 
+          0}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{0, 0.997`, 0}\),
+      SequenceForm[ "Ponto = ", {0, 1, 0}, " f2 = ", {0, 0.997, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 1, 
+          1}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{0, 0.997`, 0.997`}\),
+      SequenceForm[ "Ponto = ", {0, 1, 1}, " f2 = ", {0, 0.997, 0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, \(-1\), \(-1\)}\
+\[InvisibleSpace]" f2 = "\[InvisibleSpace]{1.01`, \(-0.997`\), \(-0.997`\)}\),
+      
+      SequenceForm[ 
+      "Ponto = ", {1, -1, -1}, " f2 = ", {1.01, -0.997, -0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, \(-1\), 
+          0}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{1.01`, \(-0.997`\), 
+          0}\),
+      SequenceForm[ "Ponto = ", {1, -1, 0}, " f2 = ", {1.01, -0.997, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, \(-1\), 
+          1}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{1.01`, \(-0.997`\), 
+          0.997`}\),
+      SequenceForm[ "Ponto = ", {1, -1, 1}, " f2 = ", {1.01, -0.997, 0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 
+          0, \(-1\)}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{1.01`, 
+          0, \(-0.997`\)}\),
+      SequenceForm[ "Ponto = ", {1, 0, -1}, " f2 = ", {1.01, 0, -0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 0, 
+          0}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{1.01`, 0, 0}\),
+      SequenceForm[ "Ponto = ", {1, 0, 0}, " f2 = ", {1.01, 0, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 0, 
+          1}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{1.01`, 0, 0.997`}\),
+      SequenceForm[ "Ponto = ", {1, 0, 1}, " f2 = ", {1.01, 0, 0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 
+          1, \(-1\)}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{1.01`, 
+          0.997`, \(-0.997`\)}\),
+      SequenceForm[ "Ponto = ", {1, 1, -1}, " f2 = ", {1.01, 0.997, -0.997}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 1, 
+          0}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{1.01`, 0.997`, 0}\),
+      SequenceForm[ "Ponto = ", {1, 1, 0}, " f2 = ", {1.01, 0.997, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 1, 
+          1}\[InvisibleSpace]" f2 = "\[InvisibleSpace]{1.01`, 0.997`, 
+          0.997`}\),
+      SequenceForm[ "Ponto = ", {1, 1, 1}, " f2 = ", {1.01, 0.997, 0.997}],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\n\)\(For[i = \(-1\), i <= 1, \(i++\), 
+      For[j = \(-1\), j <= 1, \(j++\), 
+        For[k = \(-1\), k <= 1, \(k++\), 
+          Print["\<Ponto = \>", {i, j, k}, "\< f3 = \>", 
+            f3[{i, j, k}]]]]]\)\)\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), \(-1\), \(-1\)}\
+\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\(-\((1 + R)\)\)\ Sin[
+              1\/R], \(-1\), R - \((1 + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {-1, -1, -1}, " f3 = ", {
+        Times[ -1, 
+          Plus[ 1, R], 
+          Sin[ 
+            Power[ R, -1]]], -1, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ 1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), \(-1\), 
+          0}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\(-R\)\ Sin[
+              1\/R], \(-1\), R - R\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {-1, -1, 0}, " f3 = ", {
+        Times[ -1, R, 
+          Sin[ 
+            Power[ R, -1]]], -1, 
+        Plus[ R, 
+          Times[ -1, R, 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), \(-1\), 
+          1}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\(-\((\(-1\) + 
+                  R)\)\)\ Sin[1\/R], \(-1\), 
+          R - \((\(-1\) + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {-1, -1, 1}, " f3 = ", {
+        Times[ -1, 
+          Plus[ -1, R], 
+          Sin[ 
+            Power[ R, -1]]], -1, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ -1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 
+          0, \(-1\)}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\(-\((1 + 
+                  R)\)\)\ Sin[1\/R], 0, R - \((1 + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {-1, 0, -1}, " f3 = ", {
+        Times[ -1, 
+          Plus[ 1, R], 
+          Sin[ 
+            Power[ R, -1]]], 0, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ 1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 0, 
+          0}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\(-R\)\ Sin[1\/R], 0, 
+          R - R\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {-1, 0, 0}, " f3 = ", {
+        Times[ -1, R, 
+          Sin[ 
+            Power[ R, -1]]], 0, 
+        Plus[ R, 
+          Times[ -1, R, 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 0, 
+          1}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\(-\((\(-1\) + 
+                  R)\)\)\ Sin[1\/R], 0, R - \((\(-1\) + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {-1, 0, 1}, " f3 = ", {
+        Times[ -1, 
+          Plus[ -1, R], 
+          Sin[ 
+            Power[ R, -1]]], 0, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ -1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 
+          1, \(-1\)}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\(-\((1 + 
+                  R)\)\)\ Sin[1\/R], 1, R - \((1 + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {-1, 1, -1}, " f3 = ", {
+        Times[ -1, 
+          Plus[ 1, R], 
+          Sin[ 
+            Power[ R, -1]]], 1, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ 1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 1, 
+          0}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\(-R\)\ Sin[1\/R], 1, 
+          R - R\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {-1, 1, 0}, " f3 = ", {
+        Times[ -1, R, 
+          Sin[ 
+            Power[ R, -1]]], 1, 
+        Plus[ R, 
+          Times[ -1, R, 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{\(-1\), 1, 
+          1}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\(-\((\(-1\) + 
+                  R)\)\)\ Sin[1\/R], 1, R - \((\(-1\) + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {-1, 1, 1}, " f3 = ", {
+        Times[ -1, 
+          Plus[ -1, R], 
+          Sin[ 
+            Power[ R, -1]]], 1, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ -1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, \(-1\), \(-1\)}\
+\[InvisibleSpace]" f3 = "\[InvisibleSpace]{0, \(-1\), \(-1\)}\),
+      SequenceForm[ "Ponto = ", {0, -1, -1}, " f3 = ", {0, -1, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, \(-1\), 
+          0}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{0, \(-1\), 0}\),
+      SequenceForm[ "Ponto = ", {0, -1, 0}, " f3 = ", {0, -1, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, \(-1\), 
+          1}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{0, \(-1\), 1}\),
+      SequenceForm[ "Ponto = ", {0, -1, 1}, " f3 = ", {0, -1, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 
+          0, \(-1\)}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{0, 
+          0, \(-1\)}\),
+      SequenceForm[ "Ponto = ", {0, 0, -1}, " f3 = ", {0, 0, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 0, 
+          0}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{0, 0, 0}\),
+      SequenceForm[ "Ponto = ", {0, 0, 0}, " f3 = ", {0, 0, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 0, 
+          1}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{0, 0, 1}\),
+      SequenceForm[ "Ponto = ", {0, 0, 1}, " f3 = ", {0, 0, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 
+          1, \(-1\)}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{0, 
+          1, \(-1\)}\),
+      SequenceForm[ "Ponto = ", {0, 1, -1}, " f3 = ", {0, 1, -1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 1, 
+          0}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{0, 1, 0}\),
+      SequenceForm[ "Ponto = ", {0, 1, 0}, " f3 = ", {0, 1, 0}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{0, 1, 
+          1}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{0, 1, 1}\),
+      SequenceForm[ "Ponto = ", {0, 1, 1}, " f3 = ", {0, 1, 1}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, \(-1\), \(-1\)}\
+\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\((1 + R)\)\ Sin[1\/R], \(-1\), 
+          R - \((1 + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {1, -1, -1}, " f3 = ", {
+        Times[ 
+          Plus[ 1, R], 
+          Sin[ 
+            Power[ R, -1]]], -1, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ 1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, \(-1\), 
+          0}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{R\ Sin[1\/R], \(-1\), 
+          R - R\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {1, -1, 0}, " f3 = ", {
+        Times[ R, 
+          Sin[ 
+            Power[ R, -1]]], -1, 
+        Plus[ R, 
+          Times[ -1, R, 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, \(-1\), 
+          1}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\((\(-1\) + R)\)\ Sin[
+              1\/R], \(-1\), R - \((\(-1\) + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {1, -1, 1}, " f3 = ", {
+        Times[ 
+          Plus[ -1, R], 
+          Sin[ 
+            Power[ R, -1]]], -1, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ -1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 
+          0, \(-1\)}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\((1 + 
+                R)\)\ Sin[1\/R], 0, R - \((1 + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {1, 0, -1}, " f3 = ", {
+        Times[ 
+          Plus[ 1, R], 
+          Sin[ 
+            Power[ R, -1]]], 0, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ 1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 0, 
+          0}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{R\ Sin[1\/R], 0, 
+          R - R\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {1, 0, 0}, " f3 = ", {
+        Times[ R, 
+          Sin[ 
+            Power[ R, -1]]], 0, 
+        Plus[ R, 
+          Times[ -1, R, 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 0, 
+          1}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\((\(-1\) + R)\)\ Sin[
+              1\/R], 0, R - \((\(-1\) + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {1, 0, 1}, " f3 = ", {
+        Times[ 
+          Plus[ -1, R], 
+          Sin[ 
+            Power[ R, -1]]], 0, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ -1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 
+          1, \(-1\)}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\((1 + 
+                R)\)\ Sin[1\/R], 1, R - \((1 + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {1, 1, -1}, " f3 = ", {
+        Times[ 
+          Plus[ 1, R], 
+          Sin[ 
+            Power[ R, -1]]], 1, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ 1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 1, 
+          0}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{R\ Sin[1\/R], 1, 
+          R - R\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {1, 1, 0}, " f3 = ", {
+        Times[ R, 
+          Sin[ 
+            Power[ R, -1]]], 1, 
+        Plus[ R, 
+          Times[ -1, R, 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Ponto = "\[InvisibleSpace]{1, 1, 
+          1}\[InvisibleSpace]" f3 = "\[InvisibleSpace]{\((\(-1\) + R)\)\ Sin[
+              1\/R], 1, R - \((\(-1\) + R)\)\ Cos[1\/R]}\),
+      SequenceForm[ "Ponto = ", {1, 1, 1}, " f3 = ", {
+        Times[ 
+          Plus[ -1, R], 
+          Sin[ 
+            Power[ R, -1]]], 1, 
+        Plus[ R, 
+          Times[ -1, 
+            Plus[ -1, R], 
+            Cos[ 
+              Power[ R, -1]]]]}],
+      Editable->False]], "Print"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["C\[AAcute]lculo das derivadas direcionais", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[TextData[
+"\nDerivada direcional da primeira fun\[CCedilla]\[ATilde]o de mapeamento"], 
+  "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(xvec\  = \ {x, y, z};\)\), "\n", 
+    \(\(uvec\  = \ {u, v, w};\)\n\), "\n", 
+    \(Df1[x_, u_] := 
+      Limit[Chop[\(f1[x + \[Alpha]\ u] - f1[x]\)\/\[Alpha]], \[Alpha] -> 
+          0]\), "\n", 
+    \(Df1[xvec, uvec]\)}], "Input"],
+
+Cell[BoxData[
+    \({\(-u\), \(-v\), w}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[
+"\nDerivada direcional da segunda fun\[CCedilla]\[ATilde]o de mapeamento"], 
+  "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(xvec\  = \ {x, y, z};\)\), "\n", 
+    \(\(uvec\  = \ {u, v, w};\)\), "\n", 
+    \(Df2[x_, u_] := 
+      Limit[Simplify[
+          Chop[\(f2[x + \[Alpha]\ u] - f2[x]\)\/\[Alpha]]], \[Alpha] -> 
+          0]\), "\n", 
+    \(Df2[xvec, uvec]\)}], "Input"],
+
+Cell[BoxData[
+    \({1.01`\ u, 0.997`\ v, 0.997`\ w}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[
+"\nDerivada direcional da terceira fun\[CCedilla]\[ATilde]o de mapeamento"], 
+  "Text"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(xvec\  = \ {x, y, z};\)\), "\n", 
+    \(\(uvec\  = \ {u, v, w};\)\), "\n", 
+    \(Df3[x_, u_] := 
+      Limit[Chop[
+          Simplify[\(f3[x + \[Alpha]\ u] - f3[x]\)\/\[Alpha]]], \[Alpha] -> 
+          0]\), "\n", 
+    \(Df3[xvec, uvec]\)}], "Input"],
+
+Cell[BoxData[
+    \({\(u\ \((R - z)\)\ Cos[x\/R] - R\ w\ Sin[x\/R]\)\/R, 
+      v, \(R\ w\ Cos[x\/R] + u\ \((R - z)\)\ Sin[x\/R]\)\/R}\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Verifica\[CCedilla]\[ATilde]o da linearidade do gradiente direcional", 
+  "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\n\)\(\(rvec\  = \ {r, s, t};\)\n
+    Df3[xvec, uvec + rvec] - Df3[xvec, uvec] - Df3[xvec, rvec]\n
+    Simplify[%]\)\)\)], "Input"],
+
+Cell[BoxData[
+    RowBox[{\(General::"spell"\), \(\(:\)\(\ \)\), "\<\"Possible spelling \
+error: new symbol name \\\"\\!\\(rvec\\)\\\" is similar to existing symbols \
+\\!\\({uvec, xvec}\\). \\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", \
+ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::spell\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    \({\(-\(\(r\ \((R - z)\)\ Cos[x\/R] - 
+                R\ t\ Sin[
+                    x\/R]\)\/R\)\) - \(u\ \((R - z)\)\ Cos[x\/R] - R\ w\ \
+Sin[x\/R]\)\/R + \(\((r + u)\)\ \((R - z)\)\ Cos[x\/R] - R\ \((t + w)\)\ \
+Sin[x\/R]\)\/R, 
+      0, \(-\(\(R\ t\ Cos[x\/R] + 
+                r\ \((R - z)\)\ Sin[
+                    x\/R]\)\/R\)\) - \(R\ w\ Cos[x\/R] + u\ \((R - z)\)\ \
+Sin[x\/R]\)\/R + \(R\ \((t + w)\)\ Cos[x\/R] + \((r + u)\)\ \((R - z)\)\ \
+Sin[x\/R]\)\/R}\)], "Output"],
+
+Cell[BoxData[
+    \({0, 0, 0}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["C\[AAcute]lculo do gradiente da fun\[CCedilla]\[ATilde]o de \
+mapeamento.", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(xvec\)], "Input"],
+
+Cell[BoxData[
+    \({x, y, z}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\n\)\(Gradf1[x_] := 
+      Transpose[{Df1[x, {1, 0, 0}], Df1[x, {0, 1, 0}], Df1[x, {0, 0, 1}]}]\n
+    Gradf2[x_] := 
+      Transpose[{Df2[x, {1, 0, 0}], Df2[x, {0, 1, 0}], Df2[x, {0, 0, 1}]}]\n
+    Gradf3[x_] := 
+      Transpose[{Df3[x, {1, 0, 0}], Df3[x, {0, 1, 0}], 
+          Df3[x, {0, 0, 1}]}]\[IndentingNewLine] (*Gradf1[t_] := 
+        Transpose[{D[f1[xvec], x], D[f1[xvec], y], 
+              D[f1[xvec], y]}] /. {x \[Rule] t[\([1]\)], 
+            y \[Rule] t[\([2]\)], z \[Rule] t[\([3]\)]}*) \n
+    Gradf1[xvec]\n
+    Gradf2[xvec]\n
+    Gradf3[xvec]\n
+    Gradf1[rvec] . uvec - Df1[rvec, uvec]\n
+    Gradf2[rvec] . uvec - Df2[rvec, uvec]\n
+    Gradf3[rvec] . uvec - Df3[rvec, uvec]\)\)\)], "Input"],
+
+Cell[BoxData[
+    \({{\(-1\), 0, 0}, {0, \(-1\), 0}, {0, 0, 1}}\)], "Output"],
+
+Cell[BoxData[
+    \({{1.01`, 0, 0}, {0, 0.997`, 0}, {0, 0, 0.997`}}\)], "Output"],
+
+Cell[BoxData[
+    \({{\(\((R - z)\)\ Cos[x\/R]\)\/R, 0, \(-Sin[x\/R]\)}, {0, 1, 
+        0}, {\(\((R - z)\)\ Sin[x\/R]\)\/R, 0, Cos[x\/R]}}\)], "Output"],
+
+Cell[BoxData[
+    \({0, 0, 0}\)], "Output"],
+
+Cell[BoxData[
+    \({0.`\ u, 0.`\ v, 0.`\ w}\)], "Output"],
+
+Cell[BoxData[
+    \({\(\((R - t)\)\ u\ Cos[r\/R]\)\/R - 
+        w\ Sin[r\/R] - \(\((R - t)\)\ u\ Cos[r\/R] - R\ w\ Sin[r\/R]\)\/R, 0, 
+      w\ Cos[r\/R] + \(\((R - t)\)\ u\ Sin[r\/R]\)\/R - \(R\ w\ Cos[r\/R] + \
+\((R - t)\)\ u\ Sin[r\/R]\)\/R}\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Aula 2 - Mec\[AHat]nica 1", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["C\[AAcute]lculo de uma decomposi\[CCedilla]\[ATilde]o polar de um \
+tensor n\[ATilde]o sim\[EAcute]trico", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(ComputeU[F_] := 
+      Block[{FtF, EigVecFtF, EigValFtF}, \n\t\tFtF = 
+          N[Transpose[F] . F]; \n\t\tEigVecFtF = 
+          Eigenvectors[FtF]; \n\t\tEigValFtF = 
+          DiagonalMatrix[Eigenvalues[FtF]]; \n\t\tEigVecFtF . \@EigValFtF . 
+          EigVecFtF\n\t\t]\), "\n", 
+    \(ComputeR[F_] := N[F] . Inverse[ComputeU[F]]\), "\n", 
+    \(F = Gradf3[{1. , 1. , 1. }]\  /. \ R -> 20. \), "\n", 
+    \(ComputeU[F]\), "\n", 
+    \(ComputeR[F]\)}], "Input"],
+
+Cell[BoxData[
+    RowBox[{\(General::"spell1"\), \(\(:\)\(\ \)\), "\<\"Possible spelling \
+error: new symbol name \\\"\\!\\(ComputeR\\)\\\" is similar to existing \
+symbol \\\"\\!\\(ComputeU\\)\\\". \\!\\(\\*ButtonBox[\\\"More\[Ellipsis]\\\", \
+ButtonStyle->\\\"RefGuideLinkText\\\", ButtonFrame->None, \
+ButtonData:>\\\"General::spell1\\\"]\\)\"\>"}]], "Message"],
+
+Cell[BoxData[
+    \({{0.9488127473752179`, 0, \(-0.04997916927067833`\)}, {0, 1, 
+        0}, {0.047480210807144416`, 0, 0.9987502603949663`}}\)], "Output"],
+
+Cell[BoxData[
+    \({{\(-0.95`\), 0.`, 0.`}, {0.`, 1.`, 0.`}, {0.`, 
+        0.`, \(-1.`\)}}\)], "Output"],
+
+Cell[BoxData[
+    \({{\(-0.9987502603949662`\), 0.`, 0.04997916927067833`}, {0.`, 1.`, 
+        0.`}, {\(-0.04997916927067833`\), 
+        0.`, \(-0.9987502603949663`\)}}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Tensor de deforma\[CCedilla]\[ATilde]o infinitesimal para as fun\[CCedilla]\
+\[OTilde]es de mapeamento\
+\>", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(E1[x_] := \((Gradf1[x] + Transpose[Gradf1[x]])\)/2 - 
+        IdentityMatrix[3]\), "\n", 
+    \(E2[x_] := \((Gradf2[x] + Transpose[Gradf2[x]])\)/2 - 
+        IdentityMatrix[3]\), "\n", 
+    \(E3[x_] := \((Gradf3[x] + Transpose[Gradf3[x]])\)/2 - 
+        IdentityMatrix[3]\), "\n", 
+    \(\(xvec\  = \ {x, y, z};\)\), "\n", 
+    \(E1[xvec]\), "\n", 
+    \(E2[xvec]\), "\n", 
+    \(E3[xvec]\)}], "Input"],
+
+Cell[BoxData[
+    \({{\(-2\), 0, 0}, {0, \(-2\), 0}, {0, 0, 0}}\)], "Output"],
+
+Cell[BoxData[
+    \({{0.010000000000000009`, 0, 0}, {0, \(-0.0030000000000000027`\), 
+        0}, {0, 0, \(-0.0030000000000000027`\)}}\)], "Output"],
+
+Cell[BoxData[
+    \({{\(-1\) + \(\((R - z)\)\ Cos[x\/R]\)\/R, 0, 
+        1\/2\ \((\(-Sin[x\/R]\) + \(\((R - z)\)\ Sin[x\/R]\)\/R)\)}, {0, 0, 
+        0}, {1\/2\ \((\(-Sin[x\/R]\) + \(\((R - z)\)\ Sin[x\/R]\)\/R)\), 
+        0, \(-1\) + Cos[x\/R]}}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "C\[AAcute]lculo da diferen\[CCedilla]a entre E e ",
+  Cell[BoxData[
+      FormBox[
+        FractionBox[
+          RowBox[{"(", 
+            RowBox[{
+              FormBox[\(U\^2\),
+                "TraditionalForm"], "-", "I"}], ")"}], "2"], 
+        TraditionalForm]]]
+}], "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Error1[x_] := 
+      E1[x] - \((Transpose[Gradf1[x]] . Gradf1[x] - \
+IdentityMatrix[3])\)\/2\), "\n", 
+    \(Error2[x_] := 
+      E2[x] - \((Transpose[Gradf2[x]] . Gradf2[x] - \
+IdentityMatrix[3])\)\/2\), "\n", 
+    \(Error3[x_] := 
+      E3[x] - \((Transpose[Gradf3[x]] . Gradf3[x] - \
+IdentityMatrix[3])\)\/2\), "\n", 
+    \(Error1[{1. , 1. , 1. }]\), "\n", 
+    \(Error2[{1. , 1. , 1. }]\), "\n", 
+    \(E3[{1. , 1. , 1. }] /. R -> 20. \), "\n", 
+    \(Error3[{1. , 1. , 1. }] /. \ R -> 20. \), "\n", 
+    \(Error3[{1. , 1. , 1. }] /. \ R -> 60. \)}], "Input"],
+
+Cell[BoxData[
+    \({{\(-2\), 0, 0}, {0, \(-2\), 0}, {0, 0, 0}}\)], "Output"],
+
+Cell[BoxData[
+    \({{\(-0.00004999999999999449`\), 0.`, 
+        0.`}, {0.`, \(-4.500000000018378`*^-6\), 0.`}, {0.`, 
+        0.`, \(-4.500000000018378`*^-6\)}}\)], "Output"],
+
+Cell[BoxData[
+    \({{\(-0.051187252624782076`\), 0, \(-0.0012494792317669576`\)}, {0, 0, 
+        0}, {\(-0.0012494792317669576`\), 
+        0, \(-0.0012497396050337173`\)}}\)], "Output"],
+
+Cell[BoxData[
+    \({{\(-0.0024372526247820464`\), 0, \(-0.001249479231766961`\)}, {0, 0, 
+        0}, {\(-0.001249479231766961`\), 
+        0, \(-0.0012497396050337587`\)}}\)], "Output"],
+
+Cell[BoxData[
+    \({{\(-0.00027545980155532085`\), 0, \(-0.0001388824589370445`\)}, {0, 0, 
+        0}, {\(-0.0001388824589370445`\), 
+        0, \(-0.00013888567389809184`\)}}\)], "Output"],
+
+Cell["\<\
+Comment\[AAcute]rios :
+1. O erro para o mapeamento 1 \[EAcute] muito grande, porque o tensor de \
+deforma\[CCedilla]\[ATilde]o infinitesimal somente consegue modelar pequenas \
+rota\[CCedilla]\[OTilde]es
+2. O erro para o mapeamento 2 \[EAcute] pequeno e aceit\[AAcute]vel. O erro \
+\[EAcute] em torno de um mil\[EAcute]simo da medida da deforma\[CCedilla]\
+\[ATilde]o
+3. O erro para o mapeamento 3 dependo do raio do c\[IAcute]rculo sobre o qual \
+mapeamos a viga. O tensor U somente acusa deforma\[CCedilla]\[ATilde]o na \
+dire\[CCedilla]\[ATilde]o x. As demais deforma\[CCedilla]\[OTilde]es do \
+tensor infinitesimal de deforma\[CCedilla]\[ATilde]o s\[ATilde]o resultante \
+da inadequa\[CCedilla]\[ATilde]o do mesmo de modelar \
+rota\[CCedilla]\[OTilde]es reais\
+\>", "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+  "Maiora\[CCedilla]\[ATilde]o da diferen\[CCedilla]a entre E e ",
+  Cell[BoxData[
+      FormBox[
+        FractionBox[
+          RowBox[{"(", 
+            RowBox[{
+              FormBox[\(U\^2\),
+                "TraditionalForm"], "-", "I"}], ")"}], "2"], 
+        TraditionalForm]]]
+}], "Subtitle"],
+
+Cell[TextData[{
+  StyleBox["A difer\[EHat]ncia E-",
+    FontSize->14],
+  Cell[BoxData[
+      FormBox[
+        FractionBox[
+          RowBox[{"(", 
+            RowBox[{
+              FormBox[\(U\^2\),
+                "TraditionalForm"], "-", "I"}], ")"}], "2"], 
+        TraditionalForm]],
+    FontSize->14],
+  StyleBox["=",
+    FontSize->14],
+  Cell[BoxData[
+      \(TraditionalForm\`gradu\^T\)],
+    FontSize->14],
+  StyleBox[
+  ".gradu, onde u \[EAcute] a fun\[CCedilla]\[ATilde]o de deslocamento. Caso \
+a matriz R da decomposi\[CCedilla]\[ATilde]o polar \[EAcute] identidade, \
+gradu ser\[AAcute] sim\[EAcute]trico e seus autovetores ser\[ATilde]o os \
+mesmos dos autovetores de E e de U (tensor da decomposi\[CCedilla]\[ATilde]o \
+polar). Por isto a difer\[EHat]ncia entre os dois tensores n\[ATilde]o ser\
+\[AAcute] maior que o m\[AAcute]ximo autovalor de ",
+    FontSize->14],
+  Cell[BoxData[
+      \(TraditionalForm\`gradu\^T\)],
+    FontSize->14],
+  StyleBox[
+  ".gradu, que \[EAcute] 0.001*0.001\nA difer\[EHat]ncia m\[AAcute]xima ser\
+\[AAcute] 0.00001, ou seja, um milesimo da deforma\[CCedilla]\[ATilde]o \
+calculada",
+    FontSize->14]
+}], "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Aula 3 - Mec\[AHat]nica 1", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Dire\[CCedilla]\[OTilde]es principais e autovalores do tensor infinitesimal \
+de deforma\[CCedilla]\[ATilde]o\
+\>", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(For[b = \(-1\), 
+      b <= 1, \(b++\), \[IndentingNewLine]For[c = \(-1\), 
+        c <= 1, \(c++\), \[IndentingNewLine]Avec = 
+          Eigenvectors[
+            E3[{1, b, c}] /. \ {R -> 20. }]; \[IndentingNewLine]Aval = 
+          Eigenvalues[
+            E3[{1, b, c}] /. \ {R -> 
+                  20. }]; \[IndentingNewLine]Print["\<E3 point 1 \>", 
+          b, "\< \>", c, \ "\< Eigenvectors \>", 
+          MatrixForm[Chop[Avec]]\ , "\< Eigenvalues \>", 
+          MatrixForm[
+            Chop[Aval]]];\[IndentingNewLine]]\n]\), "\[IndentingNewLine]", 
+    \(ClearAll[Avec, Aval]\)}], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"E3 point 1 \"\>", "\[InvisibleSpace]", \(-1\), 
+        "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", \(-1\), 
+        "\[InvisibleSpace]", "\<\" Eigenvectors \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {\(-0.9996875162757025`\), "0", \(-0.024997395914712364`\)},
+                {\(-0.024997395914712367`\), "0", "0.9996875162757026`"},
+                {"0", \(-1.`\), "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]], 
+        "\[InvisibleSpace]", "\<\" Eigenvalues \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {"0.04871901690484049`"},
+                  {\(-0.0012809830951595613`\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "E3 point 1 ", -1, " ", -1, " Eigenvectors ", 
+        MatrixForm[ {{-0.99968751627570251, 
+          0, -0.024997395914712364}, {-0.024997395914712367, 0, 
+          0.99968751627570263}, {0, -1.0, 0}}], " Eigenvalues ", 
+        MatrixForm[ {0.048719016904840491, -0.0012809830951595613, 0}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"E3 point 1 \"\>", "\[InvisibleSpace]", \(-1\), 
+        "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "0", 
+        "\[InvisibleSpace]", "\<\" Eigenvectors \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"1.`", "0", "0"},
+                {"0", "0", "1.`"},
+                {"0", "1.`", "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]], 
+        "\[InvisibleSpace]", "\<\" Eigenvalues \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {\(-0.0012497396050337173`\)},
+                  {\(-0.0012497396050337173`\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "E3 point 1 ", -1, " ", 0, " Eigenvectors ", 
+        MatrixForm[ {{1.0, 0, 0}, {0, 0, 1.0}, {0, 1.0, 0}}], " Eigenvalues ",
+         
+        MatrixForm[ {-0.0012497396050337173, -0.0012497396050337173, 0}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"E3 point 1 \"\>", "\[InvisibleSpace]", \(-1\), 
+        "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "1", 
+        "\[InvisibleSpace]", "\<\" Eigenvectors \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"0.9996875162757025`", "0", "0.024997395914712305`"},
+                {\(-0.0249973959147123`\), "0", "0.9996875162757026`"},
+                {"0", "0.9999999999999999`", "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]], 
+        "\[InvisibleSpace]", "\<\" Eigenvalues \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {\(-0.05121849611490792`\)},
+                  {\(-0.0012184961149078737`\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "E3 point 1 ", -1, " ", 1, " Eigenvectors ", 
+        MatrixForm[ {{0.99968751627570251, 0, 
+          0.024997395914712305}, {-0.024997395914712301, 0, 
+          0.99968751627570263}, {0, 0.99999999999999989, 0}}], 
+        " Eigenvalues ", 
+        MatrixForm[ {-0.051218496114907919, -0.0012184961149078737, 0}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"E3 point 1 \"\>", "\[InvisibleSpace]", "0", 
+        "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", \(-1\), 
+        "\[InvisibleSpace]", "\<\" Eigenvectors \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {\(-0.9996875162757025`\), "0", \(-0.024997395914712364`\)},
+                {\(-0.024997395914712367`\), "0", "0.9996875162757026`"},
+                {"0", \(-1.`\), "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]], 
+        "\[InvisibleSpace]", "\<\" Eigenvalues \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {"0.04871901690484049`"},
+                  {\(-0.0012809830951595613`\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "E3 point 1 ", 0, " ", -1, " Eigenvectors ", 
+        MatrixForm[ {{-0.99968751627570251, 
+          0, -0.024997395914712364}, {-0.024997395914712367, 0, 
+          0.99968751627570263}, {0, -1.0, 0}}], " Eigenvalues ", 
+        MatrixForm[ {0.048719016904840491, -0.0012809830951595613, 0}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"E3 point 1 \"\>", "\[InvisibleSpace]", "0", 
+        "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "0", 
+        "\[InvisibleSpace]", "\<\" Eigenvectors \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"1.`", "0", "0"},
+                {"0", "0", "1.`"},
+                {"0", "1.`", "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]], 
+        "\[InvisibleSpace]", "\<\" Eigenvalues \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {\(-0.0012497396050337173`\)},
+                  {\(-0.0012497396050337173`\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "E3 point 1 ", 0, " ", 0, " Eigenvectors ", 
+        MatrixForm[ {{1.0, 0, 0}, {0, 0, 1.0}, {0, 1.0, 0}}], " Eigenvalues ",
+         
+        MatrixForm[ {-0.0012497396050337173, -0.0012497396050337173, 0}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"E3 point 1 \"\>", "\[InvisibleSpace]", "0", 
+        "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "1", 
+        "\[InvisibleSpace]", "\<\" Eigenvectors \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"0.9996875162757025`", "0", "0.024997395914712305`"},
+                {\(-0.0249973959147123`\), "0", "0.9996875162757026`"},
+                {"0", "0.9999999999999999`", "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]], 
+        "\[InvisibleSpace]", "\<\" Eigenvalues \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {\(-0.05121849611490792`\)},
+                  {\(-0.0012184961149078737`\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "E3 point 1 ", 0, " ", 1, " Eigenvectors ", 
+        MatrixForm[ {{0.99968751627570251, 0, 
+          0.024997395914712305}, {-0.024997395914712301, 0, 
+          0.99968751627570263}, {0, 0.99999999999999989, 0}}], 
+        " Eigenvalues ", 
+        MatrixForm[ {-0.051218496114907919, -0.0012184961149078737, 0}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"E3 point 1 \"\>", "\[InvisibleSpace]", "1", 
+        "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", \(-1\), 
+        "\[InvisibleSpace]", "\<\" Eigenvectors \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {\(-0.9996875162757025`\), "0", \(-0.024997395914712364`\)},
+                {\(-0.024997395914712367`\), "0", "0.9996875162757026`"},
+                {"0", \(-1.`\), "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]], 
+        "\[InvisibleSpace]", "\<\" Eigenvalues \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {"0.04871901690484049`"},
+                  {\(-0.0012809830951595613`\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "E3 point 1 ", 1, " ", -1, " Eigenvectors ", 
+        MatrixForm[ {{-0.99968751627570251, 
+          0, -0.024997395914712364}, {-0.024997395914712367, 0, 
+          0.99968751627570263}, {0, -1.0, 0}}], " Eigenvalues ", 
+        MatrixForm[ {0.048719016904840491, -0.0012809830951595613, 0}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"E3 point 1 \"\>", "\[InvisibleSpace]", "1", 
+        "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "0", 
+        "\[InvisibleSpace]", "\<\" Eigenvectors \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"1.`", "0", "0"},
+                {"0", "0", "1.`"},
+                {"0", "1.`", "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]], 
+        "\[InvisibleSpace]", "\<\" Eigenvalues \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {\(-0.0012497396050337173`\)},
+                  {\(-0.0012497396050337173`\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "E3 point 1 ", 1, " ", 0, " Eigenvectors ", 
+        MatrixForm[ {{1.0, 0, 0}, {0, 0, 1.0}, {0, 1.0, 0}}], " Eigenvalues ",
+         
+        MatrixForm[ {-0.0012497396050337173, -0.0012497396050337173, 0}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"E3 point 1 \"\>", "\[InvisibleSpace]", "1", 
+        "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "1", 
+        "\[InvisibleSpace]", "\<\" Eigenvectors \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"0.9996875162757025`", "0", "0.024997395914712305`"},
+                {\(-0.0249973959147123`\), "0", "0.9996875162757026`"},
+                {"0", "0.9999999999999999`", "0"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]], 
+        "\[InvisibleSpace]", "\<\" Eigenvalues \"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", 
+            TagBox[GridBox[{
+                  {\(-0.05121849611490792`\)},
+                  {\(-0.0012184961149078737`\)},
+                  {"0"}
+                  },
+                RowSpacings->1,
+                ColumnAlignments->{Left}],
+              Column], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "E3 point 1 ", 1, " ", 1, " Eigenvectors ", 
+        MatrixForm[ {{0.99968751627570251, 0, 
+          0.024997395914712305}, {-0.024997395914712301, 0, 
+          0.99968751627570263}, {0, 0.99999999999999989, 0}}], 
+        " Eigenvalues ", 
+        MatrixForm[ {-0.051218496114907919, -0.0012184961149078737, 0}]],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell["\<\
+As dire\[CCedilla]\[OTilde]es principais est\[ATilde]o quase alinhadas com os \
+eixos principais. Para z=-1 o autovalor correspondente ao eixo (1,0,0) \
+\[EAcute] positivo (extens\[ATilde]o). Para z=1 o autovalor correspondente ao \
+eixo (1,0,0) \[EAcute] negativo (compress\[ATilde]o). Os outros autovalores s\
+\[ATilde]o bem menores.\
+\>", "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Mudan\[CCedilla]a de observador para o tensor de deforma\[CCedilla]\[ATilde]o \
+infinitesimal\
+\>", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(Rotate\  = \ {{0.866025, \(-0.353553\), 0.353553}, {0.5, 
+            0.612372, \(-0.612372\)}, {0. , 0.707107, 0.707107}};\)\), "\n", 
+    \(E3Rot[x_] := Transpose[Rotate] . E3[x] . Rotate\), "\n", 
+    \(Eigv30\  = \ Eigenvalues[E3[{1. , 1. , 1. }] /. \ R -> 20. ]\), "\n", 
+    \(Eigv31\  = \ 
+      Eigenvalues[E3Rot[{1. , 1. , 1. }] /. \ R -> 20. ]\), "\n", 
+    \(Invariants[vec_]\  := \ {vec[\([1]\)] + vec[\([2]\)] + vec[\([3]\)], 
+        vec[\([1]\)] vec[\([2]\)] + vec[\([1]\)] vec[\([3]\)] + 
+          vec[\([2]\)] vec[\([3]\)], 
+        vec[\([1]\)] vec[\([2]\)] vec[\([3]\)]}\), "\n", 
+    \(Invariants[Eigv30]\), "\n", 
+    \(Invariants[Eigv31]\)}], "Input"],
+
+Cell[BoxData[
+    \({\(-0.05121849611490792`\), \(-0.0012184961149078737`\), 
+      3.8566395214777606`*^-33}\)], "Output"],
+
+Cell[BoxData[
+    \({\(-0.051218432061667006`\), \(-0.001218496867608365`\), 
+      3.715086506657362`*^-18}\)], "Output"],
+
+Cell[BoxData[
+    \({\(-0.05243699222981579`\), 0.00006240953852743932`, 
+      2.4069109280211145`*^-37}\)], "Output"],
+
+Cell[BoxData[
+    \({\(-0.052436928929275366`\), 0.00006240949903095292`, 
+      2.318566877371396`*^-22}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Mudan\[CCedilla]a de \[AHat]ngulo", "Subtitle"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Angulo[x_, y_] := 
+      ArcCos[x . y/\((\((x . x)\) \((\ y . y)\))\)]\), "\n", 
+    \(\(vec1\  = \ {0.866025, \(-0.353553\), 0.353553};\)\), "\n", 
+    \(\(vec2\  = \ {0.5, 0.612372, \(-0.612372\)};\)\), "\n", 
+    \(Print["\<Mudan\[CCedilla]a real para R=20 \>", \n
+      Angulo[Gradf3[{1. , 1. , 1. }] . vec1\  /. \ R -> 20. , 
+          Gradf3[{1. , 1. , 1. }] . vec2\  /. \ R -> 20. ] - 
+        Angulo[vec1, 
+          vec2], \n\t\t"\< Mudan\[CCedilla]a calculada pelo tensor \
+infinitesimal \>", \n\t\t2\ vec1 . E3[{1. , 1. , 1. }] . vec2\  /. \ 
+        R -> 20. ]\n\), "\n", 
+    \(\(\(Print["\<Mudan\[CCedilla]a real para R=40 \>", \n\t\t\tAngulo[
+          Gradf3[{1. , 1. , 1. }] . vec1\  /. \ 
+            R -> 40. , \n\t\t\t\t\t\t\t\t\tGradf3[{1. , 1. , 1. }] . 
+              vec2\  /. \ R -> 40. ] - 
+        Angulo[vec1, 
+          vec2], \n\t\t\t"\< Mudan\[CCedilla]a calculada pelo tensor \
+infinitesimal \>", \t\n\t\t\t2\ vec1 . E3[{1. , 1. , 1. }] . vec2\  /. \ 
+        R -> 40. \n]\)\(\n\)
+    \)\), "\n", 
+    \(Print["\<Mudan\[CCedilla]a real para R=100 \>", \n
+      Angulo[Gradf3[{1. , 1. , 1. }] . vec1\  /. \ R -> 100. , 
+          Gradf3[{1. , 1. , 1. }] . vec2\  /. \ R -> 100. ] - 
+        Angulo[vec1, 
+          vec2], \n\t\t\t"\< Mudan\[CCedilla]a calculada pelo tensor \
+infinitesimal \>", \n\t\t\t2\ vec1 . E3[{1. , 1. , 1. }] . vec2\  /. \ 
+        R -> 100. \n\t]\)}], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[\("Mudan\[CCedilla]a real para R=20 \
+"\[InvisibleSpace]0.046704562583631315`\[InvisibleSpace]" Mudan\[CCedilla]a \
+calculada pelo tensor infinitesimal "\[InvisibleSpace]\(-0.04290477414926191`\
+\)\),
+      SequenceForm[ 
+      "Mudan\[CCedilla]a real para R=20 ", 0.046704562583631315, 
+        " Mudan\[CCedilla]a calculada pelo tensor infinitesimal ", \
+-0.042904774149261908],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Mudan\[CCedilla]a real para R=40 \
+"\[InvisibleSpace]0.022481565542978865`\[InvisibleSpace]" Mudan\[CCedilla]a \
+calculada pelo tensor infinitesimal \
+"\[InvisibleSpace]\(-0.021558221489640914`\)\),
+      SequenceForm[ 
+      "Mudan\[CCedilla]a real para R=40 ", 0.022481565542978865, 
+        " Mudan\[CCedilla]a calculada pelo tensor infinitesimal ", \
+-0.021558221489640914],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[\("Mudan\[CCedilla]a real para R=100 \
+"\[InvisibleSpace]0.008791363567401289`\[InvisibleSpace]" Mudan\[CCedilla]a \
+calculada pelo tensor infinitesimal \
+"\[InvisibleSpace]\(-0.008646112758037264`\)\),
+      SequenceForm[ 
+      "Mudan\[CCedilla]a real para R=100 ", 0.0087913635674012891, 
+        " Mudan\[CCedilla]a calculada pelo tensor infinitesimal ", \
+-0.0086461127580372641],
+      Editable->False]], "Print"]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for X",
+ScreenRectangle->{{0, 1280}, {0, 800}},
+CellGrouping->Manual,
+WindowSize->{1270, 720},
+WindowMargins->{{0, Automatic}, {Automatic, 0}}
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 41, 0, 96, "Title"],
+
+Cell[CellGroupData[{
+Cell[1842, 57, 93, 1, 51, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[1960, 62, 84, 1, 32, "Text"],
+
+Cell[CellGroupData[{
+Cell[2069, 67, 71, 1, 27, "Input"],
+Cell[2143, 70, 53, 1, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2245, 77, 50, 0, 32, "Text"],
+
+Cell[CellGroupData[{
+Cell[2320, 81, 81, 1, 27, "Input"],
+Cell[2404, 84, 66, 1, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2519, 91, 63, 0, 32, "Text"],
+
+Cell[CellGroupData[{
+Cell[2607, 95, 112, 2, 27, "Input"],
+Cell[2722, 99, 89, 1, 41, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2872, 107, 109, 3, 51, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[3006, 114, 250, 5, 43, "Input"],
+Cell[3259, 121, 253, 4, 23, "Print"],
+Cell[3515, 127, 250, 4, 23, "Print"],
+Cell[3768, 133, 250, 4, 23, "Print"],
+Cell[4021, 139, 267, 5, 23, "Print"],
+Cell[4291, 146, 244, 4, 23, "Print"],
+Cell[4538, 152, 244, 4, 23, "Print"],
+Cell[4785, 158, 264, 5, 23, "Print"],
+Cell[5052, 165, 250, 4, 23, "Print"],
+Cell[5305, 171, 250, 4, 23, "Print"],
+Cell[5558, 177, 247, 4, 23, "Print"],
+Cell[5808, 183, 244, 4, 23, "Print"],
+Cell[6055, 189, 244, 4, 23, "Print"],
+Cell[6302, 195, 261, 5, 23, "Print"],
+Cell[6566, 202, 238, 4, 23, "Print"],
+Cell[6807, 208, 238, 4, 23, "Print"],
+Cell[7048, 214, 258, 5, 23, "Print"],
+Cell[7309, 221, 244, 4, 23, "Print"],
+Cell[7556, 227, 244, 4, 23, "Print"],
+Cell[7803, 233, 253, 4, 23, "Print"],
+Cell[8059, 239, 250, 4, 23, "Print"],
+Cell[8312, 245, 250, 4, 23, "Print"],
+Cell[8565, 251, 267, 5, 23, "Print"],
+Cell[8835, 258, 244, 4, 23, "Print"],
+Cell[9082, 264, 244, 4, 23, "Print"],
+Cell[9329, 270, 264, 5, 23, "Print"],
+Cell[9596, 277, 250, 4, 23, "Print"],
+Cell[9849, 283, 250, 4, 23, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10136, 292, 250, 5, 43, "Input"],
+Cell[10389, 299, 299, 6, 23, "Print"],
+Cell[10691, 307, 280, 5, 23, "Print"],
+Cell[10974, 314, 296, 6, 23, "Print"],
+Cell[11273, 322, 289, 5, 23, "Print"],
+Cell[11565, 329, 257, 4, 23, "Print"],
+Cell[11825, 335, 277, 5, 23, "Print"],
+Cell[12105, 342, 305, 6, 23, "Print"],
+Cell[12413, 350, 277, 5, 23, "Print"],
+Cell[12693, 357, 286, 5, 23, "Print"],
+Cell[12982, 364, 271, 4, 23, "Print"],
+Cell[13256, 370, 259, 4, 23, "Print"],
+Cell[13518, 376, 279, 5, 23, "Print"],
+Cell[13800, 383, 270, 5, 23, "Print"],
+Cell[14073, 390, 238, 4, 23, "Print"],
+Cell[14314, 396, 247, 4, 23, "Print"],
+Cell[14564, 402, 279, 5, 23, "Print"],
+Cell[14846, 409, 247, 4, 23, "Print"],
+Cell[15096, 415, 256, 4, 23, "Print"],
+Cell[15355, 421, 292, 6, 23, "Print"],
+Cell[15650, 429, 277, 5, 23, "Print"],
+Cell[15930, 436, 286, 5, 23, "Print"],
+Cell[16219, 443, 277, 5, 23, "Print"],
+Cell[16499, 450, 245, 4, 23, "Print"],
+Cell[16747, 456, 254, 4, 23, "Print"],
+Cell[17004, 462, 286, 5, 23, "Print"],
+Cell[17293, 469, 254, 4, 23, "Print"],
+Cell[17550, 475, 274, 5, 23, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17861, 485, 250, 5, 43, "Input"],
+Cell[18114, 492, 520, 14, 40, "Print"],
+Cell[18637, 508, 459, 12, 40, "Print"],
+Cell[19099, 522, 550, 15, 40, "Print"],
+Cell[19652, 539, 521, 14, 40, "Print"],
+Cell[20176, 555, 443, 12, 40, "Print"],
+Cell[20622, 569, 527, 14, 40, "Print"],
+Cell[21152, 585, 521, 14, 40, "Print"],
+Cell[21676, 601, 443, 12, 40, "Print"],
+Cell[22122, 615, 527, 14, 40, "Print"],
+Cell[22652, 631, 253, 4, 23, "Print"],
+Cell[22908, 637, 250, 4, 23, "Print"],
+Cell[23161, 643, 250, 4, 23, "Print"],
+Cell[23414, 649, 261, 5, 23, "Print"],
+Cell[23678, 656, 238, 4, 23, "Print"],
+Cell[23919, 662, 238, 4, 23, "Print"],
+Cell[24160, 668, 261, 5, 23, "Print"],
+Cell[24424, 675, 238, 4, 23, "Print"],
+Cell[24665, 681, 238, 4, 23, "Print"],
+Cell[24906, 687, 501, 14, 40, "Print"],
+Cell[25410, 703, 440, 12, 40, "Print"],
+Cell[25853, 717, 520, 14, 40, "Print"],
+Cell[26376, 733, 504, 14, 40, "Print"],
+Cell[26883, 749, 428, 12, 40, "Print"],
+Cell[27314, 763, 508, 14, 40, "Print"],
+Cell[27825, 779, 504, 14, 40, "Print"],
+Cell[28332, 795, 428, 12, 40, "Print"],
+Cell[28763, 809, 508, 14, 40, "Print"]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+Cell[29320, 829, 61, 0, 53, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[29406, 833, 102, 2, 50, "Text"],
+
+Cell[CellGroupData[{
+Cell[29533, 839, 255, 6, 112, "Input"],
+Cell[29791, 847, 53, 1, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[29893, 854, 101, 2, 50, "Text"],
+
+Cell[CellGroupData[{
+Cell[30019, 860, 274, 7, 96, "Input"],
+Cell[30296, 869, 66, 1, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[30411, 876, 102, 2, 50, "Text"],
+
+Cell[CellGroupData[{
+Cell[30538, 882, 274, 7, 96, "Input"],
+Cell[30815, 891, 148, 2, 50, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[31024, 900, 91, 1, 51, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[31140, 905, 155, 3, 75, "Input"],
+Cell[31298, 910, 355, 5, 20, "Message"],
+Cell[31656, 917, 502, 10, 94, "Output"],
+Cell[32161, 929, 43, 1, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[32253, 936, 93, 1, 51, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[32371, 941, 37, 1, 27, "Input"],
+Cell[32411, 944, 43, 1, 27, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[32491, 950, 733, 16, 187, "Input"],
+Cell[33227, 968, 77, 1, 27, "Output"],
+Cell[33307, 971, 81, 1, 27, "Output"],
+Cell[33391, 974, 153, 2, 50, "Output"],
+Cell[33547, 978, 43, 1, 27, "Output"],
+Cell[33593, 981, 58, 1, 27, "Output"],
+Cell[33654, 984, 259, 4, 50, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[33974, 995, 42, 0, 96, "Title"],
+
+Cell[CellGroupData[{
+Cell[34041, 999, 124, 1, 51, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[34190, 1004, 484, 10, 182, "Input"],
+Cell[34677, 1016, 364, 5, 20, "Message"],
+Cell[35044, 1023, 156, 2, 27, "Output"],
+Cell[35203, 1027, 106, 2, 27, "Output"],
+Cell[35312, 1031, 184, 3, 27, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[35545, 1040, 130, 3, 51, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[35700, 1047, 423, 10, 123, "Input"],
+Cell[36126, 1059, 77, 1, 27, "Output"],
+Cell[36206, 1062, 148, 2, 27, "Output"],
+Cell[36357, 1066, 262, 4, 56, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[36668, 1076, 304, 10, 63, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[36997, 1090, 584, 14, 198, "Input"],
+Cell[37584, 1106, 77, 1, 27, "Output"],
+Cell[37664, 1109, 176, 3, 29, "Output"],
+Cell[37843, 1114, 188, 3, 27, "Output"],
+Cell[38034, 1119, 187, 3, 27, "Output"],
+Cell[38224, 1124, 191, 3, 27, "Output"],
+Cell[38418, 1129, 787, 14, 104, "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[39254, 1149, 316, 10, 63, "Subtitle"],
+Cell[39573, 1161, 1161, 33, 79, "Text"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[40783, 1200, 42, 0, 96, "Title"],
+
+Cell[CellGroupData[{
+Cell[40850, 1204, 137, 3, 51, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[41012, 1211, 623, 13, 139, "Input"],
+Cell[41638, 1226, 1560, 34, 59, "Print"],
+Cell[43201, 1262, 1392, 33, 59, "Print"],
+Cell[44596, 1297, 1587, 35, 59, "Print"],
+Cell[46186, 1334, 1556, 34, 59, "Print"],
+Cell[47745, 1370, 1388, 33, 59, "Print"],
+Cell[49136, 1405, 1583, 35, 59, "Print"],
+Cell[50722, 1442, 1556, 34, 59, "Print"],
+Cell[52281, 1478, 1388, 33, 59, "Print"],
+Cell[53672, 1513, 1583, 35, 59, "Print"]
+}, Open  ]],
+Cell[55270, 1551, 359, 6, 50, "Text"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[55666, 1562, 121, 3, 51, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[55812, 1569, 697, 12, 123, "Input"],
+Cell[56512, 1583, 123, 2, 29, "Output"],
+Cell[56638, 1587, 122, 2, 29, "Output"],
+Cell[56763, 1591, 119, 2, 29, "Output"],
+Cell[56885, 1595, 119, 2, 29, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[57053, 1603, 53, 0, 51, "Subtitle"],
+
+Cell[CellGroupData[{
+Cell[57131, 1607, 1437, 27, 331, "Input"],
+Cell[58571, 1636, 450, 9, 23, "Print"],
+Cell[59024, 1647, 451, 9, 23, "Print"],
+Cell[59478, 1658, 455, 9, 23, "Print"]
+}, Open  ]]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

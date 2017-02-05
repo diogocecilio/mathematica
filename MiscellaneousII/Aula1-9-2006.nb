@@ -1,0 +1,598 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     12223,        413]*)
+(*NotebookOutlinePosition[     12912,        437]*)
+(*  CellTagsIndexPosition[     12868,        433]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["M\[EAcute]todo dos Deslocamentos", "Title"],
+
+Cell[CellGroupData[{
+
+Cell["Evita mensagens de \"warning\"", "Text"],
+
+Cell[BoxData[
+    \(Off[General::spell1]\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["C\[AAcute]lculo dos coeficientes de rigidez", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Express\[ATilde]o em fun\[CCedilla]\[ATilde]o dos fatores de forma e \
+rea\[CCedilla]\[OTilde]es fict\[IAcute]cias", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(eq1 = phia \[Equal] MA\ Glinha - A - MB\ F\), "\n", 
+    \(eq2 = phib \[Equal] \(-MA\)\ F + MB\ G + B\), "\n", 
+    \(\)}], "Input"],
+
+Cell[BoxData[
+    \(phia \[Equal] \(-A\) + Glinha\ MA - F\ MB\)], "Output"],
+
+Cell[BoxData[
+    \(phib \[Equal] B - F\ MA + G\ MB\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+C\[AAcute]lculo dos momentos de engastamento perfeito e \
+coeficientes de rigidez\
+\>", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(eqsol = Flatten[Solve[{eq1, eq2}, {MA, MB}]]\)], "Input"],
+
+Cell[BoxData[
+    \({MA \[Rule] \(-\(\(\(-B\)\ F + A\ G + G\ phia + F\ phib\)\/\(F\^2 - 
+                G\ Glinha\)\)\), 
+      MB \[Rule] \(-\(\(A\ F - B\ Glinha + F\ phia + Glinha\ phib\)\/\(F\^2 - 
+                G\ Glinha\)\)\)}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(MA /. eqsol\), "\n", 
+    \(MB /. eqsol\)}], "Input"],
+
+Cell[BoxData[
+    \(\(-\(\(\(-B\)\ F + A\ G + G\ phia + F\ phib\)\/\(F\^2 - 
+            G\ Glinha\)\)\)\)], "Output"],
+
+Cell[BoxData[
+    \(\(-\(\(A\ F - B\ Glinha + F\ phia + Glinha\ phib\)\/\(F\^2 - 
+            G\ Glinha\)\)\)\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Express\[OTilde]es fundamentais do m\[EAcute]todo dos deslocamentos", \
+"Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(MAGenerico = 
+      MAB + bab\ phia\  + \ bba\ alfaba\ phib\), "\[IndentingNewLine]", 
+    \(MBGenerico = MBA\  + bab\ alfaab\ phia\  + \ bba\ phib\)}], "Input"],
+
+Cell[BoxData[
+    \(MAB + bab\ phia + alfaba\ bba\ phib\)], "Output"],
+
+Cell[BoxData[
+    \(MBA + alfaab\ bab\ phia + bba\ phib\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Simplifica\[CCedilla]\[ATilde]o para barra prism\[AAcute]tica", \
+"Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Prismatica = {bab \[Rule] 4/Llinha, alfaab \[Rule] 1/2, 
+        bba \[Rule] 4/Llinha, alfaba \[Rule] 1/2}\)], "Input"],
+
+Cell[BoxData[
+    \({bab \[Rule] 4\/Llinha, alfaab \[Rule] 1\/2, bba \[Rule] 4\/Llinha, 
+      alfaba \[Rule] 1\/2}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Exemplo de regra de substitui\[CCedilla]\[ATilde]o", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(MAGenerico /. Prismatica\), "\n", 
+    \(MBGenerico /. Prismatica\)}], "Input"],
+
+Cell[BoxData[
+    \(MAB + \(4\ phia\)\/Llinha + \(2\ phib\)\/Llinha\)], "Output"],
+
+Cell[BoxData[
+    \(MBA + \(2\ phia\)\/Llinha + \(4\ phib\)\/Llinha\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Configura\[CCedilla]\[ATilde]o da estrutura", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Barras = {{Llinha \[Rule] 2.5, MAB \[Rule] 0.96, MBA \[Rule] \(-3.84\), 
+          phia \[Rule] 0, phib \[Rule] phi2}, {Llinha \[Rule] 6, 
+          MAB \[Rule] \(-12\), MBA \[Rule] 12, phia \[Rule] phi3, 
+          phib \[Rule] phi2}, {Llinha \[Rule] Sqrt[61]/2, MAB \[Rule] 11.7, 
+          MBA \[Rule] \(-11.7\), phia \[Rule] 0, 
+          phib \[Rule] phi3}, {Llinha \[Rule] 5, MAB \[Rule] 0, 
+          MBA \[Rule] 0, phia \[Rule] phi3, 
+          phib \[Rule] 0}, {Llinha \[Rule] Sqrt[2] 5/3, 
+          MAB \[Rule] \(-0.96\), MBA \[Rule] 1.44, phia \[Rule] phi3, 
+          phib \[Rule] phi5}}\)], "Input"],
+
+Cell[BoxData[
+    \({{Llinha \[Rule] 2.5`, MAB \[Rule] 0.96`, MBA \[Rule] \(-3.84`\), 
+        phia \[Rule] 0, phib \[Rule] phi2}, {Llinha \[Rule] 6, 
+        MAB \[Rule] \(-12\), MBA \[Rule] 12, phia \[Rule] phi3, 
+        phib \[Rule] phi2}, {Llinha \[Rule] \@61\/2, MAB \[Rule] 11.7`, 
+        MBA \[Rule] \(-11.7`\), phia \[Rule] 0, 
+        phib \[Rule] phi3}, {Llinha \[Rule] 5, MAB \[Rule] 0, MBA \[Rule] 0, 
+        phia \[Rule] phi3, phib \[Rule] 0}, {Llinha \[Rule] \(5\ \@2\)\/3, 
+        MAB \[Rule] \(-0.96`\), MBA \[Rule] 1.44`, phia \[Rule] phi3, 
+        phib \[Rule] phi5}}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Equa\[CCedilla]\[OTilde]es associadas a cada barra", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(MAGenerico /. Prismatica\) /. Barras[\([1]\)]\), "\n", 
+    \(\(MBGenerico /. Prismatica\) /. Barras[\([2]\)]\)}], "Input"],
+
+Cell[BoxData[
+    \(\(\(0.96`\)\(\[InvisibleSpace]\)\) + 0.8`\ phi2\)], "Output"],
+
+Cell[BoxData[
+    \(12 + \(2\ phi2\)\/3 + phi3\/3\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Equa\[CCedilla]\[ATilde]o por barra", "Subsection"],
+
+Cell[BoxData[{
+    \(MA[i_] := \(MAGenerico /. Prismatica\) /. Barras[\([i]\)]\), "\n", 
+    \(MB[i_] := \(MBGenerico /. Prismatica\) /. Barras[\([i]\)]\)}], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Exemplo de uso", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(MA[1]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(0.96`\)\(\[InvisibleSpace]\)\) + 0.8`\ phi2\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(MB[5]\)], "Input"],
+
+Cell[BoxData[
+    \(\(\(1.44`\)\(\[InvisibleSpace]\)\) + \(3\ \@2\ phi3\)\/5 + \(6\ \@2\ \
+phi5\)\/5\)], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Montagem do sistema global de equa\[CCedilla]\[OTilde]es", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["Equa\[CCedilla]\[OTilde]es globais de equil\[IAcute]brio", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Restricoes = {}\), "\n", 
+    \(Equacoes = {\[IndentingNewLine]MB[1] + MB[2] \[Equal] 
+            0, \[IndentingNewLine]MA[2] + MB[3] + MA[4] + MA[5] \[Equal] 
+            6, \[IndentingNewLine]MB[5] \[Equal] 0} /. Restricoes\), "\n", 
+    \(MatrixForm[Equacoes]\)}], "Input"],
+
+Cell[BoxData[
+    \({}\)], "Output"],
+
+Cell[BoxData[
+    \({\(\(8.16`\)\(\[InvisibleSpace]\)\) + 2.2666666666666666`\ phi2 + 
+          phi3\/3 \[Equal] 
+        0, \(-24.66`\) + 
+          phi2\/3 + \(22\ phi3\)\/15 + \(6\ \@2\ phi3\)\/5 + \(8\ \
+phi3\)\/\@61 + \(3\ \@2\ phi5\)\/5 \[Equal] 
+        6, \(\(1.44`\)\(\[InvisibleSpace]\)\) + \(3\ \@2\ phi3\)\/5 + \(6\ \
+\@2\ phi5\)\/5 \[Equal] 0}\)], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", 
+        TagBox[GridBox[{
+              {\(\(\(8.16`\)\(\[InvisibleSpace]\)\) + 
+                    2.2666666666666666`\ phi2 + phi3\/3 \[Equal] 0\)},
+              {\(\(-24.66`\) + 
+                    phi2\/3 + \(22\ phi3\)\/15 + \(6\ \@2\ phi3\)\/5 + \(8\ \
+phi3\)\/\@61 + \(3\ \@2\ phi5\)\/5 \[Equal] 6\)},
+              {\(\(\(1.44`\)\(\[InvisibleSpace]\)\) + \(3\ \@2\ phi3\)\/5 + \
+\(6\ \@2\ phi5\)\/5 \[Equal] 0\)}
+              },
+            RowSpacings->1,
+            ColumnAlignments->{Left}],
+          Column], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Resolu\[CCedilla]\[ATilde]o do sistema de equa\[CCedilla]\[OTilde]es", \
+"Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Solucao = Flatten[Solve[Equacoes, {phi2, phi3, phi5}]]\), "\n", 
+    \(Solucao = Join[Solucao, Restricoes]\)}], "Input"],
+
+Cell[BoxData[
+    \({phi2 \[Rule] \(-4.889776354902213`\), phi3 \[Rule] 8.770479213335044`, 
+      phi5 \[Rule] \(-5.233767744091379`\)}\)], "Output"],
+
+Cell[BoxData[
+    \({phi2 \[Rule] \(-4.889776354902213`\), phi3 \[Rule] 8.770479213335044`, 
+      phi5 \[Rule] \(-5.233767744091379`\)}\)], "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["P\[OAcute]s processamento: c\[AAcute]lculo dos momentos nas \
+extremidades", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(MatrixForm[
+      Momentos = Table[{MA[i], MB[i]}, {i, 1, Length[Barras]}]]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(\(\(0.96`\)\(\[InvisibleSpace]\)\) + 
+                0.8`\ phi2\), \(\(-3.84`\) + 1.6`\ phi2\)},
+            {\(\(-12\) + phi2\/3 + \(2\ phi3\)\/3\), \(12 + \(2\ phi2\)\/3 + 
+                phi3\/3\)},
+            {\(\(\(11.7`\)\(\[InvisibleSpace]\)\) + \(4\ phi3\)\/\@61\), \
+\(\(-11.7`\) + \(8\ phi3\)\/\@61\)},
+            {\(\(4\ phi3\)\/5\), \(\(2\ phi3\)\/5\)},
+            {\(\(-0.96`\) + \(6\ \@2\ phi3\)\/5 + \(3\ \@2\ phi5\)\/5\), \(\(\
+\(1.44`\)\(\[InvisibleSpace]\)\) + \(3\ \@2\ phi3\)\/5 + \(6\ \@2\ \
+phi5\)\/5\)}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(N[MatrixForm[Momentos /. Solucao]]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(-2.9518210839217707`\), \(-11.663642167843541`\)},
+            {\(-7.782939309410708`\), "11.66364216784354`"},
+            {"16.191779175966957`", \(-2.7164416480660876`\)},
+            {"7.016383370668035`", "3.5081916853340176`"},
+            {"9.482997586808757`", \(-1.7763568394002505`*^-15\)}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(ftool = {phi2 \[Rule] \(-4.89\), phi3 \[Rule] 8.77, 
+        phi5 \[Rule] \(-5.24\)\ }\), "\[IndentingNewLine]", 
+    \(N[MatrixForm[Momentos /. ftool]]\)}], "Input"],
+
+Cell[BoxData[
+    \({phi2 \[Rule] \(-4.89`\), phi3 \[Rule] 8.77`, 
+      phi5 \[Rule] \(-5.24`\)}\)], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(-2.952`\), \(-11.664`\)},
+            {\(-7.783333333333333`\), "11.663333333333334`"},
+            {"16.19153374804599`", \(-2.7169325039080174`\)},
+            {"7.016`", "3.508`"},
+            {"9.47689609031344`", \(-0.010983114994797205`\)}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 713}},
+CellGrouping->Manual,
+WindowSize->{1022, 515},
+WindowMargins->{{Automatic, 121}, {76, Automatic}},
+Magnification->1.5
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[1776, 53, 49, 0, 141, "Title"],
+
+Cell[CellGroupData[{
+Cell[1850, 57, 46, 0, 47, "Text"],
+Cell[1899, 59, 53, 1, 42, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[1989, 65, 62, 0, 109, "Section"],
+
+Cell[CellGroupData[{
+Cell[2076, 69, 133, 1, 109, "Section"],
+
+Cell[CellGroupData[{
+Cell[2234, 74, 153, 3, 94, "Input"],
+Cell[2390, 79, 75, 1, 41, "Output"],
+Cell[2468, 82, 65, 1, 41, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[2582, 89, 108, 3, 148, "Section"],
+
+Cell[CellGroupData[{
+Cell[2715, 96, 77, 1, 42, "Input"],
+Cell[2795, 99, 248, 4, 59, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3080, 108, 74, 2, 68, "Input"],
+Cell[3157, 112, 118, 2, 59, "Output"],
+Cell[3278, 116, 123, 2, 59, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3462, 125, 88, 1, 109, "Section"],
+
+Cell[CellGroupData[{
+Cell[3575, 130, 182, 3, 68, "Input"],
+Cell[3760, 135, 69, 1, 41, "Output"],
+Cell[3832, 138, 69, 1, 41, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3938, 144, 85, 1, 56, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[4048, 149, 139, 2, 42, "Input"],
+Cell[4190, 153, 129, 2, 57, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4356, 160, 72, 0, 56, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[4453, 164, 100, 2, 68, "Input"],
+Cell[4556, 168, 81, 1, 58, "Output"],
+Cell[4640, 171, 81, 1, 58, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4770, 178, 65, 0, 56, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[4860, 182, 633, 10, 146, "Input"],
+Cell[5496, 194, 604, 9, 197, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6149, 209, 72, 0, 56, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[6246, 213, 146, 2, 68, "Input"],
+Cell[6395, 217, 81, 1, 41, "Output"],
+Cell[6479, 220, 63, 1, 58, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[6591, 227, 57, 0, 56, "Subsection"],
+Cell[6651, 229, 166, 2, 68, "Input"],
+
+Cell[CellGroupData[{
+Cell[6842, 235, 36, 0, 56, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[6903, 239, 38, 1, 42, "Input"],
+Cell[6944, 242, 81, 1, 41, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7062, 248, 38, 1, 42, "Input"],
+Cell[7103, 251, 114, 2, 64, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7290, 261, 75, 0, 109, "Section"],
+
+Cell[CellGroupData[{
+Cell[7390, 265, 78, 0, 56, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[7493, 269, 298, 5, 172, "Input"],
+Cell[7794, 276, 36, 1, 41, "Output"],
+Cell[7833, 279, 371, 7, 172, "Output"],
+Cell[8207, 288, 681, 16, 153, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8937, 310, 89, 1, 109, "Section"],
+
+Cell[CellGroupData[{
+Cell[9051, 315, 141, 2, 68, "Input"],
+Cell[9195, 319, 150, 2, 41, "Output"],
+Cell[9348, 323, 150, 2, 41, "Output"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[9547, 331, 93, 1, 109, "Section"],
+
+Cell[CellGroupData[{
+Cell[9665, 336, 108, 2, 42, "Input"],
+Cell[9776, 340, 817, 18, 207, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10630, 363, 67, 1, 42, "Input"],
+Cell[10700, 366, 586, 13, 147, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[11371, 388, 187, 3, 68, "Input"],
+Cell[11561, 393, 111, 2, 41, "Output"],
+Cell[11675, 397, 532, 13, 143, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+

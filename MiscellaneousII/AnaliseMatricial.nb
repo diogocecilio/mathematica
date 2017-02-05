@@ -1,0 +1,1735 @@
+(************** Content-type: application/mathematica **************
+                     CreatedBy='Mathematica 5.2'
+
+                    Mathematica-Compatible Notebook
+
+This notebook can be used with any Mathematica-compatible
+application, such as Mathematica, MathReader or Publicon. The data
+for the notebook starts with the line containing stars above.
+
+To get the notebook into a Mathematica-compatible application, do
+one of the following:
+
+* Save the data starting with the line of stars above into a file
+  with a name ending in .nb, then open the file inside the
+  application;
+
+* Copy the data starting with the line of stars above to the
+  clipboard, then use the Paste menu command inside the application.
+
+Data for notebooks contains only printable 7-bit ASCII and can be
+sent directly in email or through ftp in text mode.  Newlines can be
+CR, LF or CRLF (Unix, Macintosh or MS-DOS style).
+
+NOTE: If you modify the data for this notebook not in a Mathematica-
+compatible application, you must delete the line below containing
+the word CacheID, otherwise Mathematica-compatible applications may
+try to use invalid cache data.
+
+For more information on notebooks and Mathematica-compatible 
+applications, contact Wolfram Research:
+  web: http://www.wolfram.com
+  email: info@wolfram.com
+  phone: +1-217-398-0700 (U.S.)
+
+Notebook reader applications are available free of charge from 
+Wolfram Research.
+*******************************************************************)
+
+(*CacheID: 232*)
+
+
+(*NotebookFileLineBreakTest
+NotebookFileLineBreakTest*)
+(*NotebookOptionsPosition[     72640,       1549]*)
+(*NotebookOutlinePosition[     73364,       1574]*)
+(*  CellTagsIndexPosition[     73320,       1570]*)
+(*WindowFrame->Normal*)
+
+
+
+Notebook[{
+Cell[BoxData[
+    StyleBox[\(Off[General::spell1]\),
+      "MR"]], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Express\[OTilde]es gen\[EAcute]ricas", "Section"],
+
+Cell[CellGroupData[{
+
+Cell["C\[AAcute]lculo da matriz de rigidez e sua rota\[CCedilla]\[ATilde]o", \
+"Subsection"],
+
+Cell[BoxData[{
+    \(\(Stiff = {\[IndentingNewLine]{Elast\ \(Area/L\)/ECIC, 0, 
+            0, \(-Elast\)\ \(Area/L\)/ECIC, 0, 
+            0}, \[IndentingNewLine]{0, \((\((1 + alfaab)\) 
+                    bab/L + \((1 + alfaba)\) bba/L)\)/L, \((1 + alfaab)\) 
+              bab/L, 0, \(-\((\((1 + alfaab)\) bab/L + \((1 + alfaba)\) 
+                      bba/L)\)\)/L, \((1 + alfaba)\) 
+              bba/L}, \[IndentingNewLine]{0, bab \((1 + alfaab)\)/L, bab, 
+            0, \(-bab\) \((1 + alfaab)\)/L, 
+            bba\ alfaba}, \[IndentingNewLine]{\(-Elast\)\ \(Area/L\)/ECIC, 0, 
+            0, Elast\ \(Area/L\)/ECIC, 0, 
+            0}, \[IndentingNewLine]{0, \(-\((\((1 + alfaab)\) 
+                      bab/L + \((1 + alfaba)\) bba/L)\)\)/
+              L, \(-\((1 + alfaab)\)\) bab/L, 
+            0, \((\((1 + alfaab)\) bab/L + \((1 + alfaba)\) bba/L)\)/
+              L, \(-\((1 + alfaba)\)\) 
+              bba/L}, \[IndentingNewLine]{0, \((1 + alfaba)\) bba/L, 
+            bab\ alfaab, 0, \(-\((1 + alfaba)\)\) bba/L, 
+            bba}\[IndentingNewLine]};\)\), "\n", 
+    \(\(MatrixForm[Stiff];\)\), "\n", 
+    \(\(Rotation = {\[IndentingNewLine]{Cos[alfa], Sin[alfa], 0, 0, 0, 
+            0}, \[IndentingNewLine]{\(-Sin[alfa]\), Cos[alfa], 0, 0, 0, 
+            0}, \[IndentingNewLine]{0, 0, 1, 0, 0, 0}, \[IndentingNewLine]{0, 
+            0, 0, Cos[alfa], Sin[alfa], 0}, \[IndentingNewLine]{0, 0, 
+            0, \(-Sin[alfa]\), Cos[alfa], 0}, \[IndentingNewLine]{0, 0, 0, 0, 
+            0, 1}\[IndentingNewLine]};\)\), "\n", 
+    \(\(RotStiff = 
+        Simplify[Transpose[Rotation] . Stiff . Rotation];\)\), "\n", 
+    \(\(MatrixForm[RotStiff];\)\), "\n", 
+    \(\(Prismatica\  = \ {bab \[Rule] 4/Llinha, alfaab \[Rule] 1/2, 
+          bba \[Rule] 4/Llinha, alfaba \[Rule] 1/2};\)\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["C\[AAcute]lculo da geometria de uma barra", "Subsection"],
+
+Cell[BoxData[
+    \(Geometria[barra_, co_] := 
+      Block[{LVal, LLinhaVal, angulo, nos, 
+          colocal}, \[IndentingNewLine]nos = {noA, noB} /. 
+            barra; \[IndentingNewLine]colocal = 
+          Table[co[\([nos[\([i]\)]]\)], {i, 1, 2}]; \[IndentingNewLine]LVal = 
+          Sqrt[\((colocal[\([1, 2]\)] - 
+                    colocal[\([2, 2]\)])\)^2 + \((colocal[\([1, 1]\)] - 
+                    colocal[\([2, 1]\)])\)^2]; \[IndentingNewLine]LLinhaVal = 
+          LVal\ ECIC/\((Elast\ Inerc)\) /. barra; \[IndentingNewLine]angulo = 
+          ArcTan[colocal[\([2, 1]\)] - colocal[\([1, 1]\)], 
+            colocal[\([2, 2]\)] - 
+              colocal[\([1, 2]\)]]; \[IndentingNewLine]Join[
+          barra, {L \[Rule] LVal, Llinha \[Rule] LLinhaVal, 
+            alfa \[Rule] angulo}]\[IndentingNewLine]]\)], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+C\[AAcute]lculo de for\[CCedilla]as de engastamento perfeito \
+associadas a uma barra\
+\>", "Subsection"],
+
+Cell[BoxData[{
+    \(DistribuidoGlobal[barra_, co_, LoadA_] := 
+      Block[{subs, LoadVec, Load2, barraloc, nos, 
+          colocal}, \[IndentingNewLine]Load2 = 
+          LoadA; \[IndentingNewLine]LoadVec = 
+          Table[0, {6}]; \[IndentingNewLine]barraloc = 
+          Geometria[barra, 
+            co]; \[IndentingNewLine]LoadVec[\([1]\)] = \(-Load2[\([1]\)]\) 
+              L/2 /. barraloc; \[IndentingNewLine]LoadVec[\([2]\)] = \
+\(-Load2[\([2]\)]\)\ L/2 /. 
+            barraloc; \[IndentingNewLine]LoadVec[\([4]\)] = \(-Load2[\([1]\)]\
+\) L/2 /. 
+            barraloc; \[IndentingNewLine]LoadVec[\([5]\)] = \(-Load2[\([2]\)]\
+\)\ L/2 /. barraloc; \[IndentingNewLine]LoadVec[\([3]\)] = \((Load2[\([1]\)] 
+                    Sin[alfa] - Load2[\([2]\)]\ Cos[alfa])\) L^2/12 /. 
+            barraloc; \[IndentingNewLine]LoadVec[\([6]\)] = \(-\((Load2[\([1]\
+\)] Sin[alfa] - Load2[\([2]\)]\ Cos[alfa])\)\) L^2/12 /. 
+            barraloc; \[IndentingNewLine]LoadVec\[IndentingNewLine]]\), "\
+\[IndentingNewLine]", 
+    \(DistribuidoLocal[barra_, co_, LoadA_] := 
+      Block[{subs, LoadVec, Load2, barraloc, nos, 
+          colocal}, \[IndentingNewLine]Load2 = 
+          LoadA; \[IndentingNewLine]LoadVec = 
+          Table[0, {6}]; \[IndentingNewLine]barraloc = 
+          Geometria[barra, 
+            co]; \[IndentingNewLine]LoadVec[\([1]\)] = \((\(-Load2[\([1]\)]\) 
+                    Cos[alfa] + Load2[\([2]\)] Sin[alfa])\) L/2 /. 
+            barraloc; \[IndentingNewLine]LoadVec[\([4]\)] = 
+          LoadVec[\([1]\)]; \[IndentingNewLine]LoadVec[\([2]\)] = \
+\((\(-Load2[\([1]\)]\) Sin[alfa] - Load2[\([2]\)] Cos[alfa])\) L/2 /. 
+            barraloc; \[IndentingNewLine]LoadVec[\([5]\)] = 
+          LoadVec[\([2]\)]; \[IndentingNewLine]LoadVec[\([3]\)] = \
+\(-Load2[\([2]\)]\)\ L^2/12 /. 
+            barraloc; \[IndentingNewLine]LoadVec[\([6]\)] = 
+          Load2[\([2]\)]\ L^2/12 /. 
+            barraloc; \[IndentingNewLine]LoadVec\[IndentingNewLine]]\), "\
+\[IndentingNewLine]", 
+    \(Termica[barra_, co_, LoadA_] := 
+      Block[{subs, LoadVec, Load2, barraloc, nos, 
+          colocal}, \[IndentingNewLine]Load2 = 
+          LoadA; \[IndentingNewLine]LoadVec = 
+          Table[0, {6}]; \[IndentingNewLine]barraloc = 
+          Geometria[barra, co]; \[IndentingNewLine]LoadVec[\([1]\)] = 
+          Cos[alfa] \((Load2[\([1]\)] + Load2[\([2]\)])\)/
+                2\ alfaterm\ Elast\ Area /. 
+            barraloc; \[IndentingNewLine]LoadVec[\([4]\)] = \
+\(-LoadVec[\([1]\)]\); \[IndentingNewLine]LoadVec[\([2]\)] = 
+          Sin[alfa] \((Load2[\([1]\)] + Load2[\([2]\)])\)/
+                2\ alfaterm\ Elast\ Area /. 
+            barraloc; \[IndentingNewLine]LoadVec[\([5]\)] = \
+\(-LoadVec[\([2]\)]\); \[IndentingNewLine]LoadVec[\([3]\)] = \
+\((\(-Load2[\([2]\)]\) + Load2[\([1]\)])\) alfaterm\ Elast\ Inerc/h\  /. 
+            barraloc; \[IndentingNewLine]LoadVec[\([6]\)] = \
+\(-LoadVec[\([3]\)]\); \[IndentingNewLine]LoadVec\[IndentingNewLine]]\)}], \
+"Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["C\[AAcute]lculo das propriedades de uma se\[CCedilla]\[ATilde]o", \
+"Subsection"],
+
+Cell[BoxData[{
+    \(Clear[h]\), "\[IndentingNewLine]", 
+    \(Secao[largura_, altura_] := \[IndentingNewLine]{h \[Rule] altura, 
+        Inerc \[Rule] largura/12\ \((altura)\)^3, 
+        Area \[Rule] largura\ altura}\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Montagem do sistema global", "Subsection"],
+
+Cell[BoxData[{
+    \(SystemSize[barras_] := 
+      Block[{b, numeq, 
+          alleq}, \[IndentingNewLine]alleq = {}; \[IndentingNewLine]For[
+          b = 1, b \[LessEqual] 
+            Length[barras], \(b++\), \[IndentingNewLine]\(alleq\  = \ 
+              Join[alleq, 
+                eq /. barras[\([b]\)]];\)\[IndentingNewLine]]; \
+\[IndentingNewLine]Max[alleq]\[IndentingNewLine]]\), "\[IndentingNewLine]", 
+    \(GlobalSys[barras_, co_] := 
+      Block[{eqloc, localstiff, i, j, b, global, alleq, 
+          numeq}, \[IndentingNewLine]numeq = 
+          SystemSize[barras]; \[IndentingNewLine]global = 
+          Table[0, {numeq}, {numeq}]; \[IndentingNewLine]For[b = 1, 
+          b \[LessEqual] 
+            Length[barras], \(b++\), \[IndentingNewLine]localstiff = \
+\(RotStiff /. Prismatica\) //. 
+              Geometria[barras[\([b]\)], co]; \[IndentingNewLine]eqloc = 
+            eq /. barras[\([b]\)]; \[IndentingNewLine]For[i = 1, 
+            i \[LessEqual] 6, \(i++\), \[IndentingNewLine]For[j = 1, 
+              j \[LessEqual] 
+                6, \(j++\), \[IndentingNewLine]\(global[\([eqloc[\([i]\)], 
+                      eqloc[\([j]\)]]\)] += 
+                  localstiff[\([i, 
+                      j]\)];\)\[IndentingNewLine]]\[IndentingNewLine]]\
+\[IndentingNewLine]]; \[IndentingNewLine]global\[IndentingNewLine]]\), "\
+\[IndentingNewLine]", 
+    \(GlobalCarga[barras_, cargas_] := 
+      Block[{eqloc, global, b, i, neq}, \[IndentingNewLine]neq = 
+          SystemSize[barras]; \[IndentingNewLine]global = 
+          Table[0, {neq}]; \[IndentingNewLine]For[b = 1, 
+          b \[LessEqual] Length[barras], \(b++\), \[IndentingNewLine]eqloc = 
+            eq /. barras[\([b]\)]; \[IndentingNewLine]For[i = 1, 
+            i \[LessEqual] 
+              6, \(i++\), \[IndentingNewLine]global[\([eqloc[\([i]\)]]\)] += 
+              cargas[\([b, 
+                  i]\)]\[IndentingNewLine]]\[IndentingNewLine]]; \
+\[IndentingNewLine]global\[IndentingNewLine]]\)}], "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Acrescimo de restri\[CCedilla]\[OTilde]es ao sistema global", \
+"Subsection"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Dados de entrado s\[ATilde]o global:lista de sistema e vetor de \
+carga, restr: lista de restri\[CCedilla]\[OTilde]es\
+\>", "Subsubsection"],
+
+Cell[BoxData[
+    \(\(\(Restricao[global_, restr_] := 
+      Block[{globsys, globcarga, neq, nrestr, i, restval, 
+          resteq}, \[IndentingNewLine]globsys = 
+          global[\([1]\)]; \[IndentingNewLine]globcarga = 
+          global[\([2]\)]; \[IndentingNewLine]neq = 
+          Length[globsys]; \[IndentingNewLine]nrestr = 
+          Length[restr]; \[IndentingNewLine]restval = 
+          Table[restr[\([i, 2]\)], {i, 1, 
+              nrestr}]; \[IndentingNewLine]resteq = 
+          Table[restr[\([i, 1]\)], {i, 1, 
+              nrestr}]; \[IndentingNewLine]globcarga = 
+          Join[globcarga, restval]; \[IndentingNewLine]For[i = 1, 
+          i \[LessEqual] neq, \(i++\), 
+          globsys[\([i]\)] = 
+            Join[globsys[\([i]\)], 
+              Table[0, {nrestr}]]]; \[IndentingNewLine]For[i = 1, 
+          i \[LessEqual] nrestr, \(i++\), 
+          globsys = 
+            Append[globsys, 
+              Table[0, {neq + nrestr}]]]; \[IndentingNewLine]For[i = 1, 
+          i \[LessEqual] 
+            nrestr, \(i++\), \[IndentingNewLine]globsys[\([resteq[\([i]\)], 
+                neq + i]\)] = 
+            1; \[IndentingNewLine]globsys[\([neq + i, resteq[\([i]\)]]\)] = 
+            1\[IndentingNewLine]]; \[IndentingNewLine]{globsys, 
+          globcarga}\[IndentingNewLine]]\)\(\[IndentingNewLine]\)
+    \)\)], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+P\[OAcute]s processamento: C\[AAcute]lculo das for\[CCedilla]as nas \
+extremidades de cada barra\
+\>", "Subsection"],
+
+Cell[BoxData[
+    \(Forcas[barras_, co_, cargas_, sol_] := 
+      Block[{locstiff, loceq, locsol, i, b, 
+          forcas}, \[IndentingNewLine]forcas = 
+          Table[0, {Length[barras]}, {6}]; \[IndentingNewLine]For[b = 1, 
+          b \[LessEqual] Length[barras], \(b++\), \[IndentingNewLine]loceq = 
+            eq /. barras[\([b]\)]; \[IndentingNewLine]locsol = 
+            Table[sol[\([loceq[\([i]\)]]\)], {i, 1, 
+                6}]; \[IndentingNewLine]locstiff = \(RotStiff /. 
+                Prismatica\) //. 
+              Geometria[barras[\([b]\)], 
+                co]; \[IndentingNewLine]forcas[\([b]\)] = 
+            cargas[\([b]\)] + 
+              locstiff . 
+                locsol\[IndentingNewLine]]; \[IndentingNewLine]forcas\
+\[IndentingNewLine]]\)], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Configura\[CCedilla]\[ATilde]o da minha estrutura", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(\[IndentingNewLine]\)\(\(X = {\[IndentingNewLine]{0, 
+            0}, \[IndentingNewLine]{0, 1}, \[IndentingNewLine]{0, 
+            4}, \[IndentingNewLine]{3, 4}, \[IndentingNewLine]{6, 
+            1}, \[IndentingNewLine]{3, 
+            0}\[IndentingNewLine]};\)\[IndentingNewLine]
+    \(Concrete = {Elast \[Rule] 25\ 10^6, 
+          alfaterm \[Rule] 10^\(-5\)};\)\[IndentingNewLine]
+    Barras = {\[IndentingNewLine]Join[{noA \[Rule] 1, noB \[Rule] 2, 
+            eq \[Rule] {1, 2, 3, 4, 5, 6}}, Concrete, 
+          Secao[1/5, 1/2]], \[IndentingNewLine]Join[{noA \[Rule] 2, 
+            noB \[Rule] 3, eq \[Rule] {4, 5, 6, 7, 8, 9}}, Concrete, 
+          Secao[1/5, 3/10]], \[IndentingNewLine]Join[{noA \[Rule] 3, 
+            noB \[Rule] 4, eq \[Rule] {7, 8, 9, 10, 11, 12}}, Concrete, 
+          Secao[1/5, 3/10]], \[IndentingNewLine]Join[{noA \[Rule] 2, 
+            noB \[Rule] 4, eq \[Rule] {4, 5, 6, 10, 11, 13}}, Concrete, 
+          Secao[1/5, 3/10]], \[IndentingNewLine]Join[{noA \[Rule] 4, 
+            noB \[Rule] 5, eq \[Rule] {10, 11, 13, 14, 15, 16}}, Concrete, 
+          Secao[1/5, 3/5]], \[IndentingNewLine]Join[{noA \[Rule] 5, 
+            noB \[Rule] 6, eq \[Rule] {14, 15, 16, 17, 18, 19}}, Concrete, 
+          Secao[1/5, 4/5]]\[IndentingNewLine]}\[IndentingNewLine]
+    \(ECIC = Elast\ Inerc\  /. Barras[\([1]\)];\)\[IndentingNewLine]
+    \(Cargas = Table[0, {Length[Barras]}, {6}];\)\[IndentingNewLine]
+    \(Cargas[\([3]\)] = 
+        DistribuidoGlobal[Barras[\([3]\)], 
+          X, {0, \(-5\)}];\)\[IndentingNewLine]
+    Cargas[\([4]\)] = 
+      DistribuidoGlobal[Barras[\([4]\)], X, {4, 0}]\[IndentingNewLine]
+    \(Cargas[\([6]\)] = 
+        DistribuidoGlobal[Barras[\([6]\)], 
+          X, {0, \(-3\)}];\)\[IndentingNewLine]
+    \(numeq = SystemSize[Barras];\)\[IndentingNewLine]
+    \(CargasNodais = Table[0, {numeq}];\)\[IndentingNewLine]
+    \(CargasNodais[\([14]\)] = \(-10\);\)\[IndentingNewLine]
+    \(Restricoes = {\[IndentingNewLine]{1, 0}, \[IndentingNewLine]{2, 
+            0}, \[IndentingNewLine]{3, 0}, \[IndentingNewLine]{18, 
+            0}\[IndentingNewLine]};\)\)\)\)], "Input"],
+
+Cell[BoxData[
+    \({{noA \[Rule] 1, noB \[Rule] 2, eq \[Rule] {1, 2, 3, 4, 5, 6}, 
+        Elast \[Rule] 25000000, alfaterm \[Rule] 1\/100000, h \[Rule] 1\/2, 
+        Inerc \[Rule] 1\/480, Area \[Rule] 1\/10}, {noA \[Rule] 2, 
+        noB \[Rule] 3, eq \[Rule] {4, 5, 6, 7, 8, 9}, Elast \[Rule] 25000000, 
+        alfaterm \[Rule] 1\/100000, h \[Rule] 3\/10, Inerc \[Rule] 9\/20000, 
+        Area \[Rule] 3\/50}, {noA \[Rule] 3, noB \[Rule] 4, 
+        eq \[Rule] {7, 8, 9, 10, 11, 12}, Elast \[Rule] 25000000, 
+        alfaterm \[Rule] 1\/100000, h \[Rule] 3\/10, Inerc \[Rule] 9\/20000, 
+        Area \[Rule] 3\/50}, {noA \[Rule] 2, noB \[Rule] 4, 
+        eq \[Rule] {4, 5, 6, 10, 11, 13}, Elast \[Rule] 25000000, 
+        alfaterm \[Rule] 1\/100000, h \[Rule] 3\/10, Inerc \[Rule] 9\/20000, 
+        Area \[Rule] 3\/50}, {noA \[Rule] 4, noB \[Rule] 5, 
+        eq \[Rule] {10, 11, 13, 14, 15, 16}, Elast \[Rule] 25000000, 
+        alfaterm \[Rule] 1\/100000, h \[Rule] 3\/5, Inerc \[Rule] 9\/2500, 
+        Area \[Rule] 3\/25}, {noA \[Rule] 5, noB \[Rule] 6, 
+        eq \[Rule] {14, 15, 16, 17, 18, 19}, Elast \[Rule] 25000000, 
+        alfaterm \[Rule] 1\/100000, h \[Rule] 4\/5, Inerc \[Rule] 16\/1875, 
+        Area \[Rule] 4\/25}}\)], "Output"],
+
+Cell[BoxData[
+    \({\(-6\)\ \@2, 0, 3\ \@2, \(-6\)\ \@2, 0, \(-3\)\ \@2}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Exemplos de c\[AAcute]lculo", "Subsection"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Barras[\([1]\)]\)], "Input"],
+
+Cell[BoxData[
+    \({noA \[Rule] 1, noB \[Rule] 2, eq \[Rule] {1, 2, 3, 4, 5, 6}, 
+      Elast \[Rule] 25000000, alfaterm \[Rule] 1\/100000, h \[Rule] 1\/2, 
+      Inerc \[Rule] 1\/480, Area \[Rule] 1\/10}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Geometria[Barras[\([1]\)], X]\)], "Input"],
+
+Cell[BoxData[
+    \({noA \[Rule] 1, noB \[Rule] 2, eq \[Rule] {1, 2, 3, 4, 5, 6}, 
+      Elast \[Rule] 25000000, alfaterm \[Rule] 1\/100000, h \[Rule] 1\/2, 
+      Inerc \[Rule] 1\/480, Area \[Rule] 1\/10, L \[Rule] 1, 
+      Llinha \[Rule] 1, alfa \[Rule] \[Pi]\/2}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(MatrixForm[
+      N[\(RotStiff /. Prismatica\) /. 
+          Geometria[Barras[\([1]\)], X]]]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"12.`", "0.`", \(-6.`\), \(-12.`\), "0.`", \(-6.`\)},
+            {"0.`", "48.`", "0.`", "0.`", \(-48.`\), "0.`"},
+            {\(-6.`\), "0.`", "4.`", "6.`", "0.`", "2.`"},
+            {\(-12.`\), "0.`", "6.`", "12.`", "0.`", "6.`"},
+            {"0.`", \(-48.`\), "0.`", "0.`", "48.`", "0.`"},
+            {\(-6.`\), "0.`", "2.`", "6.`", "0.`", "4.`"}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(\(\(For[b = 1, 
+      b \[LessEqual] 
+        Length[Barras], \(b++\), \[IndentingNewLine]Print["\<Barra \>"\ , \ 
+        b, \ MatrixForm[
+          N[\(RotStiff /. Prismatica\) /. 
+              Geometria[Barras[\([b]\)], 
+                X]]]]\[IndentingNewLine]]\)\(\[IndentingNewLine]\)
+    \)\)], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Barra \"\>", "\[InvisibleSpace]", "1", "\[InvisibleSpace]",
+         
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"12.`", "0.`", \(-6.`\), \(-12.`\), "0.`", \(-6.`\)},
+                {"0.`", "48.`", "0.`", "0.`", \(-48.`\), "0.`"},
+                {\(-6.`\), "0.`", "4.`", "6.`", "0.`", "2.`"},
+                {\(-12.`\), "0.`", "6.`", "12.`", "0.`", "6.`"},
+                {"0.`", \(-48.`\), "0.`", "0.`", "48.`", "0.`"},
+                {\(-6.`\), "0.`", "2.`", "6.`", "0.`", "4.`"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "Barra ", 1, 
+        MatrixForm[ {{12.0, 0.0, -6.0, -12.0, 0.0, -6.0}, {0.0, 48.0, 0.0, 
+          0.0, -48.0, 0.0}, {-6.0, 0.0, 4.0, 6.0, 0.0, 2.0}, {-12.0, 0.0, 6.0,
+           12.0, 0.0, 6.0}, {0.0, -48.0, 0.0, 0.0, 48.0, 0.0}, {-6.0, 0.0, 
+          2.0, 6.0, 0.0, 4.0}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Barra \"\>", "\[InvisibleSpace]", "2", "\[InvisibleSpace]",
+         
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"0.096`", "0.`", \(-0.144`\), \(-0.096`\), 
+                  "0.`", \(-0.144`\)},
+                {"0.`", "9.6`", "0.`", "0.`", \(-9.6`\), "0.`"},
+                {\(-0.144`\), "0.`", "0.288`", "0.144`", "0.`", "0.144`"},
+                {\(-0.096`\), "0.`", "0.144`", "0.096`", "0.`", "0.144`"},
+                {"0.`", \(-9.6`\), "0.`", "0.`", "9.6`", "0.`"},
+                {\(-0.144`\), "0.`", "0.144`", "0.144`", "0.`", "0.288`"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "Barra ", 2, 
+        MatrixForm[ {{.096000000000000002, 
+          0.0, -.14399999999999999, -.096000000000000002, 
+          0.0, -.14399999999999999}, {0.0, 9.5999999999999996, 0.0, 
+          0.0, -9.5999999999999996, 0.0}, {-.14399999999999999, 
+          0.0, .28799999999999998, .14399999999999999, 
+          0.0, .14399999999999999}, {-.096000000000000002, 
+          0.0, .14399999999999999, .096000000000000002, 
+          0.0, .14399999999999999}, {0.0, -9.5999999999999996, 0.0, 0.0, 
+          9.5999999999999996, 0.0}, {-.14399999999999999, 
+          0.0, .14399999999999999, .14399999999999999, 
+          0.0, .28799999999999998}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Barra \"\>", "\[InvisibleSpace]", "3", "\[InvisibleSpace]",
+         
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"9.6`", "0.`", "0.`", \(-9.6`\), "0.`", "0.`"},
+                {"0.`", "0.096`", "0.144`", "0.`", \(-0.096`\), "0.144`"},
+                {"0.`", "0.144`", "0.288`", "0.`", \(-0.144`\), "0.144`"},
+                {\(-9.6`\), "0.`", "0.`", "9.6`", "0.`", "0.`"},
+                {"0.`", \(-0.096`\), \(-0.144`\), "0.`", 
+                  "0.096`", \(-0.144`\)},
+                {"0.`", "0.144`", "0.144`", "0.`", \(-0.144`\), "0.288`"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "Barra ", 3, 
+        MatrixForm[ {{9.5999999999999996, 0.0, 0.0, -9.5999999999999996, 0.0, 
+          0.0}, {0.0, .096000000000000002, .14399999999999999, 
+          0.0, -.096000000000000002, .14399999999999999}, {
+          0.0, .14399999999999999, .28799999999999998, 
+          0.0, -.14399999999999999, .14399999999999999}, {-9.5999999999999996,
+           0.0, 0.0, 9.5999999999999996, 0.0, 0.0}, {
+          0.0, -.096000000000000002, -.14399999999999999, 
+          0.0, .096000000000000002, -.14399999999999999}, {
+          0.0, .14399999999999999, .14399999999999999, 
+          0.0, -.14399999999999999, .28799999999999998}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Barra \"\>", "\[InvisibleSpace]", "4", "\[InvisibleSpace]",
+         
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"3.4110831124439054`", 
+                  "3.3771419869469512`", \(-0.05091168824543142`\), \
+\(-3.4110831124439054`\), \(-3.3771419869469512`\), \
+\(-0.05091168824543142`\)},
+                {"3.3771419869469512`", "3.4110831124439054`", 
+                  "0.05091168824543142`", \(-3.3771419869469512`\), \
+\(-3.4110831124439054`\), "0.05091168824543142`"},
+                {\(-0.05091168824543142`\), "0.05091168824543142`", 
+                  "0.2036467529817257`", 
+                  "0.05091168824543142`", \(-0.05091168824543142`\), 
+                  "0.10182337649086284`"},
+                {\(-3.4110831124439054`\), \(-3.3771419869469512`\), 
+                  "0.05091168824543142`", "3.4110831124439054`", 
+                  "3.3771419869469512`", "0.05091168824543142`"},
+                {\(-3.3771419869469512`\), \(-3.4110831124439054`\), \
+\(-0.05091168824543142`\), "3.3771419869469512`", 
+                  "3.4110831124439054`", \(-0.05091168824543142`\)},
+                {\(-0.05091168824543142`\), "0.05091168824543142`", 
+                  "0.10182337649086284`", 
+                  "0.05091168824543142`", \(-0.05091168824543142`\), 
+                  "0.2036467529817257`"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "Barra ", 4, 
+        MatrixForm[ {{3.4110831124439054, 
+          3.3771419869469512, -.050911688245431422, -3.4110831124439054, \
+-3.3771419869469512, -.050911688245431422}, {3.3771419869469512, 
+          3.4110831124439054, .050911688245431422, -3.3771419869469512, \
+-3.4110831124439054, .050911688245431422}, {-.050911688245431422, \
+.050911688245431422, .20364675298172569, .050911688245431422, \
+-.050911688245431422, .10182337649086284}, {-3.4110831124439054, \
+-3.3771419869469512, .050911688245431422, 3.4110831124439054, 
+          3.3771419869469512, .050911688245431422}, {-3.3771419869469512, \
+-3.4110831124439054, -.050911688245431422, 3.3771419869469512, 
+          3.4110831124439054, -.050911688245431422}, {-.050911688245431422, \
+.050911688245431422, .10182337649086284, .050911688245431422, \
+-.050911688245431422, .20364675298172569}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Barra \"\>", "\[InvisibleSpace]", "5", "\[InvisibleSpace]",
+         
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"6.923989601378674`", \(-6.6524605974030395`\), 
+                  "0.4072935059634514`", \(-6.923989601378674`\), 
+                  "6.6524605974030395`", "0.4072935059634514`"},
+                {\(-6.6524605974030395`\), "6.923989601378674`", 
+                  "0.4072935059634514`", 
+                  "6.6524605974030395`", \(-6.923989601378674`\), 
+                  "0.4072935059634514`"},
+                {"0.4072935059634514`", "0.4072935059634514`", 
+                  "1.6291740238538055`", \(-0.4072935059634514`\), \
+\(-0.4072935059634514`\), "0.8145870119269027`"},
+                {\(-6.923989601378674`\), 
+                  "6.6524605974030395`", \(-0.4072935059634514`\), 
+                  "6.923989601378674`", \(-6.6524605974030395`\), \
+\(-0.4072935059634514`\)},
+                {
+                  "6.6524605974030395`", \(-6.923989601378674`\), \
+\(-0.4072935059634514`\), \(-6.6524605974030395`\), 
+                  "6.923989601378674`", \(-0.4072935059634514`\)},
+                {"0.4072935059634514`", "0.4072935059634514`", 
+                  "0.8145870119269027`", \(-0.4072935059634514`\), \
+\(-0.4072935059634514`\), "1.6291740238538055`"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "Barra ", 5, 
+        MatrixForm[ {{
+          6.9239896013786737, -6.6524605974030395, .40729350596345137, \
+-6.9239896013786737, 
+          6.6524605974030395, .40729350596345137}, {-6.6524605974030395, 
+          6.9239896013786737, .40729350596345137, 
+          6.6524605974030395, -6.9239896013786737, .40729350596345137}, \
+{.40729350596345137, .40729350596345137, 
+          1.6291740238538055, -.40729350596345137, -.40729350596345137, \
+.81458701192690275}, {-6.9239896013786737, 
+          6.6524605974030395, -.40729350596345137, 
+          6.9239896013786737, -6.6524605974030395, -.40729350596345137}, {
+          6.6524605974030395, -6.9239896013786737, -.40729350596345137, \
+-6.6524605974030395, 
+          6.9239896013786737, -.40729350596345137}, {.40729350596345137, \
+.40729350596345137, .81458701192690275, -.40729350596345137, \
+-.40729350596345137, 1.6291740238538055}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Barra \"\>", "\[InvisibleSpace]", "6", "\[InvisibleSpace]",
+         
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"22.013095458636435`", "6.819590914370157`", 
+                  "0.7771613577629809`", \(-22.013095458636435`\), \
+\(-6.819590914370157`\), "0.7771613577629809`"},
+                {"6.819590914370157`", 
+                  "3.827519686982681`", \(-2.3314840732889426`\), \
+\(-6.819590914370157`\), \(-3.827519686982681`\), \(-2.3314840732889426`\)},
+                {"0.7771613577629809`", \(-2.3314840732889426`\), 
+                  "5.181075718419873`", \(-0.7771613577629809`\), 
+                  "2.3314840732889426`", "2.5905378592099364`"},
+                {\(-22.013095458636435`\), \(-6.819590914370157`\), \
+\(-0.7771613577629809`\), "22.013095458636435`", 
+                  "6.819590914370157`", \(-0.7771613577629809`\)},
+                {\(-6.819590914370157`\), \(-3.827519686982681`\), 
+                  "2.3314840732889426`", "6.819590914370157`", 
+                  "3.827519686982681`", "2.3314840732889426`"},
+                {"0.7771613577629809`", \(-2.3314840732889426`\), 
+                  "2.5905378592099364`", \(-0.7771613577629809`\), 
+                  "2.3314840732889426`", "5.181075718419873`"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "Barra ", 6, 
+        MatrixForm[ {{22.013095458636435, 
+          6.8195909143701572, .7771613577629809, -22.013095458636435, \
+-6.8195909143701572, .7771613577629809}, {6.8195909143701572, 
+          3.8275196869826811, -2.3314840732889426, -6.8195909143701572, \
+-3.8275196869826811, -2.3314840732889426}, {.7771613577629809, \
+-2.3314840732889426, 5.1810757184198728, -.7771613577629809, 
+          2.3314840732889426, 
+          2.5905378592099364}, {-22.013095458636435, -6.8195909143701572, \
+-.7771613577629809, 22.013095458636435, 
+          
+          6.8195909143701572, -.7771613577629809}, {-6.8195909143701572, \
+-3.8275196869826811, 2.3314840732889426, 6.8195909143701572, 
+          3.8275196869826811, 
+          2.3314840732889426}, {.7771613577629809, -2.3314840732889426, 
+          2.5905378592099364, -.7771613577629809, 2.3314840732889426, 
+          5.1810757184198728}}]],
+      Editable->False]], "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(DistribuidoLocal[Barras[\([1]\)], 
+      X, {0, \(-5\)}]\), "\[IndentingNewLine]", 
+    \(Termica[Barras[\([1]\)], X, {5, 5}]\)}], "Input"],
+
+Cell[BoxData[
+    \({\(-\(5\/2\)\), 0, 5\/12, \(-\(5\/2\)\), 0, \(-\(5\/12\)\)}\)], "Output"],
+
+Cell[BoxData[
+    \({0, 125, 0, 0, \(-125\), 0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(MatrixForm[N[GlobalSys[Barras, X]]]\), "\[IndentingNewLine]", 
+    \(N[GlobalSys[Barras, X] . {1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 
+          0, 1, 1, 0}]\), "\[IndentingNewLine]", 
+    \(\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"12.`", "0.`", \(-6.`\), \(-12.`\), "0.`", \(-6.`\), "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`"},
+            {"0.`", "48.`", "0.`", "0.`", \(-48.`\), "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {\(-6.`\), "0.`", "4.`", "6.`", "0.`", "2.`", "0.`", "0.`", "0.`",
+               "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`"},
+            {\(-12.`\), "0.`", "6.`", "15.507083112443905`", 
+              "3.3771419869469512`", "5.805088311754568`", \(-0.096`\), 
+              "0.`", \(-0.144`\), \(-3.4110831124439054`\), \
+\(-3.3771419869469512`\), "0.`", \(-0.05091168824543142`\), "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", \(-48.`\), "0.`", "3.3771419869469512`", 
+              "61.011083112443906`", "0.05091168824543142`", "0.`", \(-9.6`\),
+               "0.`", \(-3.3771419869469512`\), \(-3.4110831124439054`\), 
+              "0.`", "0.05091168824543142`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {\(-6.`\), "0.`", "2.`", "5.805088311754568`", 
+              "0.05091168824543142`", "4.491646752981726`", "0.144`", "0.`", 
+              "0.144`", "0.05091168824543142`", \(-0.05091168824543142`\), 
+              "0.`", "0.10182337649086284`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.096`\), "0.`", "0.144`", "9.696`", 
+              "0.`", "0.144`", \(-9.6`\), "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", \(-9.6`\), "0.`", "0.`", "9.696`", 
+              "0.144`", "0.`", \(-0.096`\), "0.144`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.144`\), "0.`", "0.144`", "0.144`", 
+              "0.144`", "0.576`", "0.`", \(-0.144`\), "0.144`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", 
+              "0.`", \(-3.4110831124439054`\), \(-3.3771419869469512`\), 
+              "0.05091168824543142`", \(-9.6`\), "0.`", "0.`", 
+              "19.935072713822578`", \(-3.2753186104560883`\), "0.`", 
+              "0.4582051942088828`", \(-6.923989601378674`\), 
+              "6.6524605974030395`", "0.4072935059634514`", "0.`", "0.`", 
+              "0.`"},
+            {"0.`", "0.`", 
+              "0.`", \(-3.3771419869469512`\), \(-3.4110831124439054`\), \
+\(-0.05091168824543142`\), 
+              "0.`", \(-0.096`\), \(-0.144`\), \(-3.2753186104560883`\), 
+              "10.43107271382258`", \(-0.144`\), "0.35638181771801997`", 
+              "6.6524605974030395`", \(-6.923989601378674`\), 
+              "0.4072935059634514`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.144`", 
+              "0.144`", "0.`", \(-0.144`\), "0.288`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.05091168824543142`\), 
+              "0.05091168824543142`", "0.10182337649086284`", "0.`", "0.`", 
+              "0.`", "0.4582051942088828`", "0.35638181771801997`", "0.`", 
+              "1.8328207768355314`", \(-0.4072935059634514`\), \
+\(-0.4072935059634514`\), "0.8145870119269027`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", \(-6.923989601378674`\), "6.6524605974030395`", 
+              "0.`", \(-0.4072935059634514`\), "28.937085060015107`", 
+              "0.16713031696711766`", 
+              "0.3698678517995295`", \(-22.013095458636435`\), \
+\(-6.819590914370157`\), "0.7771613577629809`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "6.6524605974030395`", \(-6.923989601378674`\), 
+              "0.`", \(-0.4072935059634514`\), "0.16713031696711766`", 
+              "10.751509288361355`", \(-2.738777579252394`\), \
+\(-6.819590914370157`\), \(-3.827519686982681`\), \(-2.3314840732889426`\)},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.4072935059634514`", "0.4072935059634514`", "0.`", 
+              "0.8145870119269027`", 
+              "0.3698678517995295`", \(-2.738777579252394`\), 
+              "6.810249742273678`", \(-0.7771613577629809`\), 
+              "2.3314840732889426`", "2.5905378592099364`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", 
+              "0.`", \(-22.013095458636435`\), \(-6.819590914370157`\), \
+\(-0.7771613577629809`\), "22.013095458636435`", 
+              "6.819590914370157`", \(-0.7771613577629809`\)},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", 
+              "0.`", \(-6.819590914370157`\), \(-3.827519686982681`\), 
+              "2.3314840732889426`", "6.819590914370157`", 
+              "3.827519686982681`", "2.3314840732889426`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", 
+              "0.7771613577629809`", \(-2.3314840732889426`\), 
+              "2.5905378592099364`", \(-0.7771613577629809`\), 
+              "2.3314840732889426`", "5.181075718419873`"}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    \({0.`, 0.`, 0.`, 0.`, 0.`, 0.`, 0.`, 0.`, 0.`, 0.`, 0.`, 0.`, 0.`, 0.`, 
+      0.`, 0.`, 0.`, 0.`, 0.`}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(MatrixForm[N[Cargas]]\)], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "7.5`", "3.75`", "0.`", "7.5`", \(-3.75`\)},
+            {\(-8.485281374238571`\), "0.`", 
+              "4.242640687119286`", \(-8.485281374238571`\), 
+              "0.`", \(-4.242640687119286`\)},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "4.743416490252569`", \(-2.3717082451262845`\), "0.`", 
+              "4.743416490252569`", "2.3717082451262845`"}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(N[12  Sqrt[2]]\)], "Input"],
+
+Cell[BoxData[
+    \(16.970562748477143`\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(Table[Geometria[Barras[\([i]\)], X], {i, 1, 3}]\)], "Input"],
+
+Cell[BoxData[
+    \({{noA \[Rule] 1, noB \[Rule] 2, eq \[Rule] {1, 2, 3, 4, 5, 6}, 
+        Elast \[Rule] 25000000, alfaterm \[Rule] 1\/100000, h \[Rule] 1\/2, 
+        Inerc \[Rule] 1\/480, Area \[Rule] 1\/10, L \[Rule] 1, 
+        Llinha \[Rule] 1, alfa \[Rule] \[Pi]\/2}, {noA \[Rule] 2, 
+        noB \[Rule] 3, eq \[Rule] {4, 5, 6, 7, 8, 9}, Elast \[Rule] 25000000, 
+        alfaterm \[Rule] 1\/100000, h \[Rule] 3\/10, Inerc \[Rule] 9\/20000, 
+        Area \[Rule] 3\/50, L \[Rule] 3, Llinha \[Rule] 125\/9, 
+        alfa \[Rule] \[Pi]\/2}, {noA \[Rule] 3, noB \[Rule] 4, 
+        eq \[Rule] {7, 8, 9, 10, 11, 12}, Elast \[Rule] 25000000, 
+        alfaterm \[Rule] 1\/100000, h \[Rule] 3\/10, Inerc \[Rule] 9\/20000, 
+        Area \[Rule] 3\/50, L \[Rule] 3, Llinha \[Rule] 125\/9, 
+        alfa \[Rule] 0}}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(DistribuidoGlobal[Barras[\([1]\)], X, {0, \(-10\)}]\)], "Input"],
+
+Cell[BoxData[
+    \({0, 5, 0, 0, 5, 0}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+    \(N[\(-GlobalCarga[Barras, Cargas]\) + CargasNodais]\)], "Input"],
+
+Cell[BoxData[
+    \({0.`, 0.`, 0.`, 8.485281374238571`, 0.`, \(-4.242640687119286`\), 
+      0.`, \(-7.5`\), \(-3.75`\), 8.485281374238571`, \(-7.5`\), 3.75`, 
+      4.242640687119286`, \(-10.`\), \(-4.743416490252569`\), 
+      2.3717082451262845`, 
+      0.`, \(-4.743416490252569`\), \(-2.3717082451262845`\)}\)], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(MatrixForm[
+      Car = \(-GlobalCarga[Barras, Cargas]\) + 
+          CargasNodais]\), "\[IndentingNewLine]", 
+    \(MatrixForm[N[Glob = GlobalSys[Barras, X]]]\), "\[IndentingNewLine]", 
+    \(MatrixForm[\(N[
+          Restricao[{Glob, Car}, 
+            Restricoes]]\)[\([1]\)]]\), "\[IndentingNewLine]", 
+    \(MatrixForm[\(N[
+          Restricao[{Glob, Car}, Restricoes]]\)[\([2]\)]]\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", 
+        TagBox[GridBox[{
+              {"0"},
+              {"0"},
+              {"0"},
+              {\(6\ \@2\)},
+              {"0"},
+              {\(\(-3\)\ \@2\)},
+              {"0"},
+              {\(-\(15\/2\)\)},
+              {\(-\(15\/4\)\)},
+              {\(6\ \@2\)},
+              {\(-\(15\/2\)\)},
+              {\(15\/4\)},
+              {\(3\ \@2\)},
+              {\(-10\)},
+              {\(\(-3\)\ \@\(5\/2\)\)},
+              {\(\(3\ \@\(5\/2\)\)\/2\)},
+              {"0"},
+              {\(\(-3\)\ \@\(5\/2\)\)},
+              {\(-\(\(3\ \@\(5\/2\)\)\/2\)\)}
+              },
+            RowSpacings->1,
+            ColumnAlignments->{Left}],
+          Column], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"12.`", "0.`", \(-6.`\), \(-12.`\), "0.`", \(-6.`\), "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`"},
+            {"0.`", "48.`", "0.`", "0.`", \(-48.`\), "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {\(-6.`\), "0.`", "4.`", "6.`", "0.`", "2.`", "0.`", "0.`", "0.`",
+               "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`"},
+            {\(-12.`\), "0.`", "6.`", "15.507083112443905`", 
+              "3.3771419869469512`", "5.805088311754568`", \(-0.096`\), 
+              "0.`", \(-0.144`\), \(-3.4110831124439054`\), \
+\(-3.3771419869469512`\), "0.`", \(-0.05091168824543142`\), "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", \(-48.`\), "0.`", "3.3771419869469512`", 
+              "61.011083112443906`", "0.05091168824543142`", "0.`", \(-9.6`\),
+               "0.`", \(-3.3771419869469512`\), \(-3.4110831124439054`\), 
+              "0.`", "0.05091168824543142`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {\(-6.`\), "0.`", "2.`", "5.805088311754568`", 
+              "0.05091168824543142`", "4.491646752981726`", "0.144`", "0.`", 
+              "0.144`", "0.05091168824543142`", \(-0.05091168824543142`\), 
+              "0.`", "0.10182337649086284`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.096`\), "0.`", "0.144`", "9.696`", 
+              "0.`", "0.144`", \(-9.6`\), "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", \(-9.6`\), "0.`", "0.`", "9.696`", 
+              "0.144`", "0.`", \(-0.096`\), "0.144`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.144`\), "0.`", "0.144`", "0.144`", 
+              "0.144`", "0.576`", "0.`", \(-0.144`\), "0.144`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", 
+              "0.`", \(-3.4110831124439054`\), \(-3.3771419869469512`\), 
+              "0.05091168824543142`", \(-9.6`\), "0.`", "0.`", 
+              "19.935072713822578`", \(-3.2753186104560883`\), "0.`", 
+              "0.4582051942088828`", \(-6.923989601378674`\), 
+              "6.6524605974030395`", "0.4072935059634514`", "0.`", "0.`", 
+              "0.`"},
+            {"0.`", "0.`", 
+              "0.`", \(-3.3771419869469512`\), \(-3.4110831124439054`\), \
+\(-0.05091168824543142`\), 
+              "0.`", \(-0.096`\), \(-0.144`\), \(-3.2753186104560883`\), 
+              "10.43107271382258`", \(-0.144`\), "0.35638181771801997`", 
+              "6.6524605974030395`", \(-6.923989601378674`\), 
+              "0.4072935059634514`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.144`", 
+              "0.144`", "0.`", \(-0.144`\), "0.288`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.05091168824543142`\), 
+              "0.05091168824543142`", "0.10182337649086284`", "0.`", "0.`", 
+              "0.`", "0.4582051942088828`", "0.35638181771801997`", "0.`", 
+              "1.8328207768355314`", \(-0.4072935059634514`\), \
+\(-0.4072935059634514`\), "0.8145870119269027`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", \(-6.923989601378674`\), "6.6524605974030395`", 
+              "0.`", \(-0.4072935059634514`\), "28.937085060015107`", 
+              "0.16713031696711766`", 
+              "0.3698678517995295`", \(-22.013095458636435`\), \
+\(-6.819590914370157`\), "0.7771613577629809`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "6.6524605974030395`", \(-6.923989601378674`\), 
+              "0.`", \(-0.4072935059634514`\), "0.16713031696711766`", 
+              "10.751509288361355`", \(-2.738777579252394`\), \
+\(-6.819590914370157`\), \(-3.827519686982681`\), \(-2.3314840732889426`\)},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.4072935059634514`", "0.4072935059634514`", "0.`", 
+              "0.8145870119269027`", 
+              "0.3698678517995295`", \(-2.738777579252394`\), 
+              "6.810249742273678`", \(-0.7771613577629809`\), 
+              "2.3314840732889426`", "2.5905378592099364`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", 
+              "0.`", \(-22.013095458636435`\), \(-6.819590914370157`\), \
+\(-0.7771613577629809`\), "22.013095458636435`", 
+              "6.819590914370157`", \(-0.7771613577629809`\)},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", 
+              "0.`", \(-6.819590914370157`\), \(-3.827519686982681`\), 
+              "2.3314840732889426`", "6.819590914370157`", 
+              "3.827519686982681`", "2.3314840732889426`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", 
+              "0.7771613577629809`", \(-2.3314840732889426`\), 
+              "2.5905378592099364`", \(-0.7771613577629809`\), 
+              "2.3314840732889426`", "5.181075718419873`"}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"12.`", "0.`", \(-6.`\), \(-12.`\), "0.`", \(-6.`\), "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "1.`", "0.`", "0.`", "0.`"},
+            {"0.`", "48.`", "0.`", "0.`", \(-48.`\), "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "1.`", "0.`", "0.`"},
+            {\(-6.`\), "0.`", "4.`", "6.`", "0.`", "2.`", "0.`", "0.`", "0.`",
+               "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "1.`", "0.`"},
+            {\(-12.`\), "0.`", "6.`", "15.507083112443905`", 
+              "3.3771419869469512`", "5.805088311754568`", \(-0.096`\), 
+              "0.`", \(-0.144`\), \(-3.4110831124439054`\), \
+\(-3.3771419869469512`\), "0.`", \(-0.05091168824543142`\), "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", \(-48.`\), "0.`", "3.3771419869469512`", 
+              "61.011083112443906`", "0.05091168824543142`", "0.`", \(-9.6`\),
+               "0.`", \(-3.3771419869469512`\), \(-3.4110831124439054`\), 
+              "0.`", "0.05091168824543142`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {\(-6.`\), "0.`", "2.`", "5.805088311754568`", 
+              "0.05091168824543142`", "4.491646752981726`", "0.144`", "0.`", 
+              "0.144`", "0.05091168824543142`", \(-0.05091168824543142`\), 
+              "0.`", "0.10182337649086284`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.096`\), "0.`", "0.144`", "9.696`", 
+              "0.`", "0.144`", \(-9.6`\), "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", \(-9.6`\), "0.`", "0.`", "9.696`", 
+              "0.144`", "0.`", \(-0.096`\), "0.144`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.144`\), "0.`", "0.144`", "0.144`", 
+              "0.144`", "0.576`", "0.`", \(-0.144`\), "0.144`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", 
+              "0.`", \(-3.4110831124439054`\), \(-3.3771419869469512`\), 
+              "0.05091168824543142`", \(-9.6`\), "0.`", "0.`", 
+              "19.935072713822578`", \(-3.2753186104560883`\), "0.`", 
+              "0.4582051942088828`", \(-6.923989601378674`\), 
+              "6.6524605974030395`", "0.4072935059634514`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", 
+              "0.`", \(-3.3771419869469512`\), \(-3.4110831124439054`\), \
+\(-0.05091168824543142`\), 
+              "0.`", \(-0.096`\), \(-0.144`\), \(-3.2753186104560883`\), 
+              "10.43107271382258`", \(-0.144`\), "0.35638181771801997`", 
+              "6.6524605974030395`", \(-6.923989601378674`\), 
+              "0.4072935059634514`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`",
+               "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.144`", 
+              "0.144`", "0.`", \(-0.144`\), "0.288`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.05091168824543142`\), 
+              "0.05091168824543142`", "0.10182337649086284`", "0.`", "0.`", 
+              "0.`", "0.4582051942088828`", "0.35638181771801997`", "0.`", 
+              "1.8328207768355314`", \(-0.4072935059634514`\), \
+\(-0.4072935059634514`\), "0.8145870119269027`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", \(-6.923989601378674`\), "6.6524605974030395`", 
+              "0.`", \(-0.4072935059634514`\), "28.937085060015107`", 
+              "0.16713031696711766`", 
+              "0.3698678517995295`", \(-22.013095458636435`\), \
+\(-6.819590914370157`\), "0.7771613577629809`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "6.6524605974030395`", \(-6.923989601378674`\), 
+              "0.`", \(-0.4072935059634514`\), "0.16713031696711766`", 
+              "10.751509288361355`", \(-2.738777579252394`\), \
+\(-6.819590914370157`\), \(-3.827519686982681`\), \(-2.3314840732889426`\), 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.4072935059634514`", "0.4072935059634514`", "0.`", 
+              "0.8145870119269027`", 
+              "0.3698678517995295`", \(-2.738777579252394`\), 
+              "6.810249742273678`", \(-0.7771613577629809`\), 
+              "2.3314840732889426`", "2.5905378592099364`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", 
+              "0.`", \(-22.013095458636435`\), \(-6.819590914370157`\), \
+\(-0.7771613577629809`\), "22.013095458636435`", 
+              "6.819590914370157`", \(-0.7771613577629809`\), "0.`", "0.`", 
+              "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", 
+              "0.`", \(-6.819590914370157`\), \(-3.827519686982681`\), 
+              "2.3314840732889426`", "6.819590914370157`", 
+              "3.827519686982681`", "2.3314840732889426`", "0.`", "0.`", 
+              "0.`", "1.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", 
+              "0.7771613577629809`", \(-2.3314840732889426`\), 
+              "2.5905378592099364`", \(-0.7771613577629809`\), 
+              "2.3314840732889426`", "5.181075718419873`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {"1.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "1.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "1.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "1.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", 
+        TagBox[GridBox[{
+              {"0.`"},
+              {"0.`"},
+              {"0.`"},
+              {"8.485281374238571`"},
+              {"0.`"},
+              {\(-4.242640687119286`\)},
+              {"0.`"},
+              {\(-7.5`\)},
+              {\(-3.75`\)},
+              {"8.485281374238571`"},
+              {\(-7.5`\)},
+              {"3.75`"},
+              {"4.242640687119286`"},
+              {\(-10.`\)},
+              {\(-4.743416490252569`\)},
+              {"2.3717082451262845`"},
+              {"0.`"},
+              {\(-4.743416490252569`\)},
+              {\(-2.3717082451262845`\)},
+              {"0.`"},
+              {"0.`"},
+              {"0.`"},
+              {"0.`"}
+              },
+            RowSpacings->1,
+            ColumnAlignments->{Left}],
+          Column], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Resolu\[CCedilla]\[ATilde]o do sistema global", "Section"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(\(Car = \(-GlobalCarga[Barras, Cargas]\) + 
+          CargasNodais;\)\), "\[IndentingNewLine]", 
+    \(\(\(MatrixForm[Glob = GlobalSys[Barras, X]];\)\(\[IndentingNewLine]\)
+    \)\), "\[IndentingNewLine]", 
+    \(\(FinalSys = 
+        Restricao[{Glob, Car}, Restricoes];\)\), "\[IndentingNewLine]", 
+    \(MatrixForm[N[FinalSys[\([1]\)]]]\), "\[IndentingNewLine]", 
+    \(MatrixForm[
+      N[UTotal = 
+          LinearSolve[N[FinalSys[\([1]\)]], 
+            FinalSys[\([2]\)]]]]\), "\[IndentingNewLine]", 
+    \(UTotal\), "\[IndentingNewLine]", 
+    \(MatrixForm[UTotal]\), "\[IndentingNewLine]", 
+    \(MatrixForm[
+      ForcasRes = 
+        Forcas[Barras, X, Cargas, UTotal]]\), "\[IndentingNewLine]", 
+    \(\(neq\  = \ SystemSize[Barras];\)\), "\[IndentingNewLine]", 
+    \(UZero = Table[0, {neq}]\), "\[IndentingNewLine]", 
+    \(MatrixForm[Forcas[Barras, X, Cargas, UZero]]\)}], "Input"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"12.`", "0.`", \(-6.`\), \(-12.`\), "0.`", \(-6.`\), "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "1.`", "0.`", "0.`", "0.`"},
+            {"0.`", "48.`", "0.`", "0.`", \(-48.`\), "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "1.`", "0.`", "0.`"},
+            {\(-6.`\), "0.`", "4.`", "6.`", "0.`", "2.`", "0.`", "0.`", "0.`",
+               "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "1.`", "0.`"},
+            {\(-12.`\), "0.`", "6.`", "15.507083112443905`", 
+              "3.3771419869469512`", "5.805088311754568`", \(-0.096`\), 
+              "0.`", \(-0.144`\), \(-3.4110831124439054`\), \
+\(-3.3771419869469512`\), "0.`", \(-0.05091168824543142`\), "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", \(-48.`\), "0.`", "3.3771419869469512`", 
+              "61.011083112443906`", "0.05091168824543142`", "0.`", \(-9.6`\),
+               "0.`", \(-3.3771419869469512`\), \(-3.4110831124439054`\), 
+              "0.`", "0.05091168824543142`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {\(-6.`\), "0.`", "2.`", "5.805088311754568`", 
+              "0.05091168824543142`", "4.491646752981726`", "0.144`", "0.`", 
+              "0.144`", "0.05091168824543142`", \(-0.05091168824543142`\), 
+              "0.`", "0.10182337649086284`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.096`\), "0.`", "0.144`", "9.696`", 
+              "0.`", "0.144`", \(-9.6`\), "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", \(-9.6`\), "0.`", "0.`", "9.696`", 
+              "0.144`", "0.`", \(-0.096`\), "0.144`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.144`\), "0.`", "0.144`", "0.144`", 
+              "0.144`", "0.576`", "0.`", \(-0.144`\), "0.144`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", 
+              "0.`", \(-3.4110831124439054`\), \(-3.3771419869469512`\), 
+              "0.05091168824543142`", \(-9.6`\), "0.`", "0.`", 
+              "19.935072713822578`", \(-3.2753186104560883`\), "0.`", 
+              "0.4582051942088828`", \(-6.923989601378674`\), 
+              "6.6524605974030395`", "0.4072935059634514`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", 
+              "0.`", \(-3.3771419869469512`\), \(-3.4110831124439054`\), \
+\(-0.05091168824543142`\), 
+              "0.`", \(-0.096`\), \(-0.144`\), \(-3.2753186104560883`\), 
+              "10.43107271382258`", \(-0.144`\), "0.35638181771801997`", 
+              "6.6524605974030395`", \(-6.923989601378674`\), 
+              "0.4072935059634514`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`",
+               "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.144`", 
+              "0.144`", "0.`", \(-0.144`\), "0.288`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", \(-0.05091168824543142`\), 
+              "0.05091168824543142`", "0.10182337649086284`", "0.`", "0.`", 
+              "0.`", "0.4582051942088828`", "0.35638181771801997`", "0.`", 
+              "1.8328207768355314`", \(-0.4072935059634514`\), \
+\(-0.4072935059634514`\), "0.8145870119269027`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", \(-6.923989601378674`\), "6.6524605974030395`", 
+              "0.`", \(-0.4072935059634514`\), "28.937085060015107`", 
+              "0.16713031696711766`", 
+              "0.3698678517995295`", \(-22.013095458636435`\), \
+\(-6.819590914370157`\), "0.7771613577629809`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "6.6524605974030395`", \(-6.923989601378674`\), 
+              "0.`", \(-0.4072935059634514`\), "0.16713031696711766`", 
+              "10.751509288361355`", \(-2.738777579252394`\), \
+\(-6.819590914370157`\), \(-3.827519686982681`\), \(-2.3314840732889426`\), 
+              "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.4072935059634514`", "0.4072935059634514`", "0.`", 
+              "0.8145870119269027`", 
+              "0.3698678517995295`", \(-2.738777579252394`\), 
+              "6.810249742273678`", \(-0.7771613577629809`\), 
+              "2.3314840732889426`", "2.5905378592099364`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", 
+              "0.`", \(-22.013095458636435`\), \(-6.819590914370157`\), \
+\(-0.7771613577629809`\), "22.013095458636435`", 
+              "6.819590914370157`", \(-0.7771613577629809`\), "0.`", "0.`", 
+              "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", 
+              "0.`", \(-6.819590914370157`\), \(-3.827519686982681`\), 
+              "2.3314840732889426`", "6.819590914370157`", 
+              "3.827519686982681`", "2.3314840732889426`", "0.`", "0.`", 
+              "0.`", "1.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", 
+              "0.7771613577629809`", \(-2.3314840732889426`\), 
+              "2.5905378592099364`", \(-0.7771613577629809`\), 
+              "2.3314840732889426`", "5.181075718419873`", "0.`", "0.`", 
+              "0.`", "0.`"},
+            {"1.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "1.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "1.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"},
+            {"0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "0.`", "1.`", 
+              "0.`", "0.`", "0.`", "0.`", "0.`"}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", 
+        TagBox[GridBox[{
+              {"4.820102650349156`*^-14"},
+              {\(-2.3592239273284576`*^-16\)},
+              {"1.4566126083082054`*^-13"},
+              {"8.287368699810441`"},
+              {"0.03651665295952343`"},
+              {\(-15.412976941541412`\)},
+              {"274.14858201275536`"},
+              {\(-0.6990107468186624`\)},
+              {\(-120.65185816352047`\)},
+              {"274.76622161930885`"},
+              {\(-266.24054514865514`\)},
+              {\(-59.424004785824714`\)},
+              {\(-321.8401939202439`\)},
+              {\(-879.5024351383564`\)},
+              {\(-1418.538672132311`\)},
+              {\(-455.30524476915525`\)},
+              {\(-1352.053620106485`\)},
+              {"0.`"},
+              {\(-482.03022149205657`\)},
+              {"6.970562748477143`"},
+              {"1.752799342057136`"},
+              {\(-18.89825831578013`\)},
+              {\(-26.239632322562834`\)}
+              },
+            RowSpacings->1,
+            ColumnAlignments->{Left}],
+          Column], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    \({4.820102650349156`*^-14, \(-2.3592239273284576`*^-16\), 
+      1.4566126083082054`*^-13, 8.287368699810441`, 
+      0.03651665295952343`, \(-15.412976941541412`\), 
+      274.14858201275536`, \(-0.6990107468186624`\), \
+\(-120.65185816352047`\), 
+      274.76622161930885`, \(-266.24054514865514`\), \
+\(-59.424004785824714`\), \(-321.8401939202439`\), \(-879.5024351383564`\), \
+\(-1418.538672132311`\), \(-455.30524476915525`\), \(-1352.053620106485`\), 
+      0.`, \(-482.03022149205657`\), 6.970562748477143`, 
+      1.752799342057136`, \(-18.89825831578013`\), \
+\(-26.239632322562834`\)}\)], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", 
+        TagBox[GridBox[{
+              {"4.820102650349156`*^-14"},
+              {\(-2.3592239273284576`*^-16\)},
+              {"1.4566126083082054`*^-13"},
+              {"8.287368699810441`"},
+              {"0.03651665295952343`"},
+              {\(-15.412976941541412`\)},
+              {"274.14858201275536`"},
+              {\(-0.6990107468186624`\)},
+              {\(-120.65185816352047`\)},
+              {"274.76622161930885`"},
+              {\(-266.24054514865514`\)},
+              {\(-59.424004785824714`\)},
+              {\(-321.8401939202439`\)},
+              {\(-879.5024351383564`\)},
+              {\(-1418.538672132311`\)},
+              {\(-455.30524476915525`\)},
+              {\(-1352.053620106485`\)},
+              {"0.`"},
+              {\(-482.03022149205657`\)},
+              {"6.970562748477143`"},
+              {"1.752799342057136`"},
+              {\(-18.89825831578013`\)},
+              {\(-26.239632322562834`\)}
+              },
+            RowSpacings->1,
+            ColumnAlignments->{Left}],
+          Column], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {\(-6.970562748477119`\), \(-1.752799342057136`\), 
+              "18.89825831578012`", "6.970562748477119`", 
+              "1.752799342057136`", \(-11.927695567303`\)},
+            {\(-5.929340222913802`\), "7.061063037870584`", 
+              "16.471209782353192`", 
+              "5.929340222913802`", \(-7.061063037870584`\), 
+              "1.316810886388208`"},
+            {\(-5.929340222913561`\), 
+              "7.061063037870598`", \(-1.3168108863882013`\), 
+              "5.929340222913561`", 
+              "7.938936962129402`", \(-1.2434497875801753`*^-14\)},
+            {\(-1.0412225255633736`\), \(-8.813862379927755`\), \
+\(-4.543514215050177`\), \(-15.929340222913769`\), 
+              "8.813862379927755`", \(-44.23024947075849`\)},
+            {"9.999999999999844`", \(-16.75279934205661`\), 
+              "44.23024947075852`", \(-9.999999999999844`\), 
+              "16.75279934205661`", \(-64.48864749692831`\)},
+            {"5.449252160616425`*^-13", \(-16.75279934205716`\), 
+              "64.4886474969273`", \(-5.449252160616425`*^-13\), 
+              "26.2396323225623`", \(-2.9176661087149114`*^-13\)}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"],
+
+Cell[BoxData[
+    \({0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}\)], "Output"],
+
+Cell[BoxData[
+    TagBox[
+      RowBox[{"(", "\[NoBreak]", GridBox[{
+            {"0", "0", "0", "0", "0", "0"},
+            {"0", "0", "0", "0", "0", "0"},
+            {"0", \(15\/2\), \(15\/4\), "0", \(15\/2\), \(-\(15\/4\)\)},
+            {\(\(-6\)\ \@2\), "0", \(3\ \@2\), \(\(-6\)\ \@2\), 
+              "0", \(\(-3\)\ \@2\)},
+            {"0", "0", "0", "0", "0", "0"},
+            {"0", \(3\ \@\(5\/2\)\), \(-\(\(3\ \@\(5\/2\)\)\/2\)\), 
+              "0", \(3\ \@\(5\/2\)\), \(\(3\ \@\(5\/2\)\)\/2\)}
+            },
+          RowSpacings->1,
+          ColumnSpacings->1,
+          ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+      Function[ BoxForm`e$, 
+        MatrixForm[ BoxForm`e$]]]], "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+    \(Print["\<Momentos\>", 
+      MatrixForm[
+        Momentos = 
+          Table[{i, ForcasRes[\([i, 3]\)], ForcasRes[\([i, 6]\)]}, {i, 1, 
+              Length[Barras]}]]]\), "\[IndentingNewLine]", 
+    \(Print["\<Forcas Horizontais\>", 
+      MatrixForm[
+        ForcasHor = 
+          Table[{i, ForcasRes[\([i, 1]\)], ForcasRes[\([i, 4]\)]}, {i, 1, 
+              Length[Barras]}]]]\), "\[IndentingNewLine]", 
+    \(Print["\<Forcas Verticais\>", 
+      MatrixForm[
+        ForcasVer = 
+          Table[{i, ForcasRes[\([i, 2]\)], ForcasRes[\([i, 5]\)]}, {i, 1, 
+              Length[Barras]}]]]\)}], "Input"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Momentos\"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"1", "18.89825831578012`", \(-11.927695567303`\)},
+                {"2", "16.471209782353192`", "1.316810886388208`"},
+                {
+                  "3", \(-1.3168108863882013`\), \
+\(-1.2434497875801753`*^-14\)},
+                {"4", \(-4.543514215050177`\), \(-44.23024947075849`\)},
+                {"5", "44.23024947075852`", \(-64.48864749692831`\)},
+                {"6", "64.4886474969273`", \(-2.9176661087149114`*^-13\)}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "Momentos", 
+        MatrixForm[ {{1, 18.898258315780119, -11.927695567302999}, {2, 
+          16.471209782353192, 1.316810886388208}, {
+          3, -1.3168108863882013, -.12434497875801753*^-13}, {
+          4, -4.5435142150501768, -44.230249470758487}, {5, 
+          44.230249470758523, -64.488647496928309}, {6, 
+          64.4886474969273, -.29176661087149114*^-12}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Forcas Horizontais\"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"1", \(-6.970562748477119`\), "6.970562748477119`"},
+                {"2", \(-5.929340222913802`\), "5.929340222913802`"},
+                {"3", \(-5.929340222913561`\), "5.929340222913561`"},
+                {"4", \(-1.0412225255633736`\), \(-15.929340222913769`\)},
+                {"5", "9.999999999999844`", \(-9.999999999999844`\)},
+                {"6", 
+                  "5.449252160616425`*^-13", \(-5.449252160616425`*^-13\)}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "Forcas Horizontais", 
+        MatrixForm[ {{1, -6.9705627484771187, 6.9705627484771187}, {
+          2, -5.9293402229138019, 5.9293402229138019}, {
+          3, -5.9293402229135612, 5.9293402229135612}, {
+          4, -1.0412225255633736, -15.929340222913769}, {5, 
+          9.9999999999998437, -9.9999999999998437}, {
+          6, .54492521606164246*^-12, -.54492521606164246*^-12}}]],
+      Editable->False]], "Print"],
+
+Cell[BoxData[
+    InterpretationBox[
+      RowBox[{"\<\"Forcas Verticais\"\>", "\[InvisibleSpace]", 
+        TagBox[
+          RowBox[{"(", "\[NoBreak]", GridBox[{
+                {"1", \(-1.752799342057136`\), "1.752799342057136`"},
+                {"2", "7.061063037870584`", \(-7.061063037870584`\)},
+                {"3", "7.061063037870598`", "7.938936962129402`"},
+                {"4", \(-8.813862379927755`\), "8.813862379927755`"},
+                {"5", \(-16.75279934205661`\), "16.75279934205661`"},
+                {"6", \(-16.75279934205716`\), "26.2396323225623`"}
+                },
+              RowSpacings->1,
+              ColumnSpacings->1,
+              ColumnAlignments->{Left}], "\[NoBreak]", ")"}],
+          Function[ BoxForm`e$, 
+            MatrixForm[ BoxForm`e$]]]}],
+      SequenceForm[ "Forcas Verticais", 
+        MatrixForm[ {{1, -1.7527993420571359, 1.7527993420571359}, {2, 
+          7.0610630378705839, -7.0610630378705839}, {3, 7.0610630378705981, 
+          7.9389369621294019}, {4, -8.8138623799277553, 8.8138623799277553}, {
+          5, -16.752799342056608, 16.752799342056608}, {
+          6, -16.752799342057159, 26.239632322562301}}]],
+      Editable->False]], "Print"]
+}, Open  ]]
+}, Open  ]]
+},
+FrontEndVersion->"5.2 for Microsoft Windows",
+ScreenRectangle->{{0, 1280}, {0, 717}},
+WindowSize->{1016, 647},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{Automatic, Automatic},
+Magnification->1
+]
+
+(*******************************************************************
+Cached data follows.  If you edit this Notebook file directly, not
+using Mathematica, you must remove the line containing CacheID at
+the top of  the file.  The cache data will then be recreated when
+you save this file from within Mathematica.
+*******************************************************************)
+
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+
+(*NotebookFileOutline
+Notebook[{
+Cell[1754, 51, 75, 2, 29, "Input"],
+
+Cell[CellGroupData[{
+Cell[1854, 57, 55, 0, 73, "Section"],
+
+Cell[CellGroupData[{
+Cell[1934, 61, 92, 1, 38, "Subsection"],
+Cell[2029, 64, 1822, 30, 450, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[3888, 99, 63, 0, 38, "Subsection"],
+Cell[3954, 101, 835, 14, 170, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[4826, 120, 115, 3, 38, "Subsection"],
+Cell[4944, 125, 2996, 54, 730, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[7977, 184, 87, 1, 38, "Subsection"],
+Cell[8067, 187, 232, 4, 70, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[8336, 196, 48, 0, 38, "Subsection"],
+Cell[8387, 198, 2002, 37, 650, "Input"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[10426, 240, 83, 1, 38, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[10534, 245, 150, 3, 29, "Subsubsection"],
+Cell[10687, 250, 1348, 27, 350, "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[12084, 283, 126, 3, 38, "Subsection"],
+Cell[12213, 288, 784, 15, 210, "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[13046, 309, 68, 0, 73, "Section"],
+
+Cell[CellGroupData[{
+Cell[13139, 313, 2155, 36, 650, "Input"],
+Cell[15297, 351, 1255, 18, 212, "Output"],
+Cell[16555, 371, 87, 1, 32, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[16679, 377, 49, 0, 38, "Subsection"],
+
+Cell[CellGroupData[{
+Cell[16753, 381, 48, 1, 30, "Input"],
+Cell[16804, 384, 219, 3, 42, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17060, 392, 62, 1, 30, "Input"],
+Cell[17125, 395, 280, 4, 67, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[17442, 404, 125, 3, 30, "Input"],
+Cell[17570, 409, 638, 14, 119, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[18245, 428, 331, 8, 90, "Input"],
+Cell[18579, 438, 1130, 23, 101, "Print"],
+Cell[19712, 463, 1566, 31, 101, "Print"],
+Cell[21281, 496, 1555, 30, 101, "Print"],
+Cell[22839, 528, 2540, 47, 101, "Print"],
+Cell[25382, 577, 2549, 50, 101, "Print"],
+Cell[27934, 629, 2504, 47, 101, "Print"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[30475, 681, 160, 3, 50, "Input"],
+Cell[30638, 686, 93, 1, 42, "Output"],
+Cell[30734, 689, 61, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[30832, 695, 232, 4, 70, "Input"],
+Cell[31067, 701, 5708, 95, 327, "Output"],
+Cell[36778, 798, 136, 2, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[36951, 805, 54, 1, 30, "Input"],
+Cell[37008, 808, 794, 17, 119, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[37839, 830, 47, 1, 30, "Input"],
+Cell[37889, 833, 53, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[37979, 839, 80, 1, 30, "Input"],
+Cell[38062, 842, 826, 12, 144, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[38925, 859, 84, 1, 30, "Input"],
+Cell[39012, 862, 52, 1, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[39101, 868, 83, 1, 30, "Input"],
+Cell[39187, 871, 326, 5, 29, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[39550, 881, 421, 9, 90, "Input"],
+Cell[39974, 892, 842, 28, 493, "Output"],
+Cell[40819, 922, 5708, 95, 327, "Output"],
+Cell[46530, 1019, 7165, 114, 391, "Output"],
+Cell[53698, 1135, 964, 32, 391, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[54723, 1174, 64, 0, 73, "Section"],
+
+Cell[CellGroupData[{
+Cell[54812, 1178, 915, 19, 250, "Input"],
+Cell[55730, 1199, 7165, 114, 391, "Output"],
+Cell[62898, 1315, 1212, 32, 399, "Output"],
+Cell[64113, 1349, 628, 11, 48, "Output"],
+Cell[64744, 1362, 1212, 32, 399, "Output"],
+Cell[65959, 1396, 1422, 28, 125, "Output"],
+Cell[67384, 1426, 91, 1, 29, "Output"],
+Cell[67478, 1429, 711, 16, 167, "Output"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+Cell[68226, 1450, 627, 15, 70, "Input"],
+Cell[68856, 1467, 1257, 26, 107, "Print"],
+Cell[70116, 1495, 1279, 25, 103, "Print"],
+Cell[71398, 1522, 1214, 23, 101, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+
+
+(*******************************************************************
+End of Mathematica Notebook file.
+*******************************************************************)
+
