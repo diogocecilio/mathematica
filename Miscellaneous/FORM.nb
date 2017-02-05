@@ -1,0 +1,2335 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     88020,       2325]
+NotebookOptionsPosition[     87607,       2308]
+NotebookOutlinePosition[     87951,       2323]
+CellTagsIndexPosition[     87908,       2320]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComputeRandomVarData", "[", 
+    RowBox[{"distribution_", ",", "mean_", ",", "sdev_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"p1", ",", "p2", ",", "case"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"case", "=", "distribution"}], ";", "\n", 
+      RowBox[{"Switch", "[", 
+       RowBox[{"case", "\n", ",", "\"\<NORMAL\>\"", ",", "\n", 
+        RowBox[{
+         RowBox[{"p1", "=", "mean"}], ";", "\n", 
+         RowBox[{"p2", "=", "sdev"}], ";", "\n", 
+         RowBox[{"case", "=", "1"}], ";"}], "\n", ",", "\"\<LOGNORMAL\>\"", 
+        ",", "\n", 
+        RowBox[{
+         RowBox[{"p2", "=", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{"Log", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"sdev", "/", "mean"}], ")"}], "^", "2"}]}], "]"}], 
+           "]"}]}], ";", "\n", 
+         RowBox[{"p1", "=", 
+          RowBox[{
+           RowBox[{"Log", "[", "mean", " ", "]"}], "-", 
+           RowBox[{"0.5", " ", 
+            RowBox[{"p2", "^", "2"}]}]}]}], ";", "\n", 
+         RowBox[{"case", "=", "2"}], ";"}], "\n", ",", "\"\<DETERM\>\"", ",", 
+        "\n", 
+        RowBox[{
+         RowBox[{"p2", "=", "0"}], ";", "\n", 
+         RowBox[{"p1", "=", "mean"}], " ", ";", "\n", 
+         RowBox[{"case", "=", "3"}], ";"}], "\n", ",", "\"\<UNIFORME\>\"", 
+        ",", "\n", 
+        RowBox[{
+         RowBox[{"p1", "=", 
+          RowBox[{
+           RowBox[{"1", "/", "2"}], " ", 
+           RowBox[{"(", 
+            RowBox[{"1", "+", 
+             RowBox[{"2", " ", "mean"}], "-", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{"1", "+", 
+               RowBox[{"12", " ", 
+                RowBox[{"sdev", "^", "2"}]}]}], "]"}]}], ")"}]}]}], ";", "\n", 
+         RowBox[{"p2", "=", 
+          RowBox[{
+           RowBox[{"1", "/", "2"}], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "1"}], "+", 
+             RowBox[{"2", " ", "mean"}], "+", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{"1", "+", 
+               RowBox[{"12", " ", 
+                RowBox[{"sdev", "^", "2"}]}]}], "]"}]}], ")"}]}]}], ";", "\n", 
+         RowBox[{"case", "=", "4"}], ";"}], "\n", ",", "\"\<WEIBULL MIN\>\"", 
+        ",", "\n", 
+        RowBox[{
+         RowBox[{"p1", "=", 
+          RowBox[{"mean", "+", 
+           RowBox[{
+            RowBox[{"N", "[", "EulerGamma", "]"}], "/", "p2"}]}]}], ";", "\n", 
+         RowBox[{"p2", "=", " ", 
+          RowBox[{"Pi", "/", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Sqrt", "[", "6", "]"}], "sdev"}], ")"}]}]}], ";", "\n", 
+         RowBox[{"case", "=", "5"}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"mean", ",", "sdev", ",", "p1", ",", "p2", ",", "case"}], 
+       "}"}]}]}], "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PHI", "[", "x_", "]"}], ":=", 
+   RowBox[{"CDF", "[", 
+    RowBox[{
+     RowBox[{"NormalDistribution", "[", 
+      RowBox[{"0", ",", "1"}], "]"}], ",", "x"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"InvPHI", "[", "x_", "]"}], ":=", 
+   RowBox[{"InverseCDF", "[", 
+    RowBox[{
+     RowBox[{"NormalDistribution", "[", 
+      RowBox[{"0", ",", "1"}], "]"}], ",", "x"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"phi", "[", "x_", "]"}], ":=", 
+   RowBox[{"PDF", "[", 
+    RowBox[{
+     RowBox[{"NormalDistribution", "[", 
+      RowBox[{"0", ",", "1"}], "]"}], ",", "x"}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"ComputeY", "[", 
+   RowBox[{"RvVec_", ",", "Nsamples_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "y", ",", "x", ",", "nrv", ",", "i", ",", "j", ",", "mu", ",", "sig", 
+      ",", "p1", ",", "p2", ",", "case"}], "}"}], ",", "\n", 
+    RowBox[{
+     RowBox[{"nrv", "=", 
+      RowBox[{"Length", "[", "RvVec", "]"}]}], ";", "\n", 
+     RowBox[{"y", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"j", "=", "1"}], ",", 
+       RowBox[{"j", "<=", "nrv"}], ",", 
+       RowBox[{"j", "++"}], ",", "\n", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], 
+          "}"}], "=", 
+         RowBox[{"RvVec", "[", 
+          RowBox[{"[", "j", "]"}], "]"}]}], ";", "\n", 
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", "j", "]"}], "]"}], "=", 
+         RowBox[{"RandomVariate", "[", 
+          RowBox[{
+           RowBox[{"NormalDistribution", "[", 
+            RowBox[{"0", ",", "1"}], "]"}], ",", "Nsamples"}], "]"}]}], 
+        ";"}]}], "\n", "]"}], ";", "\n", 
+     RowBox[{"Transpose", "[", "y", "]"}]}]}], "\n", "]"}]}]}], "Code"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"MeritFunction", "[", 
+    RowBox[{
+    "GxGradx_", ",", "y_", ",", "Jxy_", ",", "Mneq_", ",", "c_", ",", 
+     "vvars_"}], "]"}], ":=", " ", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", "val"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"val", "=", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"y", ".", "y"}], ")"}], "/", "2"}], "+", 
+        RowBox[{"c", " ", 
+         RowBox[{"Abs", "[", 
+          RowBox[{
+           RowBox[{"GxGradx", "[", 
+            RowBox[{"vvars", ",", 
+             RowBox[{
+              RowBox[{"Jxy", ".", "y"}], "+", "Mneq"}]}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "]"}]}]}]}], ";", "\n", "val"}]}], 
+    "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComputeC", "[", 
+    RowBox[{"y_", ",", "grady_", ",", "dk_", ",", "g_"}], "]"}], ":=", " ", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"c", ",", 
+       RowBox[{"eta", "=", "2"}]}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Abs", "[", "g", "]"}], "<", 
+         RowBox[{"10", "^", 
+          RowBox[{"-", "8"}]}]}], ",", "\n", 
+        RowBox[{"c", " ", "=", " ", "eta"}], "\n", ",", "\n", 
+        RowBox[{"c", "=", 
+         RowBox[{"eta", " ", 
+          RowBox[{"Abs", "[", 
+           RowBox[{
+            RowBox[{"1", "/", "g"}], " ", 
+            RowBox[{
+             RowBox[{"y", ".", "grady"}], "/", 
+             RowBox[{"grady", ".", "grady"}]}]}], "]"}]}]}]}], "\n", "]"}], 
+      ";", "\n", "c"}]}], "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"PenalizeXhalf", "[", 
+    RowBox[{"x1_", ",", "x2_", ",", "Xmax_", ",", "Xmin_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "xpen", ",", "Penalized", ",", "PenalSteps", ",", "sz", ",", "a", ",", 
+       "b", ",", "i", ",", "counter"}], "}"}], ",", "\n", " ", 
+     RowBox[{
+      RowBox[{"xpen", " ", "=", " ", "x2"}], ";", "\n", 
+      RowBox[{"sz", "=", 
+       RowBox[{"Length", "[", "x1", "]"}]}], ";", "\n", 
+      RowBox[{"counter", "=", "1"}], ";", "\n", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "<=", " ", "sz"}], ",", 
+        RowBox[{"i", "++"}], ",", "\n", 
+        RowBox[{
+         RowBox[{"While", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"xpen", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], ">=", " ", 
+             RowBox[{"Xmax", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], " ", "&&", " ", 
+            RowBox[{"counter", "<=", "1000"}]}], ",", "\n", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"xpen", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], " ", "=", " ", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"xpen", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "+", 
+                RowBox[{"x1", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "/", "2"}]}], ";", 
+            " ", "\n", 
+            RowBox[{"counter", "++"}], ";"}]}], "\n", "]"}], ";", "\n", 
+         RowBox[{"counter", "=", "1"}], ";", "\n", 
+         RowBox[{"While", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             RowBox[{"xpen", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "<=", " ", 
+             RowBox[{"Xmin", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], " ", "&&", " ", 
+            RowBox[{"counter", "<=", "1000"}]}], ",", "\n", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"xpen", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], " ", "=", " ", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"xpen", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "+", 
+                RowBox[{"x1", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "/", "2"}]}], ";", 
+            " ", "\n", 
+            RowBox[{"counter", "++"}], ";"}]}], "\n", "]"}], ";"}]}], "\n", 
+       "]"}], ";", "\n", "\n", "xpen"}]}], "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComputeExtremes", "[", "RandonVar_", "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "xmax", ",", "xmin", ",", "mu", ",", "sig", ",", "p1", ",", "p2", ",", 
+       "case"}], " ", "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], "}"}], 
+       "=", "RandonVar"}], ";", "\n", "\n", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"case", "!=", "4"}], ",", 
+        RowBox[{"(*", 
+         RowBox[{
+         "se", " ", "for", " ", "diferente", " ", "de", " ", "uniforme"}], 
+         "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"xmax", "=", 
+          RowBox[{"mu", "+", 
+           RowBox[{"3", "sig"}]}]}], ";", "\n", 
+         RowBox[{"xmin", "=", 
+          RowBox[{"mu", "-", 
+           RowBox[{"3", "sig"}]}]}], ";"}], "\n", ",", "\n", 
+        RowBox[{
+         RowBox[{"xmin", "=", "p1"}], ";", "\n", 
+         RowBox[{"xmax", "=", "p2"}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"xmax", ",", "xmin"}], "}"}]}]}], "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ArmijoLineSearch", "[", 
+    RowBox[{
+    "GxGradx_", ",", "y_", ",", "grady_", ",", "Jxy_", ",", "Mneq_", ",", 
+     "dk_", ",", "kprev_", ",", "vvars_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"grad", ",", "gx", ",", "c", ",", "kk", ",", "My", ",", 
+       RowBox[{"a", "=", "0.1"}], ",", 
+       RowBox[{"b", "=", "0.5"}], ",", "k", ",", 
+       RowBox[{"kmax", "=", "30"}], ",", "gradMtimesD", ",", "A", ",", "BB", 
+       ",", "B", ",", "gy", ",", "an", ",", "an1", ",", 
+       RowBox[{"tolerance", "=", 
+        RowBox[{"10", "^", 
+         RowBox[{"-", "5"}]}]}]}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"k", "=", "kprev"}], ";", "\n", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"gy", ",", "grad"}], "}"}], "=", 
+       RowBox[{"GxGradx", "[", 
+        RowBox[{"vvars", ",", "y"}], "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"gx", ",", "grad"}], "}"}], "=", 
+       RowBox[{"GxGradx", "[", 
+        RowBox[{"vvars", ",", 
+         RowBox[{
+          RowBox[{"Jxy", ".", "y"}], "+", "Mneq"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"c", "=", 
+       RowBox[{"ComputeC", "[", 
+        RowBox[{"y", ",", "grady", ",", "dk", ",", "gx"}], "]"}]}], ";", "\n", 
+      RowBox[{"gradMtimesD", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"y", "+", 
+          RowBox[{"c", " ", 
+           RowBox[{"Sign", "[", "gy", "]"}], "grady"}]}], ")"}], ".", 
+        "dk"}]}], ";", "\n", 
+      RowBox[{"My", " ", "=", " ", 
+       RowBox[{"MeritFunction", "[", 
+        RowBox[{
+        "GxGradx", ",", "y", ",", "Jxy", ",", "Mneq", ",", "c", ",", 
+         "vvars"}], "]"}]}], ";", "\n", 
+      RowBox[{"A", "=", 
+       RowBox[{"MeritFunction", "[", 
+        RowBox[{"GxGradx", ",", 
+         RowBox[{"y", "+", 
+          RowBox[{
+           RowBox[{"b", "^", "k"}], " ", "dk"}]}], " ", ",", "Jxy", ",", 
+         "Mneq", ",", "c", ",", "vvars"}], "]"}]}], ";", "\n", 
+      RowBox[{"B", "=", 
+       RowBox[{"My", "+", 
+        RowBox[{"a", " ", 
+         RowBox[{"b", "^", "k"}], " ", "gradMtimesD"}]}]}], ";", "\n", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"k", "<=", "kmax"}], "&&", 
+         RowBox[{"A", ">", "B"}]}], ",", "\n", 
+        RowBox[{
+         RowBox[{"A", "=", 
+          RowBox[{"MeritFunction", "[", 
+           RowBox[{"GxGradx", ",", 
+            RowBox[{"y", "+", 
+             RowBox[{
+              RowBox[{"b", "^", "k"}], " ", "dk"}]}], " ", ",", "Jxy", ",", 
+            "Mneq", ",", "c", ",", "vvars"}], "]"}]}], ";", "\n", 
+         RowBox[{"B", "=", 
+          RowBox[{"My", "+", 
+           RowBox[{"a", " ", 
+            RowBox[{"b", "^", "k"}], " ", "gradMtimesD"}]}]}], ";", "\n", 
+         RowBox[{"k", "++"}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"k", ">=", "kmax"}], ",", " ", "\n", 
+        RowBox[{
+         RowBox[{"Return", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "2"}], ",", "1"}], "}"}], "]"}], ";"}], "\n", ",", 
+        "\n", 
+        RowBox[{
+         RowBox[{"Return", "[", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", 
+            RowBox[{"b", "^", "k"}]}], "}"}], "]"}], ";"}]}], "\n", "]"}], 
+      ";"}]}], "\n", "]"}]}], ";"}]}], "Code"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"FromYtoZ", "[", 
+    RowBox[{"y_", ",", "Rx_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "x", ",", "sz", ",", "i", ",", "j", ",", "var", ",", "z", ",", "Jyz", 
+       ",", "Jzy"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"sz", "=", 
+       RowBox[{"Length", "[", "y", "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Jzy", ",", "Jyz"}], "}"}], " ", "=", " ", 
+       RowBox[{"ComputeJYZ", "[", "Rx", "]"}]}], ";", "\n", 
+      RowBox[{"z", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "sz", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"j", "=", "1"}], ",", 
+        RowBox[{"j", "<=", "sz"}], ",", 
+        RowBox[{"j", "++"}], ",", "\n", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"z", "[", 
+           RowBox[{"[", "j", "]"}], "]"}], "=", 
+          RowBox[{"Jyz", ".", 
+           RowBox[{"y", "[", 
+            RowBox[{"[", "j", "]"}], "]"}]}]}], ";"}]}], "\n", "]"}], ";", 
+      "\n", "z"}]}], "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"F", "[", 
+    RowBox[{"RandonVar_", ",", "x_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "fx", ",", "mu", ",", "sig", ",", "p1", ",", "p2", ",", "case", ",", 
+       "Fx"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], "}"}], 
+       "=", "RandonVar"}], ";", "\n", 
+      RowBox[{"Switch", "[", 
+       RowBox[{"case", "\n", ",", "1", ",", 
+        RowBox[{"(*", "Normal", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"Fx", "=", 
+          RowBox[{"CDF", "[", 
+           RowBox[{
+            RowBox[{"NormalDistribution", "[", 
+             RowBox[{"mu", ",", "sig"}], "]"}], ",", "x"}], "]"}]}], ";"}], 
+        "\n", ",", "2", ",", 
+        RowBox[{"(*", "LogNormal", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"Fx", "=", 
+          RowBox[{"CDF", "[", 
+           RowBox[{
+            RowBox[{"LogNormalDistribution", "[", 
+             RowBox[{"mu", ",", "sig"}], "]"}], ",", "x"}], "]"}]}], ";"}], 
+        "\n", ",", "3", ",", 
+        RowBox[{"(*", "Deterministico", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"Fx", "=", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"x", ">=", " ", "p1"}], ",", "1.0", ",", "0"}], "]"}]}], 
+         ";"}], "\n", ",", "4", ",", 
+        RowBox[{"(*", "Uniforme", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"Fx", "=", 
+          RowBox[{"CDF", "[", 
+           RowBox[{
+            RowBox[{"UniformDistribution", "[", 
+             RowBox[{"{", 
+              RowBox[{"p1", ",", "p2"}], "}"}], "]"}], ",", "x"}], "]"}]}], 
+         ";"}], "\n", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"Fx", "=", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"x", "\[GreaterEqual]", " ", "p2"}], ",", "1.0", ",", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"x", "\[LessEqual]", " ", "p1"}], ",", "0.0", ",", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"x", "-", "p1"}], ")"}], "/", 
+                RowBox[{"(", 
+                 RowBox[{"p2", "-", "p1"}], ")"}]}]}], "]"}]}], "]"}]}], 
+          ";"}], "*)"}], "\n", ",", "5", ","}], "\n", "\n", "]"}], ";", "\n", 
+      "Fx"}]}], "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"RandonVar_", ",", "x_"}], "]"}], ":=", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "fx", ",", "mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], 
+       "}"}], ",", "\n", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], "}"}],
+         "=", "RandonVar"}], ";", "\n", 
+       RowBox[{"Switch", "[", 
+        RowBox[{"case", "\n", ",", "1", ",", 
+         RowBox[{"(*", "Normal", "*)"}], "\n", 
+         RowBox[{
+          RowBox[{"fx", "=", 
+           RowBox[{"PDF", "[", 
+            RowBox[{
+             RowBox[{"NormalDistribution", "[", 
+              RowBox[{"mu", ",", "sig"}], "]"}], ",", "x"}], "]"}]}], ";"}], 
+         "\n", ",", "2", ",", 
+         RowBox[{"(*", "LogNormal", "*)"}], "\n", 
+         RowBox[{
+          RowBox[{"fx", "=", 
+           RowBox[{"PDF", "[", 
+            RowBox[{
+             RowBox[{"LogNormalDistribution", "[", 
+              RowBox[{"mu", ",", "sig"}], "]"}], ",", "x"}], "]"}]}], ";"}], 
+         "\n", ",", "3", ",", 
+         RowBox[{"(*", "Deterministico", "*)"}], "\n", 
+         RowBox[{
+          RowBox[{"fx", "=", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"x", ">=", " ", 
+              RowBox[{"1.05", " ", "p1"}]}], ",", "0.0", ",", 
+             RowBox[{"If", "[", 
+              RowBox[{
+               RowBox[{"x", "<=", " ", 
+                RowBox[{"0.95", " ", "p1"}]}], ",", "0.0", ",", "10"}], 
+              "]"}]}], "]"}]}], ";"}], "\n", ",", "4", ",", 
+         RowBox[{"(*", "Uniforme", "*)"}], "\n", 
+         RowBox[{
+          RowBox[{"fx", "=", 
+           RowBox[{"PDF", "[", 
+            RowBox[{
+             RowBox[{"UniformDistribution", "[", 
+              RowBox[{"{", 
+               RowBox[{"p1", ",", "p2"}], "}"}], "]"}], ",", "x"}], "]"}]}], 
+          ";"}], "\n", ",", "5", ",", "\n", 
+         RowBox[{
+          RowBox[{"fx", "=", 
+           RowBox[{"PDF", "[", 
+            RowBox[{
+             RowBox[{"WeibullDistribution", "[", 
+              RowBox[{"p1", ",", "p2"}], "]"}], ",", "x"}], "]"}]}], ";"}]}], 
+        "\n", "]"}], ";", "\n", "fx"}]}], "\n", "]"}]}], ";"}], "\n", "\n", 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"zi", "=", 
+     RowBox[{"INVFIE", "[", 
+      RowBox[{"StCDF", "[", 
+       RowBox[{
+        RowBox[{"RV", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", 
+        RowBox[{"xi", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "]"}]}], ";", "\n", 
+    RowBox[{
+     RowBox[{"Dneq", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{"fi", "[", "zi", "]"}], "/", 
+      RowBox[{"StPDF", "[", 
+       RowBox[{
+        RowBox[{"RV", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], ",", 
+        RowBox[{"xi", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}]}], ";", "\n", 
+    RowBox[{
+     RowBox[{"Mneq", "[", 
+      RowBox[{"[", "i", "]"}], "]"}], " ", "=", " ", 
+     RowBox[{
+      RowBox[{"xi", "[", 
+       RowBox[{"[", "i", "]"}], "]"}], " ", "-", " ", 
+      RowBox[{"zi", "*", 
+       RowBox[{"Dneq", "[", 
+        RowBox[{"[", "i", "]"}], "]"}]}]}]}], ";"}], "*)"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComputeXZ", "[", 
+    RowBox[{"RandonVar_", ",", "x_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "mu", ",", "sig", ",", "z", ",", "SdevNeq", ",", "case", ",", "MuNeq", 
+       ",", "p1", ",", "p2"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], "}"}], 
+       "=", "RandonVar"}], ";", "\n", 
+      RowBox[{"Switch", "[", 
+       RowBox[{"case", "\n", ",", "1", ",", 
+        RowBox[{"(*", "Normal", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"SdevNeq", "=", "sig"}], ";", "\n", 
+         RowBox[{"MuNeq", "=", "mu"}], ";"}], "\n", ",", "2", ",", 
+        RowBox[{"(*", "LogNormal", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"SdevNeq", "=", 
+          RowBox[{"x", " ", "p2"}]}], ";", "\n", 
+         RowBox[{"MuNeq", "=", 
+          RowBox[{"x", "*", 
+           RowBox[{"(", 
+            RowBox[{"1", "-", 
+             RowBox[{"Log", "[", "x", "]"}], "+", "p1"}], ")"}]}]}], ";"}], 
+        "\n", ",", "3", ",", 
+        RowBox[{"(*", "Deterministico", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"SdevNeq", "=", "1"}], ";", "\n", 
+         RowBox[{"MuNeq", "=", "mu"}], ";"}], "\n", ",", "4", ",", 
+        RowBox[{"(*", "Uniforme", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"z", "=", 
+          RowBox[{"InvPHI", "[", 
+           RowBox[{"F", "[", 
+            RowBox[{"RandonVar", ",", "x"}], "]"}], "]"}]}], ";", "\n", 
+         RowBox[{"SdevNeq", "=", 
+          RowBox[{
+           RowBox[{"phi", "[", "z", "]"}], "/", 
+           RowBox[{"f", "[", 
+            RowBox[{"RandonVar", ",", "x"}], "]"}]}]}], ";", "\n", 
+         RowBox[{"MuNeq", "=", 
+          RowBox[{"x", "-", 
+           RowBox[{"z", " ", "SdevNeq"}]}]}], ";"}], "\n", ",", "5", ",", 
+        RowBox[{"(*", "Geral", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"z", "=", 
+          RowBox[{"InverseCDF", "[", 
+           RowBox[{
+            RowBox[{"WeibullDistribution", "[", 
+             RowBox[{"p1", ",", "p2"}], "]"}], ",", "x"}], "]"}]}], ";", "\n", 
+         RowBox[{"z", "=", 
+          RowBox[{"p3", "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"p1", "-", "p3"}], ")"}], "*", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"-", 
+               RowBox[{"Log", "[", 
+                RowBox[{"1", "-", 
+                 RowBox[{"WeibullDistribution", "[", 
+                  RowBox[{"p1", ",", "p2"}], "]"}]}], "]"}]}], ")"}], "^", 
+             RowBox[{"(", 
+              RowBox[{"1", "/", "p2"}], ")"}]}]}]}]}], ";", "\n", 
+         RowBox[{"SdevNeq", "=", 
+          RowBox[{
+           RowBox[{"phi", "[", "z", "]"}], "/", 
+           RowBox[{"f", "[", 
+            RowBox[{"RandonVar", ",", "x"}], "]"}]}]}], ";", "\n", 
+         RowBox[{"MuNeq", "=", 
+          RowBox[{"x", "-", 
+           RowBox[{"z", " ", "SdevNeq"}]}]}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"SdevNeq", ",", "MuNeq"}], "}"}]}]}], "\n", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComputeJXZ", "[", 
+    RowBox[{"RandonVarVec_", ",", "x_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "sz", ",", "i", ",", "j", ",", "JXZ", ",", "JZX", ",", "MuNeq", ",", 
+       "SdevNeq", ",", "MuNeqEquiv", ",", "Mean"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"sz", "=", 
+       RowBox[{"Length", "[", "RandonVarVec", "]"}]}], ";", "\n", 
+      RowBox[{"JXZ", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "sz", "}"}], ",", 
+         RowBox[{"{", "sz", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"JZX", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "sz", "}"}], ",", 
+         RowBox[{"{", "sz", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"MuNeqEquiv", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "sz", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"Mean", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "sz", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "<=", "sz"}], ",", 
+        RowBox[{"i", "++"}], ",", "\n", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"SdevNeq", ",", "MuNeq"}], "}"}], "=", 
+          RowBox[{"ComputeXZ", "[", 
+           RowBox[{
+            RowBox[{"RandonVarVec", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{"x", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "]"}]}], ";", "\n", 
+         RowBox[{
+          RowBox[{"JXZ", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "i"}], "]"}], "]"}], "=", "SdevNeq"}], ";", 
+         "\n", 
+         RowBox[{
+          RowBox[{"JZX", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", ",", "i"}], "]"}], "]"}], "=", 
+          RowBox[{"1", "/", "SdevNeq"}]}], ";", "\n", 
+         RowBox[{
+          RowBox[{"MuNeqEquiv", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], "=", "MuNeq"}], ";"}]}], "\n", 
+       "]"}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"JXZ", ",", "JZX", ",", "MuNeqEquiv"}], "}"}]}]}], "\n", 
+    "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComputeJYZ", "[", "RX_", "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "cx", ",", "L", ",", "correlated", ",", "Jyz", ",", "Jzy", ",", "NRV"}],
+       "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"NRV", "=", 
+       RowBox[{"Length", "[", "RX", "]"}]}], ";", "\n", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Det", "[", "RX", "]"}], "!=", "1"}], ",", "\n", 
+        RowBox[{
+         RowBox[{"L", "=", 
+          RowBox[{"Transpose", "[", 
+           RowBox[{"CholeskyDecomposition", "[", "RX", "]"}], "]"}]}], ";", 
+         "\n", 
+         RowBox[{"Jyz", "=", 
+          RowBox[{"Inverse", "[", "L", "]"}]}], ";", "\n", 
+         RowBox[{"Jzy", "=", "L"}], ";", "\n", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Det", "[", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"L", ".", 
+                RowBox[{"Transpose", "[", "L", "]"}]}], ")"}], "-", "RX"}], 
+             "]"}], ">", " ", 
+            RowBox[{"10", "^", 
+             RowBox[{"-", "8"}]}]}], ",", 
+           RowBox[{
+           "Print", "[", "\"\<Attention, Cholesky decomposition failed!\>\"", 
+            "]"}]}], "]"}], ";"}], "\n", ",", "\n", 
+        RowBox[{
+         RowBox[{"Jyz", "=", 
+          RowBox[{"IdentityMatrix", "[", "NRV", "]"}]}], ";", "\n", 
+         RowBox[{"Jzy", "=", 
+          RowBox[{"IdentityMatrix", "[", "NRV", "]"}]}], ";"}]}], "\n", "]"}],
+       ";", "\n", 
+      RowBox[{"Return", "[", 
+       RowBox[{"{", 
+        RowBox[{"Jyz", ",", "Jzy"}], "}"}], "]"}], ";"}]}], "\n", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComputeExtremes", "[", "RandonVar_", "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "xmax", ",", "xmin", ",", "mu", ",", "sig", ",", "p1", ",", "p2", ",", 
+       "case"}], " ", "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], "}"}], 
+       "=", "RandonVar"}], ";", "\n", "\n", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"case", "!=", "4"}], ",", 
+        RowBox[{"(*", 
+         RowBox[{
+         "se", " ", "for", " ", "diferente", " ", "de", " ", "uniforme"}], 
+         "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"xmax", "=", 
+          RowBox[{"mu", "+", 
+           RowBox[{"3", "sig"}]}]}], ";", "\n", 
+         RowBox[{"xmin", "=", 
+          RowBox[{"mu", "-", 
+           RowBox[{"3", "sig"}]}]}], ";"}], "\n", ",", "\n", 
+        RowBox[{
+         RowBox[{"xmin", "=", "p1"}], ";", "\n", 
+         RowBox[{"xmax", "=", "p2"}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"xmax", ",", "xmin"}], "}"}]}]}], "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FromXtoY", "[", 
+    RowBox[{"RvVec_", ",", "x_", ",", "Jyz_", ",", "Jzy_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "Jzx", ",", "Jxz", ",", "Jxy", ",", "Jyx", ",", "Mneq", ",", "y"}], 
+      "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Jxz", ",", "Jzx", ",", "Mneq"}], "}"}], " ", "=", "  ", 
+       RowBox[{"ComputeJXZ", "[", 
+        RowBox[{"RvVec", ",", "x"}], "]"}]}], ";", "\n", 
+      RowBox[{"Jyx", " ", "=", " ", 
+       RowBox[{"Jzy", ".", "Jzx"}]}], ";", "\n", 
+      RowBox[{"Jxy", " ", "=", " ", 
+       RowBox[{"Jxz", ".", "Jyz"}]}], ";", "\n", 
+      RowBox[{"y", "=", 
+       RowBox[{"Jyx", ".", 
+        RowBox[{"(", 
+         RowBox[{"x", "-", "Mneq"}], ")"}]}]}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"y", ",", "Jxy", ",", "Mneq"}], "}"}]}]}], "\n", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FromYtoX", "[", 
+    RowBox[{"RvVec_", ",", "y_", ",", "Rx_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "Jzx", ",", "Jxz", ",", "Jxy", ",", "Jyx", ",", "Mneq", ",", "x", ",", 
+       "Jyz", ",", "Jzy"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Jyz", ",", "Jzy"}], "}"}], " ", "=", 
+       RowBox[{"ComputeJYZ", "[", "Rx", "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Jxz", ",", "Jzx", ",", "Mneq"}], "}"}], " ", "=", "  ", 
+       RowBox[{"ComputeJXZ", "[", 
+        RowBox[{"RvVec", ",", "x"}], "]"}]}], ";", "\n", 
+      RowBox[{"Jyx", " ", "=", " ", 
+       RowBox[{"Jzy", ".", "Jzx"}]}], ";", "\n", 
+      RowBox[{"Jxy", " ", "=", " ", 
+       RowBox[{"Jxz", ".", "Jyz"}]}], ";", "\n", 
+      RowBox[{"x", "=", 
+       RowBox[{
+        RowBox[{"Jxy", ".", "y"}], "+", "Mneq"}]}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "Jyx", ",", "Mneq"}], "}"}]}]}], "\n", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FromZtoX", "[", 
+    RowBox[{"RvVec_", ",", "z_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "x", ",", "sz", ",", "i", ",", "j", ",", "JXZ", ",", "JZX", ",", 
+       "MuNeqEquiv", ",", "rv", ",", "nrv", ",", "mu", ",", "sig", ",", "p1", 
+       ",", "p2", ",", "case", ",", "Fx", ",", "fx", ",", "hx"}], "}"}], ",", 
+     "\n", 
+     RowBox[{
+      RowBox[{"sz", "=", 
+       RowBox[{"Length", "[", "z", "]"}]}], ";", "\n", 
+      RowBox[{"nrv", "=", 
+       RowBox[{"Length", "[", "RvVec", "]"}]}], ";", "\n", 
+      RowBox[{"x", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "sz", "}"}], ",", 
+         RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"fx", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "sz", "}"}], ",", 
+         RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"hx", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "sz", "}"}], ",", 
+         RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"j", "=", "1"}], ",", 
+        RowBox[{"j", "<=", "sz"}], ",", 
+        RowBox[{"j", "++"}], ",", "\n", 
+        RowBox[{
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"i", "=", "1"}], ",", 
+           RowBox[{"i", "<=", "nrv"}], ",", 
+           RowBox[{"i", "++"}], ",", "\n", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], 
+              "}"}], "=", 
+             RowBox[{"RvVec", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ";", "\n", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"case", "==", "1"}], ",", "\n", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"x", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"j", ",", "i"}], "]"}], "]"}], "=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"z", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"j", ",", "i"}], "]"}], "]"}], " ", "p2"}], "+", 
+                 "p1"}]}], " ", ";"}]}], "\n", "]"}], ";", "\n", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"case", "==", "2"}], ",", "\n", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"x", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"j", ",", "i"}], "]"}], "]"}], "=", 
+                RowBox[{"Exp", "[", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{"z", "[", 
+                    RowBox[{"[", 
+                    RowBox[{"j", ",", "i"}], "]"}], "]"}], " ", "p2"}], "+", 
+                  "p1"}], "]"}]}], ";"}]}], "\n", "]"}], ";", "\n", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"case", "==", "3"}], ",", "\n", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"x", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"j", ",", "i"}], "]"}], "]"}], "=", 
+                RowBox[{
+                 RowBox[{"z", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"j", ",", "i"}], "]"}], "]"}], "p1"}]}], ";"}]}], 
+             "\n", "]"}], ";", "\n", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"case", "==", "4"}], ",", "\n", 
+              RowBox[{
+               RowBox[{"Fx", "=", 
+                RowBox[{"CDF", "[", 
+                 RowBox[{
+                  RowBox[{"UniformDistribution", "[", 
+                   RowBox[{"{", 
+                    RowBox[{"p1", ",", "p2"}], "}"}], "]"}], ",", 
+                  RowBox[{"z", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"j", ",", "i"}], "]"}], "]"}]}], "]"}]}], ";", 
+               "\n", 
+               RowBox[{
+                RowBox[{"x", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"j", ",", "i"}], "]"}], "]"}], "=", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"(", 
+                   RowBox[{"p2", "-", "p1"}], ")"}], "*", "Fx"}], "+", 
+                 "p1"}]}], ";"}]}], "\n", "]"}], ";", "\n", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"case", "!=", "1"}], " ", "&&", " ", 
+               RowBox[{"case", "!=", "2"}], " ", "&&", " ", 
+               RowBox[{"case", "!=", "4"}], " ", "&&", " ", 
+               RowBox[{"case", "!=", "3"}]}], ",", "\n", 
+              RowBox[{
+               RowBox[{
+               "Print", "[", "\"\<Error Distribution not Implemented!\>\"", 
+                "]"}], ";"}]}], "\n", "]"}], ";", "\n", 
+            RowBox[{
+             RowBox[{"fx", "[", 
+              RowBox[{"[", 
+               RowBox[{"j", ",", "i"}], "]"}], "]"}], "=", 
+             RowBox[{"f", "[", 
+              RowBox[{
+               RowBox[{"RvVec", "[", 
+                RowBox[{"[", "i", "]"}], "]"}], ",", 
+               RowBox[{"x", "[", 
+                RowBox[{"[", 
+                 RowBox[{"j", ",", "i"}], "]"}], "]"}]}], "]"}]}], ";", "\n", 
+            RowBox[{
+             RowBox[{"hx", "[", 
+              RowBox[{"[", 
+               RowBox[{"j", ",", "i"}], "]"}], "]"}], "=", 
+             RowBox[{"phi", "[", 
+              RowBox[{"x", "[", 
+               RowBox[{"[", 
+                RowBox[{"j", ",", "i"}], "]"}], "]"}], "]"}]}], ";"}]}], "\n",
+           "]"}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "fx", ",", "hx"}], "}"}]}]}], "\n", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"F", "[", 
+    RowBox[{"RandonVar_", ",", "x_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "fx", ",", "mu", ",", "sig", ",", "p1", ",", "p2", ",", "case", ",", 
+       "Fx"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], "}"}], 
+       "=", "RandonVar"}], ";", "\n", 
+      RowBox[{"Switch", "[", 
+       RowBox[{"case", "\n", ",", "1", ",", 
+        RowBox[{"(*", "Normal", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"Fx", "=", 
+          RowBox[{"CDF", "[", 
+           RowBox[{
+            RowBox[{"NormalDistribution", "[", 
+             RowBox[{"mu", ",", "sig"}], "]"}], ",", "x"}], "]"}]}], ";"}], 
+        "\n", ",", "2", ",", 
+        RowBox[{"(*", "LogNormal", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"Fx", "=", 
+          RowBox[{"CDF", "[", 
+           RowBox[{
+            RowBox[{"LogNormalDistribution", "[", 
+             RowBox[{"mu", ",", "sig"}], "]"}], ",", "x"}], "]"}]}], ";"}], 
+        "\n", ",", "3", ",", 
+        RowBox[{"(*", "Deterministico", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"Fx", "=", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"x", ">=", " ", "p1"}], ",", "1.0", ",", "0"}], "]"}]}], 
+         ";"}], "\n", ",", "4", ",", 
+        RowBox[{"(*", "Uniforme", "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"Fx", "=", 
+          RowBox[{"CDF", "[", 
+           RowBox[{
+            RowBox[{"UniformDistribution", "[", 
+             RowBox[{"{", 
+              RowBox[{"p1", ",", "p2"}], "}"}], "]"}], ",", "x"}], "]"}]}], 
+         ";"}]}], "\n", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{"Fx", "=", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{"x", "\[GreaterEqual]", " ", "p2"}], ",", "1.0", ",", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"x", "\[LessEqual]", " ", "p1"}], ",", "0.0", ",", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"x", "-", "p1"}], ")"}], "/", 
+               RowBox[{"(", 
+                RowBox[{"p2", "-", "p1"}], ")"}]}]}], "]"}]}], "]"}]}], ";"}],
+         "*)"}], "\n", "]"}], ";", "\n", "Fx"}]}], "\n", "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"HRLF", "[", 
+    RowBox[{"RvVec_", ",", "Rx_", ",", "GxGradx_", ",", "Vars_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"yy", "=", 
+        RowBox[{"{", "}"}]}], ",", 
+       RowBox[{"gg", "=", 
+        RowBox[{"{", "}"}]}], ",", 
+       RowBox[{"vbeta", "=", 
+        RowBox[{"{", "}"}]}], ",", "grad", ",", "guess", ",", 
+       RowBox[{"vvars", "=", "Vars"}], ",", "i", ",", "y0", ",", "Mneq", ",", 
+       "x", ",", "y", ",", "g", ",", "gradx", ",", "grady", ",", "betan", ",",
+        "betan1", ",", "k", ",", 
+       RowBox[{"checkconv", "=", "1"}], ",", 
+       RowBox[{"tol", "=", "0.0001"}], ",", 
+       RowBox[{"NmaxIT", "=", "60"}], ",", "Jyz", ",", "Jzy", ",", "Jzx", ",",
+        "Jxz", ",", "Jxy", ",", "Jyx", ",", "alpha", ",", "xn", ",", "xmax", 
+       ",", "xmin", ",", "nrv", ",", 
+       RowBox[{"PostProcess", "=", 
+        RowBox[{"{", "}"}]}], ",", 
+       RowBox[{"post", "=", "True"}], ",", "Sdev", ",", "DistribCases", ",", 
+       "Mean"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ";", "\n", 
+      RowBox[{"Mean", "=", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "RvVec", "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"x", "=", "Mean"}], ";", "\n", 
+      RowBox[{"Sdev", "=", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "RvVec", "]"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"DistribCases", "=", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "RvVec", "]"}], "[", 
+        RowBox[{"[", "5", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"nrv", "=", 
+       RowBox[{"Length", "[", "RvVec", "]"}]}], ";", "\n", 
+      RowBox[{"xmax", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"xmin", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "<=", "nrv"}], ",", 
+        RowBox[{"i", "++"}], ",", "\n", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"xmax", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{"xmin", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "}"}], "=", 
+          RowBox[{"ComputeExtremes", "[", 
+           RowBox[{"RvVec", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "]"}]}], ";"}]}], "\n", "]"}], 
+      ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Jzy", ",", "Jyz"}], "}"}], "  ", "=", " ", 
+       RowBox[{"ComputeJYZ", "[", "Rx", "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"y", ",", "Jxy", ",", "Mneq"}], "}"}], "=", 
+       RowBox[{"FromXtoY", "[", 
+        RowBox[{"RvVec", ",", "x", ",", "Jyz", ",", "Jzy"}], "]"}]}], ";", 
+      "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"g", ",", "grad"}], "}"}], "=", 
+       RowBox[{"GxGradx", "[", 
+        RowBox[{"vvars", ",", "Mean"}], "]"}]}], ";", "\n", "\n", 
+      RowBox[{"k", "=", "1"}], ";", "\n", 
+      RowBox[{"betan", "=", "0"}], ";", "\n", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"checkconv", ">", "tol"}], " ", "&&", 
+         RowBox[{"k", "<", " ", "NmaxIT"}]}], ",", "\n", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"Print", "[", " ", 
+           RowBox[{
+           "\"\< | iter = \>\"", ",", "k", ",", "\"\<  | residual = \>\"", 
+            ",", "checkconv", ",", "\"\< | G(x) = \>\"", ",", 
+            RowBox[{"N", "[", "g", "]"}], ",", " ", "\"\<  | y = \>\"", ",", 
+            "y"}], " ", "]"}], ";"}], "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"grady", "=", 
+          RowBox[{
+           RowBox[{"Transpose", "[", "Jxy", "]"}], ".", "grad"}]}], ";", "\n", 
+         RowBox[{"y", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"grady", ".", "y"}], ")"}], "-", "g"}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{"grady", ".", "grady"}], ")"}]}], " ", "grady"}]}], ";", 
+         "\n", 
+         RowBox[{"x", "=", 
+          RowBox[{
+           RowBox[{"Jxy", ".", "y"}], "+", "Mneq"}]}], ";", "\n", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"post", "==", "True"}], ",", "\n", 
+           RowBox[{
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"PostProcess", ",", "x"}], "]"}], ";"}]}], "\n", "]"}], 
+         ";", "\n", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"y", ",", "Jxy", ",", "Mneq"}], "}"}], "=", 
+          RowBox[{"FromXtoY", "[", 
+           RowBox[{"RvVec", ",", "x", ",", "Jyz", ",", "Jzy"}], "]"}]}], ";", 
+         "\n", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"g", ",", "grad"}], "}"}], "=", 
+          RowBox[{"GxGradx", "[", 
+           RowBox[{"vvars", ",", "x"}], "]"}]}], ";", "\n", 
+         RowBox[{"betan1", "=", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{"y", ".", "y"}], "]"}]}], ";", "\n", "\n", 
+         RowBox[{"checkconv", "=", 
+          RowBox[{"Abs", "[", 
+           RowBox[{"betan1", "-", "betan"}], "]"}]}], ";", "\n", "\n", "\n", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"yy", ",", "y"}], "]"}], ";", "\n", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"gg", ",", "g"}], "]"}], ";", "\n", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"vbeta", ",", "betan1"}], "]"}], ";", "\n", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"checkconv", "=", 
+            RowBox[{"Abs", "[", "g", "]"}]}], ";"}], "*)"}], "\n", 
+         RowBox[{"betan", "=", "betan1"}], ";", "\n", 
+         RowBox[{"k", "++"}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"Print", "[", " ", 
+         RowBox[{
+         "\"\< | iter = \>\"", ",", "k", ",", "\"\<  | residual = \>\"", ",", 
+          "checkconv", ",", "\"\< | G(x) = \>\"", ",", 
+          RowBox[{"N", "[", "g", "]"}], ",", " ", "\"\<  | y = \>\"", ",", 
+          "y"}], " ", "]"}], ";"}], "*)"}], "\n", "\n", 
+      RowBox[{"alpha", "=", 
+       RowBox[{
+        RowBox[{"(", " ", 
+         RowBox[{"grady", "/", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{"grady", ".", "grady"}], "]"}]}], ")"}], "^", "2"}]}], ";",
+       "\n", 
+      RowBox[{"Print", "[", " ", 
+       RowBox[{
+       "\"\< | iter = \>\"", ",", "k", ",", "\"\<  | residual = \>\"", ",", 
+        "checkconv", ",", "\"\< | G(x) = \>\"", ",", "g", " ", ",", 
+        "\"\<| Beta = \>\"", ",", " ", "betan"}], "]"}], ";", "\n", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"Print", "[", " ", 
+         RowBox[{"\"\<y = \>\"", ",", "y"}], "]"}], ";"}], "*)"}], "\n", "\n",
+       "\n", "\n", "\n", 
+      RowBox[{"{", 
+       RowBox[{"betan", ",", 
+        RowBox[{"PHI", "[", 
+         RowBox[{"-", "betan"}], "]"}], ",", "y"}], "}"}]}]}], "\n", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"iHRLF", "[", 
+    RowBox[{"RvVec_", ",", "Rx_", ",", "GxGradx_", ",", "Vars_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"vvars", "=", "Vars"}], ",", "grad", ",", "i", ",", "y0", ",", 
+       "Mneq", ",", "x", ",", "y", ",", "g", ",", "gradx", ",", "grady", ",", 
+       "betan", ",", "betan1", ",", "k", ",", 
+       RowBox[{"checkconv", "=", "1"}], ",", 
+       RowBox[{"tol", "=", 
+        RowBox[{"10", "^", 
+         RowBox[{"-", "3"}]}]}], ",", 
+       RowBox[{"NmaxIT", "=", "30"}], ",", "Jyz", ",", "Jzy", ",", "Jzx", ",",
+        "Jxz", ",", "Jxy", ",", "Jyx", ",", "alfa", ",", "dk", ",", "c", ",", 
+       "sensivity", ",", "kn", ",", "kn1", ",", 
+       RowBox[{"post", "=", "False"}], ",", "PostProcess", ",", "xn", ",", 
+       "xmax", ",", "xmin", ",", "nrv", ",", "Sdev", ",", "DistribCases", ",",
+        "Mean"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ";", "\n", 
+      RowBox[{"Mean", "=", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "RvVec", "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"x", "=", "Mean"}], ";", "\n", 
+      RowBox[{"Sdev", "=", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "RvVec", "]"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"DistribCases", "=", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "RvVec", "]"}], "[", 
+        RowBox[{"[", "5", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"nrv", "=", 
+       RowBox[{"Length", "[", "RvVec", "]"}]}], ";", "\n", 
+      RowBox[{"xmax", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"xmin", "=", 
+       RowBox[{"Table", "[", 
+        RowBox[{"0", ",", 
+         RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "<=", "nrv"}], ",", 
+        RowBox[{"i", "++"}], ",", "\n", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"xmax", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", 
+            RowBox[{"xmin", "[", 
+             RowBox[{"[", "i", "]"}], "]"}]}], "}"}], "=", 
+          RowBox[{"ComputeExtremes", "[", 
+           RowBox[{"RvVec", "[", 
+            RowBox[{"[", "i", "]"}], "]"}], "]"}]}], ";"}]}], "\n", "]"}], 
+      ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Jzy", ",", "Jyz"}], "}"}], "  ", "=", " ", 
+       RowBox[{"ComputeJYZ", "[", "Rx", "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"y", ",", "Jxy", ",", "Mneq"}], "}"}], "=", 
+       RowBox[{"FromXtoY", "[", 
+        RowBox[{"RvVec", ",", "x", ",", "Jyz", ",", "Jzy"}], "]"}]}], ";", 
+      "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"g", ",", "grad"}], "}"}], "=", 
+       RowBox[{"GxGradx", "[", 
+        RowBox[{"vvars", ",", "x"}], "]"}]}], ";", "\n", 
+      RowBox[{"k", "=", "1"}], ";", "\n", 
+      RowBox[{"betan", "=", "0"}], ";", "\n", 
+      RowBox[{"alfa", "=", "1"}], ";", "\n", 
+      RowBox[{"kn", "=", "0"}], ";", "\n", 
+      RowBox[{"kn1", "=", "0"}], ";", "\n", 
+      RowBox[{"alfa", "=", "1"}], ";", "\n", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"post", "==", "True"}], ",", "\n", 
+        RowBox[{
+         RowBox[{"PostProcess", "=", 
+          RowBox[{"{", "}"}]}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"xn", "=", "x"}], ";", "\n", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"Print", "[", 
+         RowBox[{"\"\<x0 = \>\"", ",", "xn"}], "]"}], ";"}], "*)"}], "\n", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"checkconv", ">", "tol"}], " ", "&&", 
+         RowBox[{"k", "<", " ", "NmaxIT"}]}], ",", "\n", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"Print", "[", " ", 
+           RowBox[{
+           "\"\< | iter = \>\"", ",", "k", ",", "\"\<  | residual = \>\"", 
+            ",", "checkconv", ",", "\"\< | G(x) = \>\"", ",", 
+            RowBox[{"N", "[", "g", "]"}], " ", ",", "\"\< | alfa = \>\"", ",",
+             "alfa", ",", " ", "\"\<| kn = \>\"", ",", "kn"}], "]"}], ";"}], 
+         "*)"}], "\n", 
+        RowBox[{
+         RowBox[{"grady", "=", 
+          RowBox[{
+           RowBox[{"Transpose", "[", "Jxy", "]"}], ".", "grad"}]}], ";", "\n", 
+         RowBox[{"dk", "=", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"grady", ".", "y"}], ")"}], "-", "g"}], ")"}], "/", 
+              RowBox[{"(", 
+               RowBox[{"grady", ".", "grady"}], ")"}]}], " ", "grady"}], 
+            ")"}], "-", "y"}]}], ";", "\n", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"kn1", ",", "alfa"}], "}"}], "=", 
+          RowBox[{"ArmijoLineSearch", "[", 
+           RowBox[{
+           "GxGradx", ",", "y", ",", "grady", ",", "Jxy", ",", "Mneq", ",", 
+            "dk", ",", "kn", ",", "vvars"}], "]"}]}], ";", "\n", 
+         RowBox[{"kn", "=", "kn1"}], ";", "\n", 
+         RowBox[{"y", "+=", 
+          RowBox[{"alfa", " ", "dk"}]}], ";", "\n", 
+         RowBox[{"xn", "=", 
+          RowBox[{
+           RowBox[{"Jxy", ".", "y"}], "+", "Mneq"}]}], ";", "\n", 
+         RowBox[{"x", "=", 
+          RowBox[{"PenalizeXhalf", "[", 
+           RowBox[{"x", ",", "xn", ",", "xmax", ",", "xmin"}], "]"}]}], ";", 
+         "\n", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"Print", "[", "\"\<*****\>\"", "]"}], ";", "\n", 
+           RowBox[{"xn", "=", 
+            RowBox[{
+             RowBox[{"Jxy", ".", "y"}], "+", "Mneq"}]}], ";", "\n", 
+           RowBox[{"Print", "[", 
+            RowBox[{
+            "\"\<xmin = \>\"", ",", "xmin", ",", " ", "\"\< xmax = \>\"", ",",
+              "xmax", ",", " ", "\"\< x = \>\"", ",", "x", " ", ",", " ", 
+             "\"\< xn = \>\"", ",", "xn"}], "]"}], ";", "\n", 
+           RowBox[{"x", "=", 
+            RowBox[{"PenalizeXhalf", "[", 
+             RowBox[{"x", ",", "xn", ",", "xmin", ",", "xmax"}], "]"}]}], ";",
+            "\n", 
+           RowBox[{"Print", "[", 
+            RowBox[{
+            "\"\<xmin = \>\"", ",", "xmin", ",", " ", "\"\< xmax = \>\"", ",",
+              "xmax", ",", " ", "\"\< x = \>\"", ",", "x", " ", ",", " ", 
+             "\"\< xn = \>\"", ",", "xn"}], "]"}], ";"}], "*)"}], "\n", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"post", "==", "True"}], ",", "\n", 
+           RowBox[{
+            RowBox[{"AppendTo", "[", 
+             RowBox[{"PostProcess", ",", "x"}], "]"}], ";"}]}], "\n", "]"}], 
+         ";", "\n", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"y", ",", "Jxy", ",", "Mneq"}], "}"}], "=", 
+          RowBox[{"FromXtoY", "[", 
+           RowBox[{"RvVec", ",", "x", ",", "Jyz", ",", "Jzy"}], "]"}]}], ";", 
+         "\n", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"g", ",", "grad"}], "}"}], "=", 
+          RowBox[{"GxGradx", "[", 
+           RowBox[{"vvars", ",", "x"}], "]"}]}], ";", "\n", 
+         RowBox[{"betan1", "=", 
+          RowBox[{"Norm", "[", "y", "]"}]}], ";", "\n", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"checkconv", "=", 
+            RowBox[{"Abs", "[", 
+             RowBox[{"betan1", "-", "betan"}], "]"}]}], ";"}], "*)"}], "\n", 
+         RowBox[{"checkconv", "=", 
+          RowBox[{"Abs", "[", "g", "]"}]}], ";", "\n", 
+         RowBox[{"betan", "=", "betan1"}], ";", "\n", 
+         RowBox[{"k", "++"}], ";"}]}], "\n", "]"}], ";", "\n", 
+      RowBox[{"Print", "[", " ", 
+       RowBox[{
+       "\"\< | iter = \>\"", ",", "k", ",", "\"\<  | residual = \>\"", ",", 
+        "checkconv", ",", "\"\< | G(x) = \>\"", ",", "g", " ", ",", 
+        "\"\< | alfa = \>\"", ",", "alfa", ",", " ", "\"\<| kn = \>\"", ",", 
+        "kn", ",", " ", "\"\<| Beta = \>\"", ",", " ", "betan"}], "]"}], ";", 
+      "\n", 
+      RowBox[{"sensivity", "=", 
+       RowBox[{
+        RowBox[{"(", " ", 
+         RowBox[{"grady", "/", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{"grady", ".", "grady"}], "]"}]}], ")"}], "^", "2"}]}], ";",
+       "\n", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"Print", "[", "\"\< SOLUTION \>\"", "]"}], ";", "\n", 
+        RowBox[{"Print", "[", 
+         RowBox[{"\"\< x = \>\"", ",", "x"}], "]"}], ";", "\n", 
+        RowBox[{"Print", "[", 
+         RowBox[{"\"\< \[Beta] = \>\"", ",", "betan"}], "]"}], ";", "\n", 
+        RowBox[{"Print", "[", " ", 
+         RowBox[{"\"\< Pf = \>\"", ",", 
+          RowBox[{"PHI", "[", 
+           RowBox[{"-", "betan"}], "]"}]}], " ", "]"}], ";", "\n", 
+        RowBox[{"Print", "[", 
+         RowBox[{"TableForm", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"\"\< Y \>\"", ",", "\"\< sensivity \>\""}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"y", ",", "sensivity"}], "}"}]}], "}"}], "]"}], "]"}], 
+        ";"}], "*)"}], "\n", 
+      RowBox[{"{", 
+       RowBox[{"betan", ",", 
+        RowBox[{"PHI", "[", 
+         RowBox[{"-", "betan"}], "]"}], ",", "sensivity", ",", 
+        "PostProcess"}], "}"}]}]}], "\n", "]"}]}], ";"}]}], "Code"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MonteCarlo", "[", 
+     RowBox[{
+     "RvVec_", ",", "Rx_", ",", "GxGradx_", ",", "Vars_", ",", "Nsamples_"}], 
+     "]"}], ":=", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "y", ",", "z", ",", "x", ",", "counter", ",", "Pf", ",", "beta", ",", 
+        "i", ",", "PostProc", ",", 
+        RowBox[{"xfailed", "=", 
+         RowBox[{"{", "}"}]}], ",", "fx", ",", "hx", ",", "vartemp"}], "}"}], 
+      ",", "\n", 
+      RowBox[{
+       RowBox[{"y", "=", 
+        RowBox[{"ComputeY", "[", 
+         RowBox[{"RvVec", ",", "Nsamples"}], "]"}]}], ";", "\n", 
+       RowBox[{"z", "=", 
+        RowBox[{"FromYtoZ", "[", 
+         RowBox[{"y", ",", "Rx"}], "]"}]}], ";", "\n", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", "fx", ",", "hx"}], "}"}], "=", 
+        RowBox[{"FromZtoX", "[", 
+         RowBox[{"RvVec", ",", "z"}], "]"}]}], ";", "\n", "\n", 
+       RowBox[{"PostProc", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", "Nsamples", "}"}], ",", 
+          RowBox[{"{", "2", "}"}]}], "]"}]}], ";", "\n", 
+       RowBox[{"counter", "=", "0"}], ";", "\n", 
+       RowBox[{"vartemp", "=", "0"}], ";", "\n", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "<=", "Nsamples"}], ",", 
+         RowBox[{"i", "++"}], ",", "\n", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"Print", "[", 
+            RowBox[{"\"\<fx = \>\"", ",", 
+             RowBox[{"fx", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ";", "\n", 
+           RowBox[{"Print", "[", 
+            RowBox[{"\"\<hx = \>\"", ",", 
+             RowBox[{"hx", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ";", "\n", 
+           RowBox[{"Print", "[", 
+            RowBox[{"\"\<hx/fx = \>\"", ",", 
+             RowBox[{
+              RowBox[{"hx", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "/", 
+              RowBox[{"fx", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}], ";"}], "*)"}], "\n", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"GxGradx", "[", 
+               RowBox[{"Vars", ",", 
+                RowBox[{"x", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "<=", "0"}], ",", "\n", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{"vartemp", "=", 
+               RowBox[{
+                RowBox[{"fx", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "/", 
+                RowBox[{"hx", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}]}], ";"}], "*)"}], "\n", 
+            RowBox[{
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"xfailed", ",", 
+               RowBox[{"x", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ";", "\n", 
+             RowBox[{"counter", "++"}], ";"}]}], "\n", "]"}], ";"}]}], "\n", 
+        "\n", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"PostProc", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "1"}], "]"}], "]"}], "=", "i"}], ";", "\n", 
+          RowBox[{"beta", "=", 
+           RowBox[{"-", 
+            RowBox[{"InvPHI", "[", 
+             RowBox[{"N", "[", 
+              RowBox[{"counter", "/", "Nsamples"}], "]"}], "]"}]}]}], ";", 
+          "\n", 
+          RowBox[{
+           RowBox[{"PostProc", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "2"}], "]"}], "]"}], "=", "beta"}], ";"}], 
+         "*)"}], "\n", "]"}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Counter = \>\"", ",", "counter"}], "]"}], ";", "\n", 
+       RowBox[{"Pf", "=", 
+        RowBox[{"N", "[", 
+         RowBox[{"counter", "/", "Nsamples"}], "]"}]}], ";", "\n", 
+       RowBox[{"beta", "=", 
+        RowBox[{"-", 
+         RowBox[{"InvPHI", "[", 
+          RowBox[{"N", "[", 
+           RowBox[{"counter", "/", "Nsamples"}], "]"}], "]"}]}]}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Pf Crude Monte Carlo  = \>\"", ",", "Pf"}], "]"}], ";", 
+       "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<\[Beta] Crude Monte Carlo = \>\"", ",", "beta"}], "]"}], 
+       ";"}]}], "\n", 
+     RowBox[{"(*", 
+      RowBox[{"{", 
+       RowBox[{"PostProc", ",", "x", ",", "xfailed", ",", "beta"}], "}"}], 
+      "*)"}], "\n", "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MonteCarloII", "[", 
+     RowBox[{
+     "RvVec_", ",", "Rx_", ",", "Gx_", ",", "Vars_", ",", "Nsamples_"}], 
+     "]"}], ":=", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "y", ",", "z", ",", "x", ",", "counter", ",", "Pf", ",", "beta", ",", 
+        "i", ",", "PostProc", ",", 
+        RowBox[{"xfailed", "=", 
+         RowBox[{"{", "}"}]}], ",", "fx", ",", "hx", ",", "vartemp"}], "}"}], 
+      ",", "\n", 
+      RowBox[{
+       RowBox[{"y", "=", 
+        RowBox[{"ComputeY", "[", 
+         RowBox[{"RvVec", ",", "Nsamples"}], "]"}]}], ";", "\n", 
+       RowBox[{"z", "=", 
+        RowBox[{"FromYtoZ", "[", 
+         RowBox[{"y", ",", "Rx"}], "]"}]}], ";", "\n", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", "fx", ",", "hx"}], "}"}], "=", 
+        RowBox[{"FromZtoX", "[", 
+         RowBox[{"RvVec", ",", "z"}], "]"}]}], ";", "\n", "\n", 
+       RowBox[{"PostProc", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", "Nsamples", "}"}], ",", 
+          RowBox[{"{", "2", "}"}]}], "]"}]}], ";", "\n", 
+       RowBox[{"counter", "=", "0"}], ";", "\n", 
+       RowBox[{"vartemp", "=", "0"}], ";", "\n", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "<=", "Nsamples"}], ",", 
+         RowBox[{"i", "++"}], ",", "\n", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"Print", "[", 
+            RowBox[{"\"\<fx = \>\"", ",", 
+             RowBox[{"fx", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ";", "\n", 
+           RowBox[{"Print", "[", 
+            RowBox[{"\"\<hx = \>\"", ",", 
+             RowBox[{"hx", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ";", "\n", 
+           RowBox[{"Print", "[", 
+            RowBox[{"\"\<hx/fx = \>\"", ",", 
+             RowBox[{
+              RowBox[{"hx", "[", 
+               RowBox[{"[", "i", "]"}], "]"}], "/", 
+              RowBox[{"fx", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]}]}], "]"}], ";"}], "*)"}], "\n", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"Gx", "[", 
+               RowBox[{"Vars", ",", 
+                RowBox[{"x", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "<=", "0"}], ",", "\n", 
+            RowBox[{"(*", 
+             RowBox[{
+              RowBox[{"vartemp", "=", 
+               RowBox[{
+                RowBox[{"fx", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], "/", 
+                RowBox[{"hx", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}]}], ";"}], "*)"}], "\n", 
+            RowBox[{
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"xfailed", ",", 
+               RowBox[{"x", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ";", "\n", 
+             RowBox[{"counter", "++"}], ";"}]}], "\n", "]"}], ";"}]}], "\n", 
+        "\n", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"PostProc", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "1"}], "]"}], "]"}], "=", "i"}], ";", "\n", 
+          RowBox[{"beta", "=", 
+           RowBox[{"-", 
+            RowBox[{"InvPHI", "[", 
+             RowBox[{"N", "[", 
+              RowBox[{"counter", "/", "Nsamples"}], "]"}], "]"}]}]}], ";", 
+          "\n", 
+          RowBox[{
+           RowBox[{"PostProc", "[", 
+            RowBox[{"[", 
+             RowBox[{"i", ",", "2"}], "]"}], "]"}], "=", "beta"}], ";"}], 
+         "*)"}], "\n", "]"}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Counter = \>\"", ",", "counter"}], "]"}], ";", "\n", 
+       RowBox[{"Pf", "=", 
+        RowBox[{"N", "[", 
+         RowBox[{"counter", "/", "Nsamples"}], "]"}]}], ";", "\n", 
+       RowBox[{"beta", "=", 
+        RowBox[{"-", 
+         RowBox[{"InvPHI", "[", 
+          RowBox[{"N", "[", 
+           RowBox[{"counter", "/", "Nsamples"}], "]"}], "]"}]}]}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Pf Crude Monte Carlo  = \>\"", ",", "Pf"}], "]"}], ";", 
+       "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<\[Beta] Crude Monte Carlo = \>\"", ",", "beta"}], "]"}], 
+       ";"}]}], "\n", 
+     RowBox[{"(*", 
+      RowBox[{"{", 
+       RowBox[{"PostProc", ",", "x", ",", "xfailed", ",", "beta"}], "}"}], 
+      "*)"}], "\n", "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{"ComputeSamples", "[", 
+   RowBox[{"RvVec_", ",", "Nsamples_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "y", ",", "x", ",", "nrv", ",", "i", ",", "j", ",", "mu", ",", "sig", 
+      ",", "p1", ",", "p2", ",", "case", ",", "stddev", ",", "beta"}], "}"}], 
+    ",", "\n", 
+    RowBox[{
+     RowBox[{"nrv", "=", 
+      RowBox[{"Length", "[", "RvVec", "]"}]}], ";", "\n", 
+     RowBox[{"y", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+     RowBox[{"For", "[", 
+      RowBox[{
+       RowBox[{"j", "=", "1"}], ",", 
+       RowBox[{"j", "<=", "nrv"}], ",", 
+       RowBox[{"j", "++"}], ",", "\n", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"y", "[", 
+          RowBox[{"[", "j", "]"}], "]"}], "=", 
+         RowBox[{"RandomVariate", "[", 
+          RowBox[{
+           RowBox[{"NormalDistribution", "[", 
+            RowBox[{"0", ",", "1"}], "]"}], ",", "Nsamples"}], "]"}]}], 
+        ";"}]}], "\n", "]"}], ";", "\n", 
+     RowBox[{"Transpose", "[", "y", "]"}]}]}], "\n", "]"}]}]}], "Code"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"MonteCarloIS", "[", 
+     RowBox[{
+     "RvVec_", ",", "Rx_", ",", "GxGradx_", ",", "Vars_", ",", "Nsamples_"}], 
+     "]"}], ":=", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "n", ",", "u", ",", "internalvars", ",", "mu", ",", "sig", ",", "p1", 
+        ",", "p2", ",", "case", ",", "w", ",", ",", "nrv", ",", "j", ",", "f",
+         ",", "h", ",", "DesignPoint", ",", "ISweight", ",", "pfsum", ",", 
+        "pf", ",", "y", ",", "z", ",", "x", ",", "counter", ",", "Pf", ",", 
+        "beta", ",", "i", ",", "PostProc", ",", 
+        RowBox[{"xfailed", "=", 
+         RowBox[{"{", "}"}]}], ",", "fx", ",", "hx", ",", "vartemp"}], "}"}], 
+      ",", "\n", "\n", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"beta", ",", "pf", ",", "DesignPoint"}], "}"}], "=", 
+        RowBox[{"HRLF", "[", 
+         RowBox[{"RvVec", ",", "Rx", ",", "GxGradx", ",", "Vars"}], "]"}]}], 
+       ";", "\n", "\n", 
+       RowBox[{"y", "=", 
+        RowBox[{"ComputeSamples", "[", 
+         RowBox[{"RvVec", ",", "Nsamples"}], "]"}]}], ";", "\n", 
+       RowBox[{"z", "=", 
+        RowBox[{"FromYtoZ", "[", 
+         RowBox[{"y", ",", "Rx"}], "]"}]}], ";", "\n", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"x", ",", "fx", ",", "hx"}], "}"}], "=", 
+        RowBox[{"FromZtoX", "[", 
+         RowBox[{"RvVec", ",", "z"}], "]"}]}], ";", "\n", "\n", "\n", 
+       RowBox[{"mu", "=", "0"}], ";", "\n", 
+       RowBox[{"sig", "=", "1"}], ";", "\n", 
+       RowBox[{"p1", "=", 
+        RowBox[{
+         RowBox[{"1", "/", "2"}], " ", 
+         RowBox[{"(", 
+          RowBox[{"1", "+", 
+           RowBox[{"2", " ", "mu"}], "-", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"12", " ", 
+              RowBox[{"sig", "^", "2"}]}]}], "]"}]}], ")"}]}]}], ";", "\n", 
+       RowBox[{"p2", "=", 
+        RowBox[{
+         RowBox[{"1", "/", "2"}], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", 
+           RowBox[{"2", " ", "mu"}], "+", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{"1", "+", 
+             RowBox[{"12", " ", 
+              RowBox[{"sig", "^", "2"}]}]}], "]"}]}], ")"}]}]}], ";", "\n", 
+       RowBox[{"n", "=", "Nsamples"}], ";", "\n", 
+       RowBox[{"nrv", "=", 
+        RowBox[{"Length", "[", "RvVec", "]"}]}], ";", "\n", 
+       RowBox[{"x", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", "\n", "\n", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"j", "=", "1"}], ",", 
+         RowBox[{"j", "<=", "nrv"}], ",", 
+         RowBox[{"j", "++"}], ",", "\n", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], 
+            "}"}], "=", 
+           RowBox[{"RvVec", "[", 
+            RowBox[{"[", "j", "]"}], "]"}]}], ";", "\n", 
+          RowBox[{
+           RowBox[{"x", "[", 
+            RowBox[{"[", "j", "]"}], "]"}], "=", 
+           RowBox[{"RandomVariate", "[", 
+            RowBox[{
+             RowBox[{"NormalDistribution", "[", 
+              RowBox[{"mu", ",", "sig"}], "]"}], ",", "n"}], "]"}]}], ";"}]}],
+         "\n", "]"}], ";", "\n", "\n", "\n", 
+       RowBox[{"f", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+       RowBox[{"w", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", "Nsamples", "}"}], ",", 
+          RowBox[{"{", "nrv", "}"}]}], "]"}]}], ";", "\n", 
+       RowBox[{"hh", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", "Nsamples", "}"}]}], "]"}]}], ";", "\n", "\n", 
+       RowBox[{"(*", 
+        RowBox[{"Print", "[", 
+         RowBox[{"w", "//", "MatrixForm"}], "]"}], "*)"}], "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<u = \>\"", ",", "u"}], "]"}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<x = \>\"", ",", "x"}], "]"}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<RvVec = \>\"", ",", "RvVec"}], "]"}], ";", "\n", "\n", 
+       RowBox[{"(*", 
+        RowBox[{"X1", " ", "=", "  ", 
+         RowBox[{
+          RowBox[{"KTRANDOM", " ", "VAR"}], " ", "|", " ", 
+          RowBox[{"X2", " ", "SIGY"}], " ", "|", " ", 
+          RowBox[{"X3", " ", "t"}], " ", "|", " ", 
+          RowBox[{"X4", " ", "ov"}], " ", "|", " ", 
+          RowBox[{"X5", " ", "ex"}], " ", "|", " ", 
+          RowBox[{"X6", " ", "rs"}], " ", "|", " ", 
+          RowBox[{"X7", " ", "Nax"}], " ", "|", " ", 
+          RowBox[{"X8", " ", "Pint"}], " ", "|", " ", 
+          RowBox[{"X9", " ", "Pext"}]}]}], " ", "*)"}], "\n", "\n", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "<=", "Nsamples"}], ",", 
+         RowBox[{"i", "++"}], ",", "\n", "\n", 
+         RowBox[{
+          RowBox[{"For", "[", 
+           RowBox[{
+            RowBox[{"j", "=", "1"}], ",", 
+            RowBox[{"j", "<=", "nrv"}], ",", 
+            RowBox[{"j", "++"}], ",", "\n", "\n", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"mu", ",", "sig", ",", "p1", ",", "p2", ",", "case"}], 
+               "}"}], "=", 
+              RowBox[{"RvVec", "[", 
+               RowBox[{"[", "j", "]"}], "]"}]}], ";", "\n", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{"Print", "[", 
+                RowBox[{"\"\<RvVec[[j]] \>\"", ",", 
+                 RowBox[{"RvVec", "[", 
+                  RowBox[{"[", "j", "]"}], "]"}]}], "]"}], ";"}], "*)"}], 
+             "\n", 
+             RowBox[{"(*", 
+              RowBox[{
+               RowBox[{"Print", "[", 
+                RowBox[{"\"\<x[[j,i]] \>\"", ",", 
+                 RowBox[{"x", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"j", ",", "i"}], "]"}], "]"}]}], "]"}], ";"}], 
+              "*)"}], "\n", 
+             RowBox[{"f", "=", 
+              RowBox[{"PDF", "[", 
+               RowBox[{
+                RowBox[{"UniformDistribution", "[", 
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"mu", "-", 
+                    RowBox[{"3", " ", "sig"}]}], " ", ",", 
+                   RowBox[{"mu", "+", 
+                    RowBox[{"3", " ", "sig"}]}]}], "}"}], "]"}], ",", 
+                RowBox[{"x", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"j", ",", "i"}], "]"}], "]"}]}], "]"}]}], ";", "\n", 
+             RowBox[{"h", "=", 
+              RowBox[{"PDF", "[", 
+               RowBox[{
+                RowBox[{"NormalDistribution", "[", 
+                 RowBox[{
+                  RowBox[{"DesignPoint", "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], ",", "1"}], "]"}], ",", 
+                RowBox[{"x", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"j", ",", "i"}], "]"}], "]"}]}], "]"}]}], ";", "\n", 
+             RowBox[{"Print", "[", 
+              RowBox[{"\"\<f \>\"", ",", "f"}], "]"}], ";", "\n", 
+             RowBox[{
+              RowBox[{"w", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "j"}], "]"}], "]"}], "=", 
+              RowBox[{"f", "/", "h"}]}], ";"}]}], "\n", "]"}], ";"}]}], "\n", 
+        "]"}], ";", "\n", "\n", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<h = \>\"", ",", 
+         RowBox[{"h", "//", "MatrixForm"}]}], "]"}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<f = \>\"", ",", 
+         RowBox[{"f", "//", "MatrixForm"}]}], "]"}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<f/h = \>\"", ",", 
+         RowBox[{
+          RowBox[{"f", "/", "h"}], "//", "MatrixForm"}]}], "]"}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<w= \>\"", ",", 
+         RowBox[{"w", "//", "Chop"}]}], "]"}], ";", "\n", "\n", "\n", 
+       RowBox[{"PostProc", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{"0", ",", 
+          RowBox[{"{", "Nsamples", "}"}], ",", 
+          RowBox[{"{", "2", "}"}]}], "]"}]}], ";", "\n", 
+       RowBox[{"counter", "=", "0"}], ";", "\n", 
+       RowBox[{"vartemp", "=", "0"}], ";", "\n", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"i", "=", "1"}], ",", 
+         RowBox[{"i", "<=", "Nsamples"}], ",", 
+         RowBox[{"i", "++"}], ",", "\n", "\n", "\n", 
+         RowBox[{
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"GxGradx", "[", 
+               RowBox[{"Vars", ",", 
+                RowBox[{"x", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "<=", "0"}], ",", "\n", 
+            RowBox[{
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"xfailed", ",", 
+               RowBox[{"x", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], ";", "\n", 
+             RowBox[{"counter", "++"}], ";"}]}], "\n", "]"}], ";"}]}], "\n", 
+        "\n", "]"}], ";", "\n", "\n", 
+       RowBox[{"beta", "=", 
+        RowBox[{"-", 
+         RowBox[{"InvPHI", "[", 
+          RowBox[{"N", "[", 
+           RowBox[{"counter", "/", "Nsamples"}], "]"}], "]"}]}]}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Counter = \>\"", ",", "counter"}], "]"}], ";", "\n", 
+       RowBox[{"Pf", "=", 
+        RowBox[{"N", "[", 
+         RowBox[{"counter", "/", "Nsamples"}], "]"}]}], ";", "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Pf Crude Monte Carlo  = \>\"", ",", "Pf"}], "]"}], ";", 
+       "\n", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<\[Beta] Crude Monte Carlo = \>\"", ",", "beta"}], "]"}], 
+       ";"}]}], "\n", "]"}]}], ";"}], "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ComputeBeta", "[", 
+    RowBox[{
+    "DeterministicData_", ",", "RandomVarsData_", ",", "Grad_", ",", "type_", 
+     ",", "print_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", "area", ",", 
+       RowBox[{"solution", "=", 
+        RowBox[{"{", "}"}]}], ",", "vars", ",", "i", ",", "betan", ",", 
+       "prob", ",", "alpha", ",", "PostProcess", ",", "k", ",", "g", ",", 
+       "RVVec", ",", "RX", ",", "PiData", ",", "PeData", ",", "ax", ",", 
+       "pipedatavec", ",", "de", ",", "di", ",", "young", ",", "nu", ",", 
+       "weightperfeet", ",", "L0", ",", "LF", ",", "sigy"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"RVVec", ",", "RX"}], "}"}], "=", "RandomVarsData"}], ";", 
+      "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"PiData", ",", "PeData", ",", "ax", ",", "pipedatavec"}], 
+        "}"}], "=", "DeterministicData"}], ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "de", ",", "di", ",", "young", ",", "nu", ",", "weightperfeet", ",", 
+         "L0", ",", "LF", ",", "sigy"}], "}"}], "=", "pipedatavec"}], ";", 
+      "\n", 
+      RowBox[{"area", "=", 
+       RowBox[{
+        RowBox[{"Pi", "/", "4"}], 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"de", "^", "2"}], "-", 
+          RowBox[{"di", "^", "2"}]}], ")"}]}]}], ";", "\n", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "<=", 
+         RowBox[{"Length", "[", "PiData", "]"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\n", "\n", 
+        RowBox[{
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"type", "==", "\"\<colapso\>\""}], ",", "\n", 
+           RowBox[{
+            RowBox[{"vars", "=", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"ax", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", ",", "1"}], "]"}], "]"}], "/", "area"}], ",", 
+               "sigy", ",", 
+               RowBox[{"PiData", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+               RowBox[{"PeData", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", "de", ",", 
+               RowBox[{"de", "-", "di"}], ",", "young", ",", "nu"}], "}"}]}], 
+            ";"}], "\n", ",", "\n", 
+           RowBox[{
+            RowBox[{"vars", "=", 
+             RowBox[{"{", 
+              RowBox[{"0.104", ",", "de", ",", 
+               RowBox[{"de", "-", "di"}], ",", 
+               RowBox[{"sigy", " ", "1.15"}], ",", 
+               RowBox[{
+                RowBox[{"ax", "[", 
+                 RowBox[{"[", 
+                  RowBox[{"i", ",", "1"}], "]"}], "]"}], "/", "area"}], ",", 
+               RowBox[{"PiData", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", "1"}], "]"}], "]"}], ",", 
+               RowBox[{"PeData", "[", 
+                RowBox[{"[", 
+                 RowBox[{"i", ",", "1"}], "]"}], "]"}]}], "}"}]}], ";"}]}], 
+          "\n", "]"}], ";", "\n", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+           "betan", ",", "prob", ",", "alpha", ",", "PostProcess", ",", "k", 
+            ",", "g", ",", "x"}], "}"}], "=", 
+          RowBox[{"HRLF", "[", 
+           RowBox[{"RVVec", ",", "RX", ",", "Grad", ",", "vars"}], "]"}]}], 
+         ";", "\n", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"print", "==", "True"}], ",", "\n", 
+           RowBox[{
+            RowBox[{"Print", "[", 
+             RowBox[{"\"\<beta = \>\"", ",", "betan"}], "]"}], ";", "\n", 
+            RowBox[{"Print", "[", 
+             RowBox[{"\"\<PHI[-beta] = \>\"", ",", "prob"}], "]"}], ";", "\n", 
+            RowBox[{"Print", "[", 
+             RowBox[{"\"\<alfa = \>\"", ",", "alpha"}], " ", "]"}], ";", "\n", 
+            RowBox[{"Print", "[", 
+             RowBox[{"\"\<k = \>\"", ",", " ", "k"}], " ", "]"}], ";", "\n", 
+            RowBox[{"Print", "[", 
+             RowBox[{"\"\<G[x] = \>\"", ",", " ", "g"}], "]"}], ";", "\n", 
+            RowBox[{"Print", "[", " ", 
+             RowBox[{"\"\<X = \>\"", ",", " ", "x"}], "]"}], ";"}]}], "\n", 
+          "]"}], ";", "\n", 
+         RowBox[{"AppendTo", "[", 
+          RowBox[{"solution", ",", 
+           RowBox[{"{", 
+            RowBox[{"betan", ",", 
+             RowBox[{"-", 
+              RowBox[{"PiData", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "2"}], "]"}], "]"}]}]}], "}"}]}], "]"}], 
+         ";"}]}], "\n", "]"}], ";", "\n", "solution"}]}], "\n", "]"}]}], 
+  "\n"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FromYtoX", "[", 
+    RowBox[{"RvVec_", ",", "y_", ",", "Rx_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "Jzx", ",", "Jxz", ",", "Jxy", ",", "Jyx", ",", "Mneq", ",", "x", ",", 
+       "Jyz", ",", "Jzy"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Jyz", ",", "Jzy"}], "}"}], " ", "=", 
+       RowBox[{"ComputeJYZ", "[", "Rx", "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Jxz", ",", "Jzx", ",", "Mneq"}], "}"}], " ", "=", "  ", 
+       RowBox[{"ComputeJXZ", "[", 
+        RowBox[{"RvVec", ",", "x"}], "]"}]}], ";", "\n", 
+      RowBox[{"Jyx", " ", "=", " ", 
+       RowBox[{"Jzy", ".", "Jzx"}]}], ";", "\n", 
+      RowBox[{"Jxy", " ", "=", " ", 
+       RowBox[{"Jxz", ".", "Jyz"}]}], ";", "\n", 
+      RowBox[{"x", "=", 
+       RowBox[{
+        RowBox[{"Jxy", ".", "y"}], "+", "Mneq"}]}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "Jyx", ",", "Mneq"}], "}"}]}]}], "\n", "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{
+  RowBox[{"FindDesignPoint", "[", 
+   RowBox[{"RvVec_", ",", "Rx_", ",", "GxGradx_", ",", "Vars_"}], "]"}], ":=", 
+  RowBox[{"Block", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"beta", ",", 
+      RowBox[{"vvars", "=", "Vars"}], ",", "Jxy", ",", "Jzy", ",", "Jyz", ",",
+       "grad", ",", "Jyx", ",", "Mneq", ",", 
+      RowBox[{"NmaxIT", "=", "60"}], ",", "MEAN", ",", "x", ",", "y", ",", 
+      "g", ",", "gradx", ",", "grady", ",", "vbeta", ",", "k", ",", 
+      "CONVERGENCE", ",", "alfa", ",", "fopf", ",", "NegativeBeta"}], "}"}], 
+    ",", 
+    RowBox[{"(", " ", "\n", "\n", 
+     RowBox[{
+      RowBox[{"k", "=", "1"}], ";", "\n", "\n", 
+      RowBox[{"MEAN", "=", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "RvVec", "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}]}], ";", "\n", 
+      RowBox[{"x", "=", "MEAN"}], ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"Jzy", ",", "Jyz"}], "}"}], "  ", "=", " ", 
+       RowBox[{"ComputeJYZ", "[", "Rx", "]"}]}], ";", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"y", ",", "Jxy", ",", "Mneq"}], "}"}], "=", 
+       RowBox[{"FromXtoY", "[", 
+        RowBox[{"RvVec", ",", "x", ",", "Jyz", ",", "Jzy"}], "]"}]}], ";", 
+      "\n", "\n", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"g", ",", "grad"}], "}"}], "=", 
+       RowBox[{"GxGradx", "[", 
+        RowBox[{"vvars", ",", "x"}], "]"}]}], ";", "\n", "\n", 
+      RowBox[{"CONVERGENCE", " ", "=", " ", "False"}], ";", "\n", "\n", 
+      RowBox[{"While", "[", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Abs", "[", "g", "]"}], ">", 
+            RowBox[{"10", "^", 
+             RowBox[{"-", "3"}]}]}], ")"}], "&&", 
+          RowBox[{"(", 
+           RowBox[{"k", "<", " ", "NmaxIT"}], ")"}]}], ")"}], ",", "\n", "\n", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"g", ",", "gradx"}], "}"}], "=", 
+          RowBox[{"GxGradx", "[", 
+           RowBox[{"vvars", ",", "x"}], "]"}]}], ";", "\n", 
+         RowBox[{"grady", "=", 
+          RowBox[{
+           RowBox[{"Transpose", "[", "Jxy", "]"}], ".", "gradx"}]}], ";", 
+         "\n", "\n", 
+         RowBox[{"y", "=", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"grady", ".", "y"}], "-", "g"}], ")"}], "/", 
+            RowBox[{"grady", ".", "grady"}]}], " ", "grady"}]}], ";", "\n", 
+         "\n", 
+         RowBox[{"x", "=", 
+          RowBox[{
+           RowBox[{"Jxy", ".", "y"}], "+", "Mneq"}]}], ";", "\n", "\n", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"y", ",", "Jxy", ",", "Mneq"}], "}"}], "=", 
+          RowBox[{"FromXtoY", "[", 
+           RowBox[{"RvVec", ",", "x", ",", "Jyz", ",", "Jzy"}], "]"}]}], ";", 
+         "\n", "\n", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"GAUSSIAN", "==", "False"}], ",", "\n", 
+             RowBox[{
+              RowBox[{
+               RowBox[{"x", "[", 
+                RowBox[{"[", 
+                 RowBox[{"k", "+", "1"}], "]"}], "]"}], " ", "=", " ", 
+               RowBox[{"PENALIZEXHALF", "[", 
+                RowBox[{
+                 RowBox[{"x", "[", 
+                  RowBox[{"[", "k", "]"}], "]"}], ",", 
+                 RowBox[{"x", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"k", "+", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+              "\n", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{"Jxz", ",", "Jzx"}], "}"}], " ", "=", " ", 
+               RowBox[{"JacobXZ", "[", 
+                RowBox[{"RVX", ",", 
+                 RowBox[{"x", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"k", "+", "1"}], "]"}], "]"}]}], "]"}]}], ";", 
+              "\n", 
+              RowBox[{"Jyx", " ", "=", " ", 
+               RowBox[{"Jyz", ".", "Jzx"}]}], ";", "\n", 
+              RowBox[{"Jxy", " ", "=", " ", 
+               RowBox[{"Jxz", ".", "Jzy"}]}], ";", "\n", 
+              RowBox[{
+               RowBox[{"y", "[", 
+                RowBox[{"[", 
+                 RowBox[{"k", "+", "1"}], "]"}], "]"}], "=", 
+               RowBox[{"Jyx", ".", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"x", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"k", "+", "1"}], "]"}], "]"}], "-", "Mneq"}], 
+                 ")"}]}]}], ";"}]}], "\n", "]"}], ";"}], "*)"}], "\n", "\n", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"g", ",", "gradx"}], "}"}], "=", 
+          RowBox[{"GxGradx", "[", 
+           RowBox[{"vvars", ",", "x"}], "]"}]}], ";", "\n", "\n", 
+         RowBox[{"vbeta", "=", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{"y", ".", "y"}], "]"}]}], ";", "\n", "\n", 
+         RowBox[{"k", " ", "=", " ", 
+          RowBox[{"k", "+", "1"}]}], ";"}]}], "\n", "\n", "]"}], ";", "\n", 
+      "\n", 
+      RowBox[{"alfa", " ", "=", 
+       RowBox[{
+        RowBox[{"(", " ", 
+         RowBox[{"grady", "/", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{"grady", ".", "grady"}], "]"}]}], ")"}], "^", "2"}]}], ";",
+       "\n", 
+      RowBox[{"beta", " ", "=", " ", "vbeta"}], ";", "\n", 
+      RowBox[{"Print", "[", " ", 
+       RowBox[{
+       "\"\< | iter = \>\"", ",", "k", " ", ",", " ", "\"\<| G(x)= \>\"", 
+        "  ", ",", "g", " ", ",", " ", "\"\< | alpha = \>\"", ",", "alfa", 
+        ",", "\"\< | Beta = \>\"", ",", " ", "beta"}], "]"}], ";", "\n", 
+      RowBox[{"{", 
+       RowBox[{"beta", ",", 
+        RowBox[{"PHI", "[", 
+         RowBox[{"-", "beta"}], "]"}], ",", "y"}], "}"}]}], "\n", ")"}]}], 
+   "]"}]}], "\n"}], "Code"]
+},
+WindowSize->{775, 873},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4904, 134, 679, "Code"],
+Cell[5465, 156, 8814, 241, 1104, "Code"],
+Cell[14282, 399, 41638, 1097, 70, "Code"],
+Cell[55923, 1498, 10234, 270, 70, "Code"],
+Cell[66160, 1770, 21443, 536, 70, "Code"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

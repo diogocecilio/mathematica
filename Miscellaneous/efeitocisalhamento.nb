@@ -1,0 +1,152 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4378,        142]
+NotebookOptionsPosition[      4132,        129]
+NotebookOutlinePosition[      4479,        144]
+CellTagsIndexPosition[      4436,        141]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Clear", "[", "M", "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"M", "[", "x_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"q", " ", "L", " ", 
+      RowBox[{"x", "/", "2"}]}], " ", "-", 
+     RowBox[{"q", " ", 
+      RowBox[{
+       RowBox[{"x", "^", "2"}], " ", "/", "2"}]}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Q", "[", "x_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"q", " ", 
+      RowBox[{"L", "/", "2"}]}], " ", "-", " ", 
+     RowBox[{"q", " ", "x"}]}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"G", "=", 
+     RowBox[{"2", " ", 
+      RowBox[{
+       RowBox[{"10", "^", "8"}], "/", 
+       RowBox[{"(", 
+        RowBox[{"2", 
+         RowBox[{"(", 
+          RowBox[{"1", "+", "0.30"}], ")"}]}], ")"}]}]}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"A", "=", 
+     RowBox[{"0.15", " ", "0.20"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\[CapitalKappa]", "=", 
+     RowBox[{"1", "/", "1.2"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"defM", "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Integrate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"M", "[", "x", "]"}], 
+           RowBox[{"(", 
+            RowBox[{"0.5", " ", "x"}], ")"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "0", ",", 
+            RowBox[{"L", "/", "2"}]}], "}"}]}], "]"}], "+", 
+        RowBox[{"Integrate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"M", "[", "x", "]"}], 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"-", "0.5"}], 
+              RowBox[{"(", 
+               RowBox[{"x", "-", "0.5"}], ")"}]}], "+", "0.25"}], ")"}]}], 
+          ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{"L", "/", "2"}], ",", "L"}], "}"}]}], "]"}]}], ")"}], "/",
+       "EI"}], " ", "//", "FullSimplify"}]}], "\[IndentingNewLine]", 
+   RowBox[{"defQ", "=", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Integrate", "[", 
+         RowBox[{
+          RowBox[{"0.5", 
+           RowBox[{"Q", "[", "x", "]"}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "0", ",", 
+            RowBox[{"L", "/", "2"}]}], "}"}]}], "]"}], "+", 
+        RowBox[{"Integrate", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"-", 
+            RowBox[{"Q", "[", "x", "]"}]}], "0.5"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", 
+            RowBox[{"L", "/", "2"}], ",", "L"}], "}"}]}], "]"}]}], ")"}], "/",
+       "GA"}], "//", "FullSimplify"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"defM", "/.", 
+      RowBox[{"EI", "\[Rule]", "20000"}]}], "/.", 
+     RowBox[{"L", "\[Rule]", "1"}]}], "/.", 
+    RowBox[{"q", "\[Rule]", "20"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"defQ", "/.", 
+      RowBox[{"GA", "\[Rule]", 
+       RowBox[{"\[CapitalKappa]", " ", "G", " ", "A"}]}]}], " ", "/.", 
+     RowBox[{"L", "\[Rule]", "1"}]}], "/.", 
+    RowBox[{"q", "\[Rule]", "20"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"defM", "+", "defQ"}], ")"}], "/.", 
+       RowBox[{"EI", "\[Rule]", "20000"}]}], "/.", 
+      RowBox[{"GA", "\[Rule]", 
+       RowBox[{"\[CapitalKappa]", " ", "G", " ", "A"}]}]}], " ", "/.", 
+     RowBox[{"L", "\[Rule]", "1"}]}], "/.", 
+    RowBox[{"q", "\[Rule]", "20"}]}]}]}]], "Input"]
+},
+WindowSize->{1114, 774},
+WindowMargins->{{29, Automatic}, {Automatic, 81}},
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3570, 107, 252, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

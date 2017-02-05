@@ -1,0 +1,185 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5692,        176]
+NotebookOptionsPosition[      5119,        151]
+NotebookOutlinePosition[      5466,        166]
+CellTagsIndexPosition[      5423,        163]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "refina", " ", "de", " ", "n", " ", "divis\[OTilde]es", " ", "de", " ", 
+    "refl", " ", "at\[EAcute]", " ", "lf"}], "*)"}], "\n", 
+  RowBox[{
+   RowBox[{"refine", "[", 
+    RowBox[{"vectoref_", ",", "a_", ",", "b_", ",", "n_"}], "]"}], ":=", 
+   RowBox[{"Block", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "dref", ",", "refinedvec", ",", "i", ",", "xa", ",", "xb", ",", 
+       "veccopy", ",", "j"}], "}"}], ",", "\n", 
+     RowBox[{
+      RowBox[{"refinedvec", "=", 
+       RowBox[{
+        RowBox[{"Table", "[", 
+         RowBox[{"dl", ",", 
+          RowBox[{"{", 
+           RowBox[{"dl", ",", "a", ",", "b", ",", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"b", "-", "a"}], ")"}], "/", "n"}]}], "}"}]}], "]"}], "//",
+         "N"}]}], ";", "\n", 
+      RowBox[{"veccopy", "=", "vectoref"}], ";", "\n", 
+      RowBox[{"For", "[", 
+       RowBox[{
+        RowBox[{"i", "=", "1"}], ",", 
+        RowBox[{"i", "\[LessEqual]", 
+         RowBox[{
+          RowBox[{"Length", "[", "vectoref", "]"}], "-", "1"}]}], ",", 
+        RowBox[{"i", "++"}], ",", "\n", 
+        RowBox[{
+         RowBox[{"xa", "=", 
+          RowBox[{"vectoref", "[", 
+           RowBox[{"[", "i", "]"}], "]"}]}], ";", "\n", 
+         RowBox[{"xb", "=", 
+          RowBox[{"vectoref", "[", 
+           RowBox[{"[", 
+            RowBox[{"i", "+", "1"}], "]"}], "]"}]}], ";", "\n", 
+         RowBox[{"k", "=", 
+          RowBox[{"i", "+", "1"}]}], ";", "\n", 
+         RowBox[{"For", "[", 
+          RowBox[{
+           RowBox[{"j", "=", "1"}], ",", 
+           RowBox[{"j", "\[LessEqual]", 
+            RowBox[{"Length", "[", "refinedvec", "]"}]}], ",", 
+           RowBox[{"j", "++"}], ",", "\n", 
+           RowBox[{
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                RowBox[{"refinedvec", "[", 
+                 RowBox[{"[", "j", "]"}], "]"}], ">", " ", "xa"}], " ", "&&", 
+               " ", 
+               RowBox[{
+                RowBox[{"refinedvec", "[", 
+                 RowBox[{"[", "j", "]"}], "]"}], "<", " ", "xb"}]}], ",", 
+              "\n", 
+              RowBox[{
+               RowBox[{"veccopy", "=", 
+                RowBox[{"Insert", "[", 
+                 RowBox[{"veccopy", ",", 
+                  RowBox[{"refinedvec", "[", 
+                   RowBox[{"[", "j", "]"}], "]"}], ",", "k"}], "]"}]}], ";", 
+               "\n", 
+               RowBox[{"k", "++"}], ";"}]}], "\n", "]"}], ";"}]}], "\n", 
+          "]"}], ";"}]}], "\n", "]"}], ";", "\n", "veccopy"}]}], "\n", 
+    "]"}]}]}]], "Code",
+ CellChangeTimes->{{3.684773573874449*^9, 3.6847735880812616`*^9}, {
+  3.684773627833535*^9, 3.684773875407696*^9}, {3.684773956807351*^9, 
+  3.6847739975816836`*^9}, {3.6847744052279997`*^9, 3.684774413347464*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"vec", "=", 
+  RowBox[{"Table", "[", 
+   RowBox[{"dl", ",", 
+    RowBox[{"{", 
+     RowBox[{"dl", ",", "0", ",", "400", ",", "100"}], "}"}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.684773907205514*^9, 3.684773921391326*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "100", ",", "200", ",", "300", ",", "400"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.684773921681342*^9, 3.6847740004498477`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"refine", "[", 
+  RowBox[{"vec", ",", "99", ",", "101", ",", "10"}], "]"}]], "Input",
+ CellChangeTimes->{{3.684773931454901*^9, 3.68477394157448*^9}, {
+  3.6847740148386707`*^9, 3.684774038541026*^9}, {3.684774360067416*^9, 
+  3.684774364219654*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0", ",", "99.`", ",", "100.2`", ",", "100.4`", ",", "100.6`", ",", 
+   "100.8`", ",", "101.`", ",", "99.2`", ",", "99.4`", ",", "99.6`", ",", 
+   "99.8`", ",", "100", ",", "200", ",", "300", ",", "400"}], "}"}]], "Output",
+ CellChangeTimes->{{3.684773946317751*^9, 3.6847740390930576`*^9}, 
+   3.684774365285715*^9, {3.684774407244115*^9, 3.684774415777603*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"a", "=", "99"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"b", "=", "101"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"n", "=", "10."}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{"b", "-", "a"}], ")"}], "/", "n"}]}], "Input",
+ CellChangeTimes->{{3.68477438513885*^9, 3.6847743948914084`*^9}}],
+
+Cell[BoxData["0.2`"], "Output",
+ CellChangeTimes->{3.684774395899466*^9}]
+}, Open  ]]
+},
+WindowSize->{772, 835},
+WindowMargins->{{555, Automatic}, {Automatic, 65}},
+FrontEndVersion->"10.3 for Microsoft Windows (64-bit) (December 10, 2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2876, 74, 373, "Code"],
+Cell[CellGroupData[{
+Cell[3459, 98, 254, 7, 31, "Input"],
+Cell[3716, 107, 182, 4, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3935, 116, 273, 5, 31, "Input"],
+Cell[4211, 123, 405, 7, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4653, 135, 374, 10, 92, "Input"],
+Cell[5030, 147, 73, 1, 31, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
